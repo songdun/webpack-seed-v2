@@ -3,17 +3,46 @@
   "globals": {
     // Put things like jQuery, etc
     "jQuery": true,
-    "$": true
+    "$": true,
+    "React": true
   },
   "env": {
     // I write for browser
     "browser": true,
     // in CommonJS
-    //"node": true
+    "node": true,
     // in jQuery
-    "jquery": true
+    "jquery": true,
+    "es6": true,
+    "commonjs": true
   },
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "settings": {
+    "react": {
+      "createClass": "createClass", // Regex for Component Factory to use, default to "createClass" 
+      "pragma": "React",  // Pragma to use, default to "React" 
+      "version": "15.0" // React version, default to the latest React stable release 
+    }
+  },
+  "plugins": [
+      "react"
+  ],
   "rules": {
+    "func-names": 0, // 允许使用匿名函数
+    "react/jsx-uses-react": "error",
+    "react/jsx-uses-vars": "error",
+    "react/jsx-indent-props": [2, "tab"],
+    "react/jsx-indent": [2, "tab"],
+    "react/prop-types": [0],
+    "quotes": [1, "double", "avoid-escape"],
+    "indent": [2, "tab"],
+    "id-length": [1, { "min": 1 }],
+    "comma-dangle": 0,
+    "consistent-return": 0,
     "no-console": 0, //console 未删除
     "no-var": 0,
     "no-new": 0,
@@ -26,7 +55,7 @@
     "no-param-reassign": 0,
     "max-len": ["error", {
       "code": 200,
-      "tabWidth": 2,
+      "tabWidth": 4,
       "comments": 200,
       "ignoreComments": false,
       "ignoreTrailingComments": false,

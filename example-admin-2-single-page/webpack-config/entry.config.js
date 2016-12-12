@@ -5,7 +5,7 @@ var url = require('./base/url.config.js');
 var configEntry = {};
 
 pageArr.forEach((page) => {
-  configEntry[page] = [path.resolve(dirVars.pagesDir, page + '/page'),'webpack/hot/dev-server','webpack-dev-server/client?'+url.webpackDevServer.localUrl];
+  configEntry[page] = [path.resolve(dirVars.pagesDir, page + '/page'), 'webpack/hot/dev-server', 'webpack-dev-server/client?' + url.webpackDevServer.localUrl];
 });
 
 module.exports = configEntry;

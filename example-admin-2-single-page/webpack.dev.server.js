@@ -3,7 +3,7 @@ var WebpackDevServer = require('webpack-dev-server');
 var config = require('./webpack.dev.config.js');
 var configURL = require('./webpack-config/base/url.config.js');
 
-module.exports = function(app) {
+module.exports = function (app) {
   var server = new WebpackDevServer(webpack(config), {
     contentBase: 'build/',
     historyApiFallback: false,
@@ -13,13 +13,13 @@ module.exports = function(app) {
     noInfo: false,
     publicPath: configURL.webpackDevServer.url,
     proxy: {
-        '*': {
-         target: configURL.mockServer.url,
-         secure: false,
-        }
+      '*': {
+        target: configURL.mockServer.url,
+        secure: false,
+      },
     },
-    stats: { colors: true }
-  }).listen(configURL.webpackDevServer.port, '0.0.0.0', function() {
+    stats: { colors: true },
+  }).listen(configURL.webpackDevServer.port, '0.0.0.0', function () {
     console.log('socketio listen 8777');
   });
-}
+};

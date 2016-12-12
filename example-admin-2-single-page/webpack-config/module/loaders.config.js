@@ -17,15 +17,24 @@ module.exports = [
     include: includeDirs,
     loader: ExtractTextPlugin.extract('css?minimize&-autoprefixer!postcss!less'),
   },
+  // {
+  //   test: /\.js$/,
+  //   include: includeDirs,
+  //   loader: 'babel-loader',
+  //   query: {
+  //     presets: ['es2015-loose'],
+  //     cacheDirectory: true,
+  //     plugins: ['transform-runtime', 'transform-object-assign'],
+  //   },
+  // },
   {
-    test: /\.js$/,
-    include: includeDirs,
+    test: /\.jsx?$/,
     loader: 'babel-loader',
+    exclude: /(node_modules|bower_components)/,
+    extensions: ['.jsx', '.js'],
     query: {
-      presets: ['es2015-loose'],
-      cacheDirectory: true,
-      plugins: ['transform-runtime', 'transform-object-assign'],
-    },
+      presets: ['es2015', 'react']
+    }
   },
   {
     test: /\.html$/,

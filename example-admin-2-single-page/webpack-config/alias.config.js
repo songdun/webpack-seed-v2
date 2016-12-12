@@ -6,7 +6,7 @@ module.exports = {
   configDir: dirVars.configDir,
 
   /* components */
-  src: dirVars.srcDir,
+  src: path.resolve(dirVars.srcDir, 'index'),
   /* logic */
   cm: path.resolve(dirVars.logicDir, 'common.module'),
   cp: path.resolve(dirVars.logicDir, 'common.page'),
