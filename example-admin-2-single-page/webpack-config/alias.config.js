@@ -6,10 +6,11 @@ module.exports = {
   configDir: dirVars.configDir,
 
   /* components */
-
+  src: dirVars.srcDir,
   /* logic */
   cm: path.resolve(dirVars.logicDir, 'common.module'),
   cp: path.resolve(dirVars.logicDir, 'common.page'),
+
 
   /* config */
   configModule: path.resolve(dirVars.configDir, 'common.config'),

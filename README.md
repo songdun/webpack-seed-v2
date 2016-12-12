@@ -1,6 +1,31 @@
 # webpack-seed-v2
 
 ## 项目介绍
+fork 自 [Array-Huang/webpack-seed](https://github.com/Array-Huang/webpack-seed) v2.0
+和 [Nutlee/webpack-seed](https://github.com/Nutlee/webpack-seed) v1.2.2
+
+并参照详细修改说明请看个人博客修改
+[关于前端工程化的思考及《webpack多页应用架构系列》mock开发环境改造](http://nutlee.github.io/2016/10/24/%E5%85%B3%E4%BA%8E%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%9A%84%E6%80%9D%E8%80%83%E5%8F%8A%E3%80%8Awebpack%E5%A4%9A%E9%A1%B5%E5%BA%94%E7%94%A8%E6%9E%B6%E6%9E%84%E7%B3%BB%E5%88%97%E3%80%8Bmock%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%94%B9%E9%80%A0/)
+
+## 修改
+
+* 增加本地 3000 端口开启 server 做 mock 服务器，当前生产环境修改为在 mock 服务器下热更新
+
+* 增加 mockjs ，接口模拟数据
+
+* 修改原使用 supervisor 服务器配置文件监控，因为如果改动服务器会重启，直接使用webpack-dev-server启动
+
+* 分离 url 配置
+
+* 修复原作者 dll.js 未压缩的问题
+
+尚存问题
+
+* 由于使用的 `html-webpack-plugin` 拼接出来的 HTML，所以所有的 HTML 并没有监控，需要手动在浏览器刷新。
+
+* `html-webpack-plugin` 动态加载 chunk 并打上了 hash，导致每次任意一个 chunk 有改动，所有的 chunk 文件都会打上相同的 hash，对严格控制版本的情况不太合适。
+
+## 原项目介绍
 本项目是一个利用webpack架构的**web app**脚手架，其特点如下：
 - 多个项目可以共用同一套架构/基础设施。
 - 更适合**多页应用**。
@@ -65,8 +90,6 @@ $ npm run start
 
 ## 更新日志
 
-### 2.0.0 (2016-10-21)
-在1.x版本的基础上抽离出基础设施，以达到多个项目**共用同一套架构/基础设施**的目的。
+基于[Array-Huang/webpack-seed](https://github.com/Array-Huang/webpack-seed) v2.0
+和 [Nutlee/webpack-seed](https://github.com/Nutlee/webpack-seed) v1.2.2
 
-### 1.x
-本脚手架项目的1.x版本（[Array-Huang/webpack-seed](https://github.com/Array-Huang/webpack-seed)），因为架构比较简单，所以也比较好上手，但无法实现多项目共用同一套架构/基础设施。

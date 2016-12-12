@@ -6,5 +6,6 @@ $(() => {
   if (!IS_PRODUCTION) {
     console.log('如果你看到这个Log，那么这个版本实际上是开发用的版本');
     console.log(config.API_ROOT);
+    console.info(343);
   }
 });

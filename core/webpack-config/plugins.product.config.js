@@ -1,5 +1,5 @@
 var webpack = require('webpack');
-var pluginsConfig = require('./inherit/plugins.config.js');
+var pluginsConfig = require('./inherit/plugins.product.config.js');
 
 /* webpack1下，用了压缩插件会导致所有loader添加min配置，而autoprefixser也被定格到某个browers配置 */
 // pluginsConfig.push(new webpack.optimize.UglifyJsPlugin({
