@@ -4,7 +4,7 @@
 // mapcat: 合并集合
 import { map, filter, comp } from "transducers-js";
 import * as most from "most";
-import ajax from "../../common/ajax";
+import ajax from "srcDir/common/ajax";
 import { message } from "antd";
 
 const GITHUB_SEARCH_API = "https://api.github.com/search/repositories?q=";
