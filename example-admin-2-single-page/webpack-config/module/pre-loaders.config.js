@@ -6,6 +6,6 @@ module.exports = [
   test: /\.js$/,
   loader: 'eslint',
   include: includeDirs,
-  exclude: [/bootstrap/,/models/,/views/],
+  exclude: [/bootstrap/],
 }
 ];
