@@ -17,24 +17,21 @@ module.exports = [
     include: includeDirs,
     loader: ExtractTextPlugin.extract('css?minimize&-autoprefixer!postcss!less'),
   },
-  // {
-  //   test: /\.js$/,
-  //   include: includeDirs,
-  //   loader: 'babel-loader',
-  //   query: {
-  //     presets: ['es2015-loose'],
-  //     cacheDirectory: true,
-  //     plugins: ['transform-runtime', 'transform-object-assign'],
-  //   },
-  // },
   {
     test: /\.jsx?$/,
-    loader: 'babel-loader',
+    include: includeDirs,
     exclude: /(node_modules|bower_components)/,
     extensions: ['.jsx', '.js'],
+    loader: 'babel-loader',
     query: {
-      presets: ['es2015', 'react']
-    }
+      presets: ['es2015-loose', 'es2015', 'react'],
+      cacheDirectory: true,
+      plugins: ['transform-runtime', 'transform-object-assign', [
+        "import", {
+          libraryName: 'antd',
+        }
+      ]],
+    },
   },
   {
     test: /\.html$/,

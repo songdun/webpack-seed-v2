@@ -16,7 +16,7 @@ module.exports = {
     },
     {
       test: /\.css$/,
-      include: [dirVars.coreDir, dirVars.vendorDir],
+      include: [dirVars.coreDir, dirVars.vendorDir, dirVars.antdDir],
       loader: ExtractTextPlugin.extract('css?minimize&-autoprefixer!postcss'),
     },
     {
@@ -25,13 +25,20 @@ module.exports = {
       loader: ExtractTextPlugin.extract('css?minimize&-autoprefixer!postcss!less'),
     },
     {
-      test: /\.js$/,
+      test: /\.jsx?$/,
       include: includeDirs,
+      exclude: /(node_modules|bower_components)/,
+      extensions: ['.jsx', '.js'],
       loader: 'babel-loader',
       query: {
-        presets: ['es2015-loose'],
+        presets: ['es2015-loose', 'es2015', 'react'],
         cacheDirectory: true,
-        plugins: ['transform-runtime', 'transform-object-assign'],
+        plugins: ['transform-runtime', 'transform-object-assign', [
+          "import", {
+            libraryName: 'antd',
+            style: 'css',
+          }
+        ]],
       },
     },
     {

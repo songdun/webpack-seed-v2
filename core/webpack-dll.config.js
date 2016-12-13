@@ -16,6 +16,13 @@ module.exports = {
     dll: [
       'jquery', '!!bootstrap-webpack!bootstrapConfig',
       'metisMenu/metisMenu.min', 'metisMenu/metisMenu.min.css',
+      'react',
+      'react-dom',
+      'react-most',
+      'rest',
+      'transducers-js',
+      'most',
+      'antd/dist/antd.min.js', 'antd/dist/antd.min.css',
     ],
   },
   plugins: [
@@ -30,8 +37,20 @@ module.exports = {
       jQuery: 'jquery',
       'window.jQuery': 'jquery',
       'window.$': 'jquery',
+      'react': 'react',
+      'react-dom': 'react-dom',
+      'react-most': 'react-most',
+      'rest': 'rest',
+      'transducers-js': 'transducers-js',
+      'most': 'most',
+      'antd': 'antd',
     }),
     new ExtractTextPlugin('[name].css'), // 打包css/less的时候会用到ExtractTextPlugin
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify('production')
+      }
+    }),
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         warnings: false,
