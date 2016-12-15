@@ -10,12 +10,12 @@ module.exports = [
   {
     test: /\.css$/,
     include: includeDirs,
-    loader: ExtractTextPlugin.extract('css?minimize&-autoprefixer!postcss'),
+    loader: ExtractTextPlugin.extract('css?modules&importLoaders=1&localIdentName=[path]___[name]__[local]___[hash:base64:5]&minimize&-autoprefixer!postcss'),
   },
   {
     test: /\.less$/,
     include: includeDirs,
-    loader: ExtractTextPlugin.extract('css?minimize&-autoprefixer!postcss!less'),
+    loader: ExtractTextPlugin.extract('css?modules&importLoaders=1&localIdentName=[path]___[name]__[local]___[hash:base64:5]&minimize&-autoprefixer!postcss!less'),
   },
   {
     test: /\.jsx?$/,

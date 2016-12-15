@@ -17,7 +17,9 @@ var configPlugins = [
     minChunks: 4,
   }),
   /* 抽取出chunk的css */
-  new ExtractTextPlugin('[name]/styles.css'),
+  new ExtractTextPlugin('[name]/styles.css', {
+    allChunks: true
+  }),
   /* 配置好Dll */
   new webpack.DllReferencePlugin({
     context: dirVars.staticRootDir, // 指定一个路径作为上下文环境，需要与DllPlugin的context参数保持一致，建议统一设置为项目根目录
