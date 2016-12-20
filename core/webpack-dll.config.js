@@ -22,7 +22,8 @@ module.exports = {
       'rest',
       'transducers-js',
       'most',
-      'antd/dist/antd.min.js', 'antd/dist/antd.min.css',
+      'antd/dist/antd.min', 'antd/dist/antd.min.css',
+      'particles.js',
     ],
   },
   plugins: [
@@ -44,6 +45,7 @@ module.exports = {
       'transducers-js': 'transducers-js',
       'most': 'most',
       'antd': 'antd',
+      'particles': 'particles.js',
     }),
     new ExtractTextPlugin('[name].css'), // 打包css/less的时候会用到ExtractTextPlugin
     new webpack.DefinePlugin({

@@ -5,6 +5,7 @@
     "jQuery": true,
     "$": true,
     "state": true,
+    "particlesJS": true,
   },
   "env": {
     // I write for browser

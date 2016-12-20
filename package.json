@@ -44,6 +44,7 @@
     "less-loader": "^2.2.3",
     "mockjs": "^1.0.1-beta3",
     "most": "^1.1.1",
+    "particles.js": "^2.0.0",
     "postcss-loader": "^0.9.1",
     "precss": "^1.4.0",
     "react": "^15.4.1",

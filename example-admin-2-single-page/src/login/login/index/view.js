@@ -1,6 +1,9 @@
 import React from "react";
 import styles from "./style.less";
 import { Form, Icon, Input, Button, Checkbox } from "antd";
+require("particles.js");
+require("./background");
+
 const FormItem = Form.Item;
 
 // 创建react组件

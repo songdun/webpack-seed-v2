@@ -1,9 +1,39 @@
-.login-form {
-  max-width: 300px;
+@import url('../../../config.less');
+:global body
+{
+    background-image: linear-gradient(215deg,#3fc3e4,#4088f2 45%,#406ef8);
 }
-.login-form-forgot {
-  float: right;
+:global #particles-js
+{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+		z-index: -1;
+    width: 100%;
+    height: 100%;
+    padding-bottom: 5px;
 }
-.login-form-button {
-  width: 100%;
+.login-form
+{
+    position: absolute;
+    top: 50%;
+    left: 65%;
+    z-index: 1;
+    transform: translate(0, -50%);
+
+    max-width: 300px;
+    margin: auto;
+    padding: @default-margin;
+    padding-bottom: 0;
+
+    border-radius: @default-border-radius;
+    background-color: @c-fff;
+}
+.login-form-forgot
+{
+    float: right;
+}
+.login-form-button
+{
+    width: 100%;
 }
