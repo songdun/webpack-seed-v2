@@ -24,6 +24,8 @@ module.exports = {
       'most',
       'antd/dist/antd.min', 'antd/dist/antd.min.css',
       'particles.js',
+      'js-cookie',
+      'react-router',
     ],
   },
   plugins: [
@@ -46,6 +48,8 @@ module.exports = {
       'most': 'most',
       'antd': 'antd',
       'particles': 'particles.js',
+      'js-cookie': 'js-cookie',
+      'react-router': 'react-router',
     }),
     new ExtractTextPlugin('[name].css'), // 打包css/less的时候会用到ExtractTextPlugin
     new webpack.DefinePlugin({

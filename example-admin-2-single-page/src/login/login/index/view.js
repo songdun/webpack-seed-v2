@@ -3,6 +3,7 @@ import styles from "./style.less";
 import { Form, Icon, Input, Button, Checkbox } from "antd";
 require("particles.js");
 require("./background");
+import Cookies from "js-cookie";
 
 const FormItem = Form.Item;
 
@@ -10,7 +11,8 @@ const FormItem = Form.Item;
 const View = Form.create()((props) => {
   const origin = window.location.origin;
   if (props.results) {
-    window.location.href = origin;
+    Cookies.set("token", props.results.token);
+    window.location.href = origin + "/index/index/page.html";
   }
   const { login } = props.actions;
   const { getFieldDecorator, validateFields } = props.form;

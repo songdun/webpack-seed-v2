@@ -52,29 +52,52 @@ const columns = [
     key: "loanInterset",
   }
 ];
+let inputValue;
 // 创建react组件
 const View = (props) => {
-    // console.info(props)
+  console.info(props);
   const { search } = props.actions;
   const error = props.error || {};
+  const paramsDefault = {
+    Q_bankName_like_string: inputValue || "",
+    _index: "1"
+  };
+  const getTableList = (params) => {
+    search(Object.assign(paramsDefault, params));
+  };
 
   return (
     <div>
       <div className={styles.test}>123</div>
-      <Input onChange={e => search(e.target.value)} />
+      <Input
+        onChange={
+          e => {
+            inputValue = e.target.value;
+            getTableList({ Q_bankName_like_string: inputValue });
+          }
+        }
+      />
       <span className={"red " + error.className}>{error.message}</span>
 
       {
         props.results && <Table
           rowKey="id"
-          dataSource={props.results}
+          dataSource={props.results.rows}
           columns={columns}
           expandedRowRender={() => <Table
             rowKey="id"
-            dataSource={props.results}
+            dataSource={props.results.rows}
             columns={columns}
           />
           }
+          pagination={{
+            total: props.results.totalRows,
+            current: props.results.page,
+            onChange: (current) => {
+              // console.log("Current: ", current);
+              getTableList({ _index: current });
+            },
+          }}
         />
       }
 

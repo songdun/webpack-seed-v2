@@ -1,10 +1,10 @@
-import ajax from "srcDir/common/ajax";
+import ajax from "srcDir/common/ajax/index";
 
 const fetch = function ({ url, method, q }) {
   return ajax({
     method,
     url,
-    params: q
+    params: q,
   });
 };
 

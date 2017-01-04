@@ -26,9 +26,7 @@ const tableModel = ({ url, method, params }) => {
   // {results:[]}
   const generateStateFromResp = comp(
     filter(i => i.type === "dataUpdate"),
-    map(data => JSON.parse(data.value).rows),
-  // 只取前10个结果
-    map(items => items.slice(0, 5)),
+    map(data => JSON.parse(data.value)),
   // 把结果映射成state 到新的 state
     map(items => state => ({ results: items }))
   );
