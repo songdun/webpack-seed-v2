@@ -6,7 +6,7 @@ var configURL = require('./webpack-config/base/url.config.js');
 module.exports = function (app) {
   var server = new WebpackDevServer(webpack(config), {
     contentBase: 'build/',
-    historyApiFallback: false,
+    historyApiFallback: true,
     devtool: true,
     hot: true,
     quiet: false,

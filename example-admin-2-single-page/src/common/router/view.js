@@ -1,11 +1,12 @@
 import React from "react";
-// import ReactDOM from "react-dom";
-// import Most from "react-most";
-import styles from "./style.less";
-import { Menu, Icon } from "antd";
-import { BrowserRouter, Match, Link } from "react-router";
+import ReactDOM from "react-dom";
+import Most from "react-most";
+// import styles from "./style.less";
+// import { Menu, Icon } from "antd";
+// import { BrowserRouter, Match, Link } from "react-router";
+import { BrowserRouter } from "react-router";
 
-const SubMenu = Menu.SubMenu;
+// const SubMenu = Menu.SubMenu;
 
 /**
  * 加载路由
@@ -19,12 +20,7 @@ const SubMenu = Menu.SubMenu;
 //       // console.log(require("srcDir/" + componentPath + "/route.js"))
 //   const RoutePage = require("srcDir/" + componentPath + "/route.js");
 //   console.info("123123");
-//   ReactDOM.render(
-//     <Most>
-//       <RoutePage />
-//     </Most>, document.getElementById("root")
-//   );
-//   return <div />;
+//   return <RoutePage />;
 // };
 
 
@@ -36,18 +32,29 @@ const SubMenu = Menu.SubMenu;
 //     </Most>, document.getElementById("root")
 //   );
 //   return true;
-const Home = () => (
-  <div>
-    <h2>Home</h2>
-  </div>
-);
+// const RoutePage = require("srcDir/assetManagement/addAsset/index/route.js");
+import AddAssetPage from "srcDir/assetManagement/addAsset/index/route";
+// const Home = () => (
+//   <div>
+//     <h2>Home</h2>
+//   </div>
+// );
+const click = () => {
+  ReactDOM.render(
+    <Most>
+      <AddAssetPage />
+    </Most>, document.getElementById("root")
+  );
+};
 
 // 创建react组件
 const View = (props) => {
   console.log(props);
   return (
-    <div>
-      <BrowserRouter>
+    <BrowserRouter>
+      <div>
+        <div onClick={click}>123123
+        {/*
         <Menu
           mode="inline"
           theme={"dark"}
@@ -71,14 +78,25 @@ const View = (props) => {
                 </SubMenu>
             )
           }
-          <Match
-            exactly
-            pattern={"/AddAsset"}
-            component={Home}
-          />
         </Menu>
-      </BrowserRouter>
-    </div>
+        {
+          props.results && Object.keys(props.results.MenuList).map(
+            (value) =>
+              props.results.MenuList[value].map(
+                (val) =>
+                  <Match
+                    exactly
+                    pattern={val.path}
+                    component={Home}
+                  />
+
+              )
+          )
+        }
+      */}
+        </div>
+      </div>
+    </BrowserRouter>
   );
 };
 

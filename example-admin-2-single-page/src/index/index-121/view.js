@@ -2,12 +2,12 @@ import React from "react";
 // import styles from "./style.less";
 // import { Menu, Icon } from "antd";
 
-import Menu from "srcDir/common/menu/route";
+import Router from "srcDir/common/router/route";
 
 // 创建react组件
 const View = () => (
   <div>
-    <Menu className={"123"} />
+    <Router />
   </div>
 );
 
