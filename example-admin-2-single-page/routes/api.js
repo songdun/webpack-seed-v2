@@ -47,7 +47,7 @@ router.route("/mag/permission/menu")
         ],
 
       },
-      MenuIcon: ["fa-cogs", "fa-money", "fa-institution", "fa-database", "fa-users"]
+      MenuIcon: ["appstore", "money", "institution", "database", "users"]
 
     };
     res.send(data);

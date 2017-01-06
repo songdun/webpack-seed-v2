@@ -1,85 +1,31 @@
 import React from "react";
-// import ReactDOM from "react-dom";
-// import Most from "react-most";
 import styles from "./style.less";
 import { Menu, Icon } from "antd";
-import { BrowserRouter, Match, Link } from "react-router";
+import { Link } from "react-router";
 
 const SubMenu = Menu.SubMenu;
 
-/**
- * 加载路由
- *
- * @param {[type]} componentPath [路由地址]
- *
- * @return {[type]} [路由对应页面组件]
- */
-// const home = (componentPath) => {
-//       // require("srcDir/" + val + "/route.js")
-//       // console.log(require("srcDir/" + componentPath + "/route.js"))
-//   const RoutePage = require("srcDir/" + componentPath + "/route.js");
-//   console.info("123123");
-//   ReactDOM.render(
-//     <Most>
-//       <RoutePage />
-//     </Most>, document.getElementById("root")
-//   );
-//   return <div />;
-// };
-
-
-// const RoutePage = require("srcDir/assetManagement/addAsset/index/route.js");
-//   console.info(RoutePage);
-//   ReactDOM.render(
-//     <Most>
-//       <RoutePage />
-//     </Most>, document.getElementById("root")
-//   );
-//   return true;
-const Home = () => (
-  <div>
-    <h2>Home</h2>
-  </div>
-);
-
 // 创建react组件
-const View = (props) => {
-  console.log(props);
-  return (
-    <div>
-      <BrowserRouter>
-        <Menu
-          mode="inline"
-          theme={"dark"}
-          className={props.className ? `${styles.menu} ${props.className}` : styles.menu}
-        >
-          {
-            props.results && Object.keys(props.results.MenuList).map(
-              (value, index) =>
-                <SubMenu key={`sub${value}`} title={<span><Icon type={props.results.MenuIcon[index]} /><span>{value}</span></span>}>
-                {
-                  props.results.MenuList[value].map(
-                    (val, inx) =>
-                      <Menu.Item key={`${value}-${inx}`}>
-                        <Link to={val.path}>{val.name}</Link>
-                        {
-                          console.log(val.component)
-                        }
-                      </Menu.Item>
-                  )
-                }
-                </SubMenu>
-            )
-          }
-          <Match
-            exactly
-            pattern={"/AddAsset"}
-            component={Home}
-          />
-        </Menu>
-      </BrowserRouter>
-    </div>
-  );
-};
+const View = (props) => <Menu
+  mode="inline"
+  theme={"dark"}
+  className={props.className ? `${styles.menu} ${props.className}` : styles.menu}
+>
+  {
+    props.results && Object.keys(props.results.MenuList).map(
+      (value, index) =>
+        <SubMenu key={`sub${value}`} title={<span><Icon type={props.results.MenuIcon[index]} /><span>{value}</span></span>}>
+        {
+          props.results.MenuList[value].map(
+            (val, inx) =>
+              <Menu.Item key={`${value}-${inx}`}>
+                <Link to={val.path}>{val.name}</Link>
+              </Menu.Item>
+          )
+        }
+        </SubMenu>
+    )
+  }
+</Menu>;
 
 export { View as default };

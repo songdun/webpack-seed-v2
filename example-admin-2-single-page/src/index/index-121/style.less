@@ -16,16 +16,19 @@
 	top: 0;
 	right: 0;
 	height: @default-headerHeight;
-	background: @c-green;
+	background: @default-headerBackgroundColor;
+	background-image: @default-headerBackgroundImage;
 }
 .nav {
 	top: @default-headerHeight;
 	bottom: 0;
 	width: @default-menuWidth;
-	// border: 1px solid @c-blue;
+	background-color: @default-menuBackground;
+	color: @default-menuColor;
 }
 .content {
-	margin-top: @default-headerHeight;
+	padding: @default-margin;
+	padding-top: @default-headerHeight+@default-margin;
 	margin-left: @default-menuWidth;
-	border: 1px solid @c-red;
+	// border: 1px solid @c-red;
 }
