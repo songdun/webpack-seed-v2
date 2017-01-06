@@ -1,12 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import Most from "react-most";
-// import styles from "./style.less";
-// import { Menu, Icon } from "antd";
-// import { BrowserRouter, Match, Link } from "react-router";
-import { BrowserRouter } from "react-router";
+import styles from "./style.less";
+import { Menu, Icon } from "antd";
+import { BrowserRouter, Match, Link } from "react-router";
+// import { BrowserRouter, Link } from "react-router";
 
-// const SubMenu = Menu.SubMenu;
+const SubMenu = Menu.SubMenu;
 
 /**
  * 加载路由
@@ -34,16 +34,15 @@ import { BrowserRouter } from "react-router";
 //   return true;
 // const RoutePage = require("srcDir/assetManagement/addAsset/index/route.js");
 import AddAssetPage from "srcDir/assetManagement/addAsset/index/route";
-// const Home = () => (
-//   <div>
-//     <h2>Home</h2>
-//   </div>
-// );
+
 const click = () => {
   ReactDOM.render(
     <Most>
       <AddAssetPage />
-    </Most>, document.getElementById("root")
+    </Most>, document.getElementById("contentContainer")
+  );
+  return (
+    <div />
   );
 };
 
@@ -53,8 +52,6 @@ const View = (props) => {
   return (
     <BrowserRouter>
       <div>
-        <div onClick={click}>123123
-        {/*
         <Menu
           mode="inline"
           theme={"dark"}
@@ -87,14 +84,15 @@ const View = (props) => {
                   <Match
                     exactly
                     pattern={val.path}
-                    component={Home}
+                    component={click}
                   />
 
               )
           )
+
         }
-      */}
-        </div>
+
+
       </div>
     </BrowserRouter>
   );
