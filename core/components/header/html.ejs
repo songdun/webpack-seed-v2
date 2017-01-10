@@ -18,3 +18,22 @@
   <!--[if lt IE 9]>
     <script src="<%= BUILD_FILE.js.respond %>"></script>
   <![endif]-->
+  <script type="text/javascript">
+
+  var ms_ie = false;
+  var ua = window.navigator.userAgent;
+  var old_ie = ua.indexOf('MSIE ');
+  var new_ie = ua.indexOf('Trident/');
+
+  if ((old_ie > -1) || (new_ie > -1)) {
+      ms_ie = true;
+  }
+
+  if ( ms_ie ) {
+    var script = document.createElement('script');
+    script.src = "<%= BUILD_FILE.js.promise %>";
+    document.documentElement.className += " ie";
+    document.head.appendChild(script);
+
+  }
+  </script>

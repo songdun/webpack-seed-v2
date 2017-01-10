@@ -4,13 +4,44 @@
 // mapcat: 合并集合
 import { map, filter, comp } from "transducers-js";
 import * as most from "most";
-import fetch from "./fetch";
 
-const tableModel = ({ url, method, params }) => {
-  // console.log(fetch({ url, method, params }));
-  if (!url || url === "") {
-    console.error("url参数不正确");
-  }
+const promise = Promise.resolve({
+  type: "dataUpdate",
+  value: JSON.stringify(
+    {
+      test: 123
+    }
+  )
+});
+
+
+// new Promise(function () {
+//   setTimeout(function () { console.log("1233333"); }, 0);
+// }).then(function (result) {
+//   console.log(result);
+//   const fetchData = {
+//     type: "dataUpdate",
+//     value: {
+//       test: 123
+//     }
+//   };
+//   return fetchData;
+// }, function (result) {
+//   console.log(result);
+//   const fetchData = {
+//     type: "dataUpdate",
+//     value: {
+//       test: 123
+//     }
+//   };
+//   return fetchData;
+// });
+const fetch = () => promise;
+console.info(fetch());
+const modalFrameModel = () => {
+  // if (!url || url === "") {
+  //   console.error("url参数不正确");
+  // }
   // 利用rest发请求
   const sendApiRequest = comp(
   // 获取输入框的值
@@ -19,7 +50,7 @@ const tableModel = ({ url, method, params }) => {
   // 使用rest发送请求，处理返回值
   // rest({ method: "DELETE", path: "/sf", entity: "hello world" })
     // map(url=>rest({ method: "GET", path: url }).then(resp=>({
-    map(q => fetch({ url, method, params, q }))
+    map(q => fetch(q))
   );
 
   // 处理返回的数据
@@ -33,8 +64,8 @@ const tableModel = ({ url, method, params }) => {
   );
 
   const Data = function (intent$) {
-  // 构建数据流并让数据流中的类型为‘search’的值debounce去抖500ms(500ms内只执行一次)
-    const updateSink$ = intent$.filter(i => i.type === "search")
+  // 构建数据流并让数据流中的类型为‘back’的值debounce去抖500ms(500ms内只执行一次)
+    const updateSink$ = intent$.filter(i => i.type === "back")
                              .debounce(300) //  延时500ms
 
   //  发送API请求
@@ -53,11 +84,11 @@ const tableModel = ({ url, method, params }) => {
                                     .map(error => state => ({ error }));
                              });
 
-    const data$ = most.fromPromise(fetch({ url, method, params })).transduce(generateStateFromResp);
+    const data$ = most.fromPromise(fetch()).transduce(generateStateFromResp);
 
     return {
       // 绑定操作到props.action里
-      search: value => ({ type: "search", value }),
+      back: value => ({ type: "back", value }),
       //  generateStateFromResp返回的新state数组{results:[]}
       updateSink$,
       data$,
@@ -67,4 +98,6 @@ const tableModel = ({ url, method, params }) => {
   return Data;
 };
 
-export { tableModel as default };
+const data = modalFrameModel();
+
+export { data as default };

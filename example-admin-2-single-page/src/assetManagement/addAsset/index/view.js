@@ -1,6 +1,18 @@
 import React from "react";
-import styles from "./style.less";
-import { Table, Icon, Tooltip, Input } from "antd";
+// import styles from "./style.less";
+import { Table, Icon, Tooltip, Input, Breadcrumb, Row, Col, Button } from "antd";
+import ReactDOM from "react-dom";
+import Most from "react-most";
+
+import Package from "srcDir/assetManagement/addAsset/package/route";
+
+const addPackage = () => {
+  ReactDOM.render(
+    <Most>
+      <Package />
+    </Most>, document.getElementById("contentContainer")
+  );
+};
 
 const columns = [
   {
@@ -52,14 +64,16 @@ const columns = [
     key: "loanInterset",
   }
 ];
-let inputValue;
+let bankNameInputValue;
+let packageNumInputValue;
 // 创建react组件
 const View = (props) => {
   console.info(props);
   const { search } = props.actions;
   const error = props.error || {};
   const paramsDefault = {
-    Q_bankName_like_string: inputValue || "",
+    Q_bankName_like_string: bankNameInputValue || "",
+    Q_packageNum_like_string: packageNumInputValue || "",
     _index: "1"
   };
   const getTableList = (params) => {
@@ -68,15 +82,38 @@ const View = (props) => {
 
   return (
     <div>
-      <div className={styles.test}>123</div>
-      <Input
-        onChange={
-          e => {
-            inputValue = e.target.value;
-            getTableList({ Q_bankName_like_string: inputValue });
-          }
-        }
-      />
+
+      <Breadcrumb separator=">">
+        <Breadcrumb.Item href="/">首页</Breadcrumb.Item>
+        <Breadcrumb.Item>资产管理</Breadcrumb.Item>
+        <Breadcrumb.Item>新增资产</Breadcrumb.Item>
+      </Breadcrumb>
+      <Row type="flex" justify="start" align="middle">
+        <Col span={2}>出包行:</Col>
+        <Col span={3}>
+          <Input
+            onChange={
+              e => {
+                bankNameInputValue = e.target.value;
+                getTableList({ Q_bankName_like_string: bankNameInputValue });
+              }
+            }
+          />
+        </Col>
+        <Col span={2} offset={3}>资产包流水号:</Col>
+        <Col span={3}>
+          <Input
+            onChange={
+              e => {
+                packageNumInputValue = e.target.value;
+                getTableList({ Q_packageNum_like_string: packageNumInputValue });
+              }
+            }
+          />
+        </Col>
+
+        <Col span={2} offset={3}><Button type="primary" icon="plus" onClick={addPackage}>添加</Button></Col>
+      </Row>
       <span className={"red " + error.className}>{error.message}</span>
 
       {

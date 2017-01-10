@@ -1,8 +1,9 @@
 import React from "react";
 import styles from "./style.less";
-// import { Menu, Icon } from "antd";
 
 import Router from "srcDir/common/router/route";
+
+const image = require("./images/home-background.jpg");
 
 // 创建react组件
 const View = () => (
@@ -11,7 +12,10 @@ const View = () => (
     <nav className={styles.nav}>
       <Router />
     </nav>
-    <article id="contentContainer" className={styles.content}></article>
+    <article id="contentContainer" className={styles.content}>
+      <img className={styles.img} alt="homeBackground" src={image} />
+      <input type="file" accept="audio/*" capture="microphone" />
+    </article>
   </div>
 );
 

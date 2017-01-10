@@ -8,7 +8,7 @@ const SubMenu = Menu.SubMenu;
 // 创建react组件
 const View = (props) => <Menu
   mode="inline"
-  theme={"dark"}
+  // theme={"dark"}
   className={props.className ? `${styles.menu} ${props.className}` : styles.menu}
 >
   {
