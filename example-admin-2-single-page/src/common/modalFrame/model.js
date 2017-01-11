@@ -5,39 +5,32 @@
 import { map, filter, comp } from "transducers-js";
 import * as most from "most";
 
-const promise = Promise.resolve({
+
+const fetch = ({ visible, content }) => Promise.resolve({
   type: "dataUpdate",
   value: JSON.stringify(
     {
-      test: 123
+      visible,
+      content
     }
   )
 });
 
+// const fetch = ({ visible, content }) => {
+//   // console.log(visible);
+//   console.log(content);
+//   return Promise.resolve({
+//     type: "dataUpdate",
+//     value: JSON.stringify(
+//       {
+//         visible: visible,
+//         content: content
+//       }
+//     )
+//   });
+// };
 
-// new Promise(function () {
-//   setTimeout(function () { console.log("1233333"); }, 0);
-// }).then(function (result) {
-//   console.log(result);
-//   const fetchData = {
-//     type: "dataUpdate",
-//     value: {
-//       test: 123
-//     }
-//   };
-//   return fetchData;
-// }, function (result) {
-//   console.log(result);
-//   const fetchData = {
-//     type: "dataUpdate",
-//     value: {
-//       test: 123
-//     }
-//   };
-//   return fetchData;
-// });
-const fetch = () => promise;
-console.info(fetch());
+// console.info(fetch());
 const modalFrameModel = () => {
   // if (!url || url === "") {
   //   console.error("url参数不正确");
@@ -47,9 +40,9 @@ const modalFrameModel = () => {
   // 获取输入框的值
     map(i => i.value),
 
-  // 使用rest发送请求，处理返回值
-  // rest({ method: "DELETE", path: "/sf", entity: "hello world" })
-    // map(url=>rest({ method: "GET", path: url }).then(resp=>({
+  // // 使用rest发送请求，处理返回值
+  // // rest({ method: "DELETE", path: "/sf", entity: "hello world" })
+  //   // map(url=>rest({ method: "GET", path: url }).then(resp=>({
     map(q => fetch(q))
   );
 
@@ -64,9 +57,9 @@ const modalFrameModel = () => {
   );
 
   const Data = function (intent$) {
-  // 构建数据流并让数据流中的类型为‘back’的值debounce去抖500ms(500ms内只执行一次)
-    const updateSink$ = intent$.filter(i => i.type === "back")
-                             .debounce(300) //  延时500ms
+  // 构建数据流并让数据流中的类型为‘reRender’的值debounce去抖500ms(500ms内只执行一次)
+    const updateSink$ = intent$.filter(i => i.type === "reRender")
+                             // .debounce(300) //  延时500ms
 
   //  发送API请求
                              .transduce(sendApiRequest)
@@ -84,11 +77,26 @@ const modalFrameModel = () => {
                                     .map(error => state => ({ error }));
                              });
 
-    const data$ = most.fromPromise(fetch()).transduce(generateStateFromResp);
+    const data$ = most.fromPromise(fetch({ visible: false })).transduce(generateStateFromResp);
 
     return {
       // 绑定操作到props.action里
-      back: value => ({ type: "back", value }),
+      reRender: value => ({ type: "reRender", value }),
+      show: value => {
+        const content = value;
+        value = {
+          visible: true,
+          content: content
+        };
+        // console.log(value);
+        return ({ type: "reRender", value });
+      },
+      hide: value => {
+        value = {
+          visible: false
+        };
+        return ({ type: "reRender", value });
+      },
       //  generateStateFromResp返回的新state数组{results:[]}
       updateSink$,
       data$,

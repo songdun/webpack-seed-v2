@@ -4,6 +4,7 @@ import Most from "react-most";
 // import styles from "./style.less";
 import { MemoryRouter, Match } from "react-router";
 import Menu from "srcDir/common/menu/route";
+import ModalFrame from "srcDir/common/modalFrame/route";
 
 
 const renderContentPage = (componentPath) => {
@@ -12,7 +13,9 @@ const renderContentPage = (componentPath) => {
   if (ContentPage) {
     ReactDOM.render(
       <Most>
-        <ContentPage />
+        <ModalFrame>
+          <ContentPage />
+        </ModalFrame>
       </Most>, document.getElementById("contentContainer")
     );
   }
@@ -23,32 +26,30 @@ const renderContentPage = (componentPath) => {
 };
 
 // 创建react组件
-const View = (props) => {
-  console.log(props);
-  return (
-    <MemoryRouter>
-      <div>
-        <Menu />
-        {
-          props.results && Object.keys(props.results.MenuList).map(
-            (value) =>
-              props.results.MenuList[value].map(
-                (val) =>
-                  <Match
-                    exactly
-                    pattern={val.path}
-                    component={() => renderContentPage(val.component)}
-                  />
+const View = (props) => (
+  <MemoryRouter>
+    <div>
+      <Menu />
+      {
+        props.results && Object.keys(props.results.MenuList).map(
+          (value) =>
+            props.results.MenuList[value].map(
+              (val) =>
+                <Match
+                  exactly
+                  pattern={val.path}
+                  component={() => renderContentPage(val.component)}
+                />
 
-              )
-          )
+            )
+        )
 
-        }
+      }
 
 
-      </div>
-    </MemoryRouter>
-  );
-};
+    </div>
+  </MemoryRouter>
+);
+
 
 export { View as default };

@@ -1,74 +1,18 @@
 import React from "react";
 // import styles from "./style.less";
 import { Table, Icon, Tooltip, Input, Breadcrumb, Row, Col, Button } from "antd";
-import ReactDOM from "react-dom";
-import Most from "react-most";
 
-import Package from "srcDir/assetManagement/addAsset/package/route";
-
-const addPackage = () => {
-  ReactDOM.render(
-    <Most>
-      <Package />
-    </Most>, document.getElementById("contentContainer")
-  );
+const PackagePath = "assetManagement/addAsset/package";
+const packageManagement = (e) => {
+  e(PackagePath);
 };
 
-const columns = [
-  {
-    title: "操作",
-    dataIndex: "id",
-    key: "id",
-    render: () => (
-      <span>
-        <a href="#"><Tooltip placement="left" title={"新增借款人"}><Icon type="plus" /></Tooltip></a>
-        <span className="ant-divider" />
-        <a href="#" className="ant-dropdown-link">
-          <Tooltip placement="top" title={"管理"}><Icon type="edit" /></Tooltip>
-        </a>
-        <span className="ant-divider" />
-        <a href="#" className="ant-dropdown-link">
-          <Tooltip placement="right" title={"删除"}><Icon type="delete" /></Tooltip>
-        </a>
-      </span>
-    ),
-  }, {
-    title: "出包行",
-    dataIndex: "bankName",
-    key: "bankName",
-  }, {
-    title: "批次",
-    dataIndex: "",
-    key: "",
-    render: (text, record) => (
-        record.packageYear + "-" + record.packageNum
-    ),
-  }, {
-    title: "转让基准日",
-    dataIndex: "transferDate",
-    key: "transferDate",
-  }, {
-    title: "总贷款余额（元）",
-    dataIndex: "",
-    key: "",
-    render: (text, record) => (
-        record.loanPrincipal + record.loanInterset
-    ),
-  }, {
-    title: "未偿还本金（元）",
-    dataIndex: "loanPrincipal",
-    key: "loanPrincipal",
-  }, {
-    title: "利息（元）",
-    dataIndex: "loanInterset",
-    key: "loanInterset",
-  }
-];
 let bankNameInputValue;
 let packageNumInputValue;
 // 创建react组件
 const View = (props) => {
-  console.info(props);
+  // console.info(props);
+  const { show } = props.modal;
   const { search } = props.actions;
   const error = props.error || {};
   const paramsDefault = {
@@ -79,6 +23,57 @@ const View = (props) => {
   const getTableList = (params) => {
     search(Object.assign(paramsDefault, params));
   };
+
+  const columns = [
+    {
+      title: "操作",
+      dataIndex: "id",
+      key: "id",
+      render: () => (
+        <span>
+          <a href="#"><Tooltip placement="left" title={"新增借款人"}><Icon type="plus" /></Tooltip></a>
+          <span className="ant-divider" />
+          <a href="#" className="ant-dropdown-link" onClick={() => packageManagement(show)}>
+            <Tooltip placement="top" title={"管理"}><Icon type="edit" /></Tooltip>
+          </a>
+          <span className="ant-divider" />
+          <a href="#" className="ant-dropdown-link">
+            <Tooltip placement="right" title={"删除"}><Icon type="delete" /></Tooltip>
+          </a>
+        </span>
+      ),
+    }, {
+      title: "出包行",
+      dataIndex: "bankName",
+      key: "bankName",
+    }, {
+      title: "批次",
+      dataIndex: "",
+      key: "",
+      render: (text, record) => (
+          record.packageYear + "-" + record.packageNum
+      ),
+    }, {
+      title: "转让基准日",
+      dataIndex: "transferDate",
+      key: "transferDate",
+    }, {
+      title: "总贷款余额（元）",
+      dataIndex: "",
+      key: "",
+      render: (text, record) => (
+          record.loanPrincipal + record.loanInterset
+      ),
+    }, {
+      title: "未偿还本金（元）",
+      dataIndex: "loanPrincipal",
+      key: "loanPrincipal",
+    }, {
+      title: "利息（元）",
+      dataIndex: "loanInterset",
+      key: "loanInterset",
+    }
+  ];
 
   return (
     <div>
@@ -112,7 +107,9 @@ const View = (props) => {
           />
         </Col>
 
-        <Col span={2} offset={3}><Button type="primary" icon="plus" onClick={addPackage}>添加</Button></Col>
+        <Col span={2} offset={3}>
+          <Button type="primary" icon="plus" onClick={() => packageManagement(show)}>添加</Button>
+        </Col>
       </Row>
       <span className={"red " + error.className}>{error.message}</span>
 

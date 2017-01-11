@@ -3,8 +3,19 @@ import React from "react";
 import { Modal, Button } from "antd";
 
 const View = (props) => {
-  console.info(props);
-  const { back } = props.actions;
+  const { hide, show, reRender } = props.actions;
+  props.children.props.modal = {
+    show, hide, reRender
+  };
+
+  const renderContent = () => {
+    if (props.results.content) {
+      const Content = require(`srcDir/${props.results.content}/route`).default;
+      // console.info(Content);
+      return <Content />;
+    }
+  };
+
   const error = props.error || {};
 
   return (
@@ -12,22 +23,27 @@ const View = (props) => {
 
       <span className={"red " + error.className}>{error.message}</span>
 
-      <Modal
-        visible={1}
-        title="Title"
-        footer={[
-          <Button key="back" type="ghost" size="large" onClick={back}>Return</Button>,
-          <Button key="submit" type="primary" size="large">
-            Submit
-          </Button>,
-        ]}
-      >
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-      </Modal>
+      {
+        props.results && <Modal
+          visible={props.results.visible}
+          title="Title"
+          onCancel={hide}
+          footer={[
+            <Button key="back" type="ghost" icon="rollback" onClick={hide}>返回</Button>,
+            <Button key="submit" type="primary" icon="save">
+              保存
+            </Button>,
+          ]}
+        >
+          {
+            renderContent()
+          }
+        </Modal>
+      }
+
+      {
+        props.children
+      }
 
     </div>
   );
