@@ -6,12 +6,16 @@ import { map, filter, comp } from "transducers-js";
 import * as most from "most";
 
 
-const fetch = ({ visible, content }) => Promise.resolve({
+const fetch = ({ visible, title, content, params, width, footer }) => Promise.resolve({
   type: "dataUpdate",
   value: JSON.stringify(
     {
       visible,
-      content
+      title,
+      content,
+      params,
+      width,
+      footer
     }
   )
 });
@@ -83,10 +87,14 @@ const modalFrameModel = () => {
       // 绑定操作到props.action里
       reRender: value => ({ type: "reRender", value }),
       show: value => {
-        const content = value;
+        const { content, title, params, width, footer } = value;
         value = {
           visible: true,
-          content: content
+          title,
+          content,
+          width,
+          params,
+          footer
         };
         // console.log(value);
         return ({ type: "reRender", value });

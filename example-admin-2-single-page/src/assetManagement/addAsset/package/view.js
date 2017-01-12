@@ -1,6 +1,6 @@
 import React from "react";
 // import styles from "./style.less";
-import { Input, Breadcrumb, Row, Col, Button, Card, DatePicker } from "antd";
+import { Input, Row, Col, Button, Card, DatePicker, Form } from "antd";
 import moment from "moment";
 
 // import fetch from "srcDir/common/model/itemModel/fetch";
@@ -17,16 +17,23 @@ import moment from "moment";
 // });
 // console.info(data);
 
-const back = () => {
-  console.log("back");
-};
+// const back = () => {
+//   console.log("back");
+// };
+
+const FormItem = Form.Item;
 const dateFormat = "YYYY-MM-DD";
 
 // let bankNameInputValue;
 // let packageNumInputValue;
 // 创建react组件
-const View = (props) => {
+const View = Form.create()((props) => {
   console.info(props);
+  const { params, results, modal } = props;
+  const { hide } = modal;
+  if (params && !results) {
+    props.actions.getItem(params);
+  }
   const error = props.error || {};
   // const paramsDefault = {
   //   Q_bankName_like_string: bankNameInputValue || "",
@@ -36,17 +43,18 @@ const View = (props) => {
 
   return (
     <div>
-
+      { /*
       <Breadcrumb separator=">">
         <Breadcrumb.Item href="/">首页</Breadcrumb.Item>
         <Breadcrumb.Item>资产管理</Breadcrumb.Item>
         <Breadcrumb.Item>新增资产</Breadcrumb.Item>
       </Breadcrumb>
+      */}
 
       <span className={"red " + error.className}>{error.message}</span>
 
 
-      <Card title="资产包管理">
+      <Card>
         <Row type="flex" justify="start" align="middle">
           <Col span={11}>
             <Row type="flex" justify="start" align="middle">
@@ -137,14 +145,22 @@ const View = (props) => {
             <Button type="primary" icon="save">保存</Button>
           </Col>
           <Col span={2}>
-            <Button icon="rollback" onClick={back}>返回</Button>
+            <Button icon="rollback" onClick={hide}>返回</Button>
           </Col>
         </Row>
       </Card>
-
+      <Form vertical>
+        <FormItem label="Title">
+          <Input />
+        </FormItem>
+        <FormItem label="Description">
+          <Input type="textarea" />
+        </FormItem>
+      </Form>
 
     </div>
   );
-};
+}
+);
 
 export { View as default };

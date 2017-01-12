@@ -1,18 +1,27 @@
 import React from "react";
 // import styles from "./style.less";
-import { Modal, Button } from "antd";
+import { Modal } from "antd";
 
 const View = (props) => {
-  const { hide, show, reRender } = props.actions;
+  // console.log(props);
+  const { actions, results } = props;
+  const { hide, show, reRender } = actions;
+
+  const { visible, title, width, footer } = results || {};
   props.children.props.modal = {
-    show, hide, reRender
+    show, hide, reRender,
   };
 
   const renderContent = () => {
     if (props.results.content) {
       const Content = require(`srcDir/${props.results.content}/route`).default;
-      // console.info(Content);
-      return <Content />;
+
+      return (
+        <Content
+          params={props.results.params}
+          modal={props.children.props.modal}
+        />
+      );
     }
   };
 
@@ -25,15 +34,11 @@ const View = (props) => {
 
       {
         props.results && <Modal
-          visible={props.results.visible}
-          title="Title"
+          visible={visible}
+          title={title}
+          width={width || 800}
           onCancel={hide}
-          footer={[
-            <Button key="back" type="ghost" icon="rollback" onClick={hide}>返回</Button>,
-            <Button key="submit" type="primary" icon="save">
-              保存
-            </Button>,
-          ]}
+          footer={footer}
         >
           {
             renderContent()

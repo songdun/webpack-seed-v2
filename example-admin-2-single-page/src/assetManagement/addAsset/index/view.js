@@ -3,15 +3,21 @@ import React from "react";
 import { Table, Icon, Tooltip, Input, Breadcrumb, Row, Col, Button } from "antd";
 
 const PackagePath = "assetManagement/addAsset/package";
-const packageManagement = (e) => {
-  e(PackagePath);
+const packageManagement = (showModal) => {
+  showModal({
+    content: PackagePath,
+    title: "资产包管理",
+    params: {
+      id: "57"
+    }
+  });
 };
 
 let bankNameInputValue;
 let packageNumInputValue;
 // 创建react组件
 const View = (props) => {
-  // console.info(props);
+  console.info(props);
   const { show } = props.modal;
   const { search } = props.actions;
   const error = props.error || {};
