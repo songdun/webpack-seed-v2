@@ -7,9 +7,9 @@ const packageManagement = (showModal) => {
   showModal({
     content: PackagePath,
     title: "资产包管理",
-    params: {
-      id: "57"
-    }
+    // params: {
+    //   id: "57"
+    // }
   });
 };
 
@@ -17,7 +17,7 @@ let bankNameInputValue;
 let packageNumInputValue;
 // 创建react组件
 const View = (props) => {
-  console.info(props);
+  // console.info(props);
   const { show } = props.modal;
   const { search } = props.actions;
   const error = props.error || {};

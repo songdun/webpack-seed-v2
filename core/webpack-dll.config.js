@@ -22,10 +22,11 @@ module.exports = {
       'rest',
       'transducers-js',
       'most',
-      'antd/dist/antd.min', 'antd/dist/antd.min.css',
+      'antd', 'antd/dist/antd.min', 'antd/dist/antd.min.css',
       'particles.js',
       'js-cookie',
       'react-router',
+      'moment',
     ],
   },
   plugins: [
@@ -46,10 +47,11 @@ module.exports = {
       'rest': 'rest',
       'transducers-js': 'transducers-js',
       'most': 'most',
-      'antd': 'antd',
+      'antd': 'antd/dist/antd.min',
       'particles': 'particles.js',
       'js-cookie': 'js-cookie',
       'react-router': 'react-router',
+      'moment': 'moment',
     }),
     new ExtractTextPlugin('[name].css'), // 打包css/less的时候会用到ExtractTextPlugin
     new webpack.DefinePlugin({

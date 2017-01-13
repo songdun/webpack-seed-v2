@@ -24,7 +24,7 @@ const tableModel = ({ url, method }) => {
     filter(i => i.type === "dataUpdate"),
     map(data => JSON.parse(data.value).obj),
   // 把结果映射成state 到新的 state
-    map(items => state => ({ results: items }))
+    map(items => state => ({ results: items || {} }))
   );
 
   const Data = function (intent$) {
@@ -46,12 +46,12 @@ const tableModel = ({ url, method }) => {
                                     .delay(3000))
                                     .map(error => state => ({ error }));
                              });
-    // const data$ = most.fromPromise(fetch({ url, method, params })).transduce(generateStateFromResp);
+    const data$ = most.fromPromise(fetch({ url, method })).transduce(generateStateFromResp);
 
     return {
       getItem: value => ({ type: "getItem", value }),
       updateSink$,
-      // data$,
+      data$,
     };
   };
 

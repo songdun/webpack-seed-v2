@@ -1,6 +1,6 @@
 import React from "react";
-// import styles from "./style.less";
-import { Input, Row, Col, Button, Card, DatePicker, Form } from "antd";
+import styles from "./style.less";
+import { Input, Button, Card, DatePicker, Form } from "antd";
 import moment from "moment";
 
 // import fetch from "srcDir/common/model/itemModel/fetch";
@@ -28,19 +28,43 @@ const dateFormat = "YYYY-MM-DD";
 // let packageNumInputValue;
 // 创建react组件
 const View = Form.create()((props) => {
-  console.info(props);
-  const { params, results, modal } = props;
-  const { hide } = modal;
+  // console.info(props);
+  const { params, results, form } = props;
+  // const { hide } = modal;
+  const { validateFieldsAndScroll, getFieldDecorator } = form;
+
+  // console.log(hide);
   if (params && !results) {
     props.actions.getItem(params);
   }
+
   const error = props.error || {};
   // const paramsDefault = {
   //   Q_bankName_like_string: bankNameInputValue || "",
   //   Q_packageNum_like_string: packageNumInputValue || "",
   //   _index: "1"
   // };
-
+  const formItemLayout = {
+    labelCol: { span: 6 },
+    wrapperCol: { span: 14 },
+  };
+  const tailFormItemLayout = {
+    wrapperCol: {
+      span: 6,
+      offset: 9,
+    },
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    validateFieldsAndScroll((err, values) => {
+      if (!err) {
+        console.log("表单结果");
+        console.log("Received values of form: ", values);
+        values.transferDate = values.transferDate.format(dateFormat);
+        console.log(values);
+      }
+    });
+  };
   return (
     <div>
       { /*
@@ -53,110 +77,95 @@ const View = Form.create()((props) => {
 
       <span className={"red " + error.className}>{error.message}</span>
 
-
       <Card>
-        <Row type="flex" justify="start" align="middle">
-          <Col span={11}>
-            <Row type="flex" justify="start" align="middle">
-              <Col span={12}>
-                出包行:
-              </Col>
-              <Col span={12}>
-                {
-                  props.results && <Input defaultValue={props.results.bankName} />
-                }
-                {
-                  !props.results && <Input />
-                }
-              </Col>
-            </Row>
-            <Row type="flex" justify="start" align="middle">
-              <Col span={12}>
-                资产包年份:
-              </Col>
-              <Col span={12}>
-                {
-                  props.results && <DatePicker format="YYYY" minView="2" defaultValue={moment(props.results.packageYear, dateFormat)} />
-                }
-                {
-                  !props.results && <DatePicker format="YYYY" minView="2" />
-                }
-              </Col>
-            </Row>
-            <Row type="flex" justify="start" align="middle">
-              <Col span={12}>
-                未偿还本金:
-              </Col>
-              <Col span={12}>
-                {
-                  props.results && <Input addonAfter="元" defaultValue={props.results.loanPrincipal} />
-                }
-                {
-                  !props.results && <Input addonAfter="元" />
-                }
-              </Col>
-            </Row>
-          </Col>
-          <Col span={11} offset={2}>
-            <Row type="flex" justify="start" align="middle">
-              <Col span={12}>
-                转让基准日:
-              </Col>
-              <Col span={12}>
-                {
-                  props.results && <DatePicker defaultValue={moment(props.results.transferDate, dateFormat)} />
-                }
-                {
-                  !props.results && <DatePicker />
-                }
-              </Col>
-            </Row>
-            <Row type="flex" justify="start" align="middle">
-              <Col span={12}>
-                资产包流水号:
-              </Col>
-              <Col span={12}>
-                {
-                  props.results && <Input defaultValue={props.results.packageNum} />
-                }
-                {
-                  !props.results && <Input />
-                }
-              </Col>
-            </Row>
-            <Row type="flex" justify="start" align="middle">
-              <Col span={12}>
-                利息:
-              </Col>
-              <Col span={12}>
-                {
-                  props.results && <Input addonAfter="元" defaultValue={props.results.loanInterset} />
-                }
-                {
-                  !props.results && <Input addonAfter="元" />
-                }
-              </Col>
-            </Row>
-          </Col>
-        </Row>
+        <Form onSubmit={handleSubmit}>
+          <FormItem
+            {...formItemLayout}
+            label="出包行"
+          >
 
-        <Row type="flex" justify="space-around" align="middle">
-          <Col span={2}>
-            <Button type="primary" icon="save">保存</Button>
-          </Col>
-          <Col span={2}>
-            <Button icon="rollback" onClick={hide}>返回</Button>
-          </Col>
-        </Row>
+            {
+              props.results && getFieldDecorator("bankName", {
+                initialValue: props.results.bankName,
+                rules: [{ required: true, message: "Please input your bankName!" }],
+              })(<Input />)
+            }
+
+          </FormItem>
+          <FormItem
+            {...formItemLayout}
+            label="资产包年份"
+          >
+            {
+              props.results && getFieldDecorator("packageYear", {
+                initialValue: props.results.packageYear,
+                rules: [
+                  { required: true, message: "Please input your packageYear!" },
+                  { len: 4, pattern: /^([\d]{4})$/, message: "资产包年份!" }
+                ],
+              })(<Input addonAfter="年" />)
+            }
+          </FormItem>
+          <FormItem
+            {...formItemLayout}
+            label="未偿还本金"
+          >
+            {
+              props.results && getFieldDecorator("loanPrincipal", {
+                initialValue: props.results.loanPrincipal,
+                rules: [{ required: true, message: "Please input your loanPrincipal!" }],
+              })(<Input addonAfter="元" />)
+            }
+          </FormItem>
+          <FormItem
+            {...formItemLayout}
+            label="转让基准日"
+          >
+            {
+              props.results && getFieldDecorator("transferDate", {
+                initialValue: moment(props.results.transferDate || new Date(), dateFormat),
+                getValueFromEvent() {
+                  return moment(arguments[1], dateFormat);
+                },
+                rules: [{ required: true, message: "Please input your transferDate!" }],
+              })(
+                <DatePicker
+                  allowClear={!1}
+                  defaultValue={moment(props.results.transferDate, dateFormat)}
+                />
+              )
+            }
+          </FormItem>
+          <FormItem
+            {...formItemLayout}
+            label="资产包流水号"
+          >
+            {
+              props.results && getFieldDecorator("packageNum", {
+                initialValue: props.results.packageNum,
+                rules: [{ required: true, message: "Please input your packageNum!" }],
+              })(<Input />)
+            }
+          </FormItem>
+          <FormItem
+            {...formItemLayout}
+            label="利息"
+          >
+            {
+              props.results && getFieldDecorator("loanInterset", {
+                initialValue: props.results.loanInterset,
+                rules: [{ required: true, message: "Please input your loanInterset!" }],
+              })(<Input addonAfter="元" />)
+            }
+          </FormItem>
+
+          <FormItem
+            {...tailFormItemLayout}
+          >
+            <Button className={styles.submitButton} type="primary" htmlType="submite" icon="save">保存</Button>
+          </FormItem>
+        </Form>
       </Card>
-      <Form vertical>
-        <FormItem label="Title">
-          <Input />
-        </FormItem>
-        <FormItem label="Description">
-          <Input type="textarea" />
-        </FormItem>
-      </Form>
 
     </div>
   );
