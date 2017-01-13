@@ -46,12 +46,12 @@ const tableModel = ({ url, method }) => {
                                     .delay(3000))
                                     .map(error => state => ({ error }));
                              });
-    const data$ = most.fromPromise(fetch({ url, method })).transduce(generateStateFromResp);
+    // const data$ = most.fromPromise(fetch({ url, method })).transduce(generateStateFromResp);
 
     return {
       getItem: value => ({ type: "getItem", value }),
       updateSink$,
-      data$,
+      // data$,
     };
   };
 

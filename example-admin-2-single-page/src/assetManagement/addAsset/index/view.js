@@ -7,9 +7,9 @@ const packageManagement = (showModal) => {
   showModal({
     content: PackagePath,
     title: "资产包管理",
-    // params: {
-    //   id: "57"
-    // }
+    params: {
+      id: "57"
+    }
   });
 };
 

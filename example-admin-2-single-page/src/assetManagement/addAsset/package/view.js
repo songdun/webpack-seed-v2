@@ -34,10 +34,13 @@ const View = Form.create()((props) => {
   const { validateFieldsAndScroll, getFieldDecorator } = form;
 
   // console.log(hide);
+  if (!results) {
+    props.results = {};
+  }
   if (params && !results) {
     props.actions.getItem(params);
   }
-
+  console.info(props);
   const error = props.error || {};
   // const paramsDefault = {
   //   Q_bankName_like_string: bankNameInputValue || "",
@@ -57,11 +60,12 @@ const View = Form.create()((props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     validateFieldsAndScroll((err, values) => {
+      console.log(arguments);
       if (!err) {
         console.log("表单结果");
         console.log("Received values of form: ", values);
         values.transferDate = values.transferDate.format(dateFormat);
-        console.log(values);
+        console.info(values);
       }
     });
   };
@@ -78,7 +82,7 @@ const View = Form.create()((props) => {
       <span className={"red " + error.className}>{error.message}</span>
 
       <Card>
-        <Form onSubmit={handleSubmit}>
+        <Form>
           <FormItem
             {...formItemLayout}
             label="出包行"
@@ -162,7 +166,7 @@ const View = Form.create()((props) => {
           <FormItem
             {...tailFormItemLayout}
           >
-            <Button className={styles.submitButton} type="primary" htmlType="submite" icon="save">保存</Button>
+            <Button className={styles.submitButton} type="primary" htmlType="submite" icon="save" onClick={handleSubmit}>保存</Button>
           </FormItem>
         </Form>
       </Card>
