@@ -1,23 +1,23 @@
 import React from "react";
-// import styles from "./style.less";
+import styles from "./style.less";
 import { Table, Icon, Tooltip, Input, Breadcrumb, Row, Col, Button } from "antd";
 
 const PackagePath = "assetManagement/addAsset/package";
-const packageManagement = (showModal) => {
-  showModal({
-    content: PackagePath,
+
+const packageManagement = (options) => {
+  const { content, params } = options;
+  return {
+    content: content,
     title: "资产包管理",
-    params: {
-      id: "57"
-    }
-  });
+    params,
+  };
 };
 
 let bankNameInputValue;
 let packageNumInputValue;
 // 创建react组件
 const View = (props) => {
-  // console.info(props);
+  console.info(props);
   const { show } = props.modal;
   const { search } = props.actions;
   const error = props.error || {};
@@ -35,11 +35,19 @@ const View = (props) => {
       title: "操作",
       dataIndex: "id",
       key: "id",
-      render: () => (
+      render: (value) => (
         <span>
           <a href="#"><Tooltip placement="left" title={"新增借款人"}><Icon type="plus" /></Tooltip></a>
           <span className="ant-divider" />
-          <a href="#" className="ant-dropdown-link" onClick={() => packageManagement(show)}>
+          <a
+            href="#"
+            className="ant-dropdown-link"
+            onClick={
+              () => show(
+                packageManagement({ content: PackagePath, params: { id: value } })
+              )
+            }
+          >
             <Tooltip placement="top" title={"管理"}><Icon type="edit" /></Tooltip>
           </a>
           <span className="ant-divider" />
@@ -84,7 +92,7 @@ const View = (props) => {
   return (
     <div>
 
-      <Breadcrumb separator=">">
+      <Breadcrumb separator=">" className={styles.Breadcrumb}>
         <Breadcrumb.Item href="/">首页</Breadcrumb.Item>
         <Breadcrumb.Item>资产管理</Breadcrumb.Item>
         <Breadcrumb.Item>新增资产</Breadcrumb.Item>
@@ -114,7 +122,7 @@ const View = (props) => {
         </Col>
 
         <Col span={2} offset={3}>
-          <Button type="primary" icon="plus" onClick={() => packageManagement(show)}>添加</Button>
+          <Button type="primary" icon="plus" onClick={() => show(packageManagement({ content: PackagePath }))}>添加</Button>
         </Col>
       </Row>
       <span className={"red " + error.className}>{error.message}</span>

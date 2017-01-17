@@ -1,4 +1,5 @@
 import React from "react";
+// import ReactDOM from "react-dom";
 // import styles from "./style.less";
 import { Modal } from "antd";
 
@@ -12,10 +13,21 @@ const View = (props) => {
     show, hide, reRender,
   };
 
+  const Close = () => {
+    hide({
+      title: results.title,
+      content: results.content,
+      width: results.width,
+      // params: results.params,
+      footer: results.footer
+    });
+  };
+
   const renderContent = () => {
     if (props.results.content) {
       const Content = require(`srcDir/${props.results.content}/route`).default;
-
+      const modal = props.children.props.modal;
+      modal.hide = Close;
       return (
         <Content
           params={props.results.params}
@@ -37,8 +49,10 @@ const View = (props) => {
           visible={visible}
           title={title}
           width={width || 800}
-          onCancel={hide}
+          onCancel={Close}
           footer={footer}
+          maskClosable={!1}
+          closable={!1}
         >
           {
             renderContent()

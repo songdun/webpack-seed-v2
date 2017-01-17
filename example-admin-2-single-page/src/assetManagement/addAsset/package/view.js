@@ -1,20 +1,11 @@
 import React from "react";
 import styles from "./style.less";
-import { Input, Button, Card, DatePicker, Form } from "antd";
+import { Input, Button, Card, DatePicker, Form, Row, Col, notification } from "antd";
 import moment from "moment";
 
-// import fetch from "srcDir/common/model/itemModel/fetch";
-// let data;
-// fetch({
-//   url: "/ap/assetInfo/show",
-//   method: "GET",
-//   params: {
-//     id: "57"
-//   },
-//   success(res) {
-//     data = res.entity;
-//   }
-// });
+import fetch from "srcDir/common/model/itemModel/fetch";
+
+
 // console.info(data);
 
 // const back = () => {
@@ -24,60 +15,83 @@ import moment from "moment";
 const FormItem = Form.Item;
 const dateFormat = "YYYY-MM-DD";
 
-// let bankNameInputValue;
-// let packageNumInputValue;
 // 创建react组件
 const View = Form.create()((props) => {
-  // console.info(props);
-  const { params, results, form } = props;
-  // const { hide } = modal;
-  const { validateFieldsAndScroll, getFieldDecorator } = form;
-
-  // console.log(hide);
-  if (!results) {
-    props.results = {};
-  }
-  if (params && !results) {
-    props.actions.getItem(params);
-  }
   console.info(props);
+  const { params, results, form, actions, modal } = props;
+  const { getItem } = actions;
+  const { hide } = modal;
+  const { validateFieldsAndScroll, getFieldDecorator, resetFields } = form;
+
+  // 首次加载的时候设置results为空对象
+  if (!params && !results) {
+    props.results = {};
+
+    // 判断是否为编辑
+  } else if (params && (!results || results.id !== params.id)) {
+    getItem(params);
+  }
+  // console.log(params);
   const error = props.error || {};
-  // const paramsDefault = {
-  //   Q_bankName_like_string: bankNameInputValue || "",
-  //   Q_packageNum_like_string: packageNumInputValue || "",
-  //   _index: "1"
-  // };
+
   const formItemLayout = {
     labelCol: { span: 6 },
     wrapperCol: { span: 14 },
   };
-  const tailFormItemLayout = {
-    wrapperCol: {
-      span: 6,
-      offset: 9,
-    },
+
+  /**
+   * 返回操作
+   * 需要执行以下步骤
+   * 1. 隐藏modal
+   * 2. 重置表单以清除验证
+   * 3. 清除表单值
+   * 4. 刷新列表
+   */
+  const handleBack = () => {
+    hide();
+    resetFields();
+    getItem();
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     validateFieldsAndScroll((err, values) => {
-      console.log(arguments);
+      // console.log(arguments);
       if (!err) {
         console.log("表单结果");
-        console.log("Received values of form: ", values);
+        // 格式化时间
         values.transferDate = values.transferDate.format(dateFormat);
         console.info(values);
+
+        let url;
+        // 判断新增或编辑
+        if (params) {
+          url = "/ap/assetInfo/update";
+          values.id = params.id;
+        } else {
+          url = "/ap/assetInfo/add";
+        }
+        fetch({
+          url,
+          method: "POST",
+          params: values,
+          success(res) {
+            notification.success({
+              message: JSON.parse(res.entity).msg,
+              description: JSON.parse(res.entity).msg,
+            });
+          }
+        });
+      } else {
+        notification.warning({
+          message: "表单验证没有通过哦",
+          description: "表单里有内容没有通过验证，请修改！",
+        });
       }
     });
   };
   return (
     <div>
-      { /*
-      <Breadcrumb separator=">">
-        <Breadcrumb.Item href="/">首页</Breadcrumb.Item>
-        <Breadcrumb.Item>资产管理</Breadcrumb.Item>
-        <Breadcrumb.Item>新增资产</Breadcrumb.Item>
-      </Breadcrumb>
-      */}
 
       <span className={"red " + error.className}>{error.message}</span>
 
@@ -163,10 +177,15 @@ const View = Form.create()((props) => {
             }
           </FormItem>
 
-          <FormItem
-            {...tailFormItemLayout}
-          >
-            <Button className={styles.submitButton} type="primary" htmlType="submite" icon="save" onClick={handleSubmit}>保存</Button>
+          <FormItem>
+            <Row type="flex" justify="space-around" align="middle">
+              <Col span={12}>
+                <Button className={styles.submitButton} type="primary" htmlType="submite" icon="save" size="large" onClick={handleSubmit}>保存</Button>
+              </Col>
+              <Col span={12}>
+                <Button className={styles.submitBack} icon="rollback" size="large" onClick={handleBack}>返回</Button>
+              </Col>
+            </Row>
           </FormItem>
         </Form>
       </Card>

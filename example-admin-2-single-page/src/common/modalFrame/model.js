@@ -81,7 +81,7 @@ const modalFrameModel = () => {
                                     .map(error => state => ({ error }));
                              });
 
-    const data$ = most.fromPromise(fetch({ visible: false })).transduce(generateStateFromResp);
+    // const data$ = most.fromPromise(fetch({ visible: false })).transduce(generateStateFromResp);
 
     return {
       // 绑定操作到props.action里
@@ -100,14 +100,21 @@ const modalFrameModel = () => {
         return ({ type: "reRender", value });
       },
       hide: value => {
+        // console.info(value);
+        const { content, title, params, width, footer } = value;
         value = {
-          visible: false
+          visible: false,
+          title,
+          content,
+          width,
+          params,
+          footer
         };
         return ({ type: "reRender", value });
       },
       //  generateStateFromResp返回的新state数组{results:[]}
       updateSink$,
-      data$,
+      // data$,
     };
   };
 
