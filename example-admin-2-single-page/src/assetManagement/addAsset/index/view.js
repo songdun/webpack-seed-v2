@@ -4,20 +4,12 @@ import { Table, Icon, Tooltip, Input, Breadcrumb, Row, Col, Button } from "antd"
 
 const PackagePath = "assetManagement/addAsset/package";
 
-const packageManagement = (options) => {
-  const { content, params } = options;
-  return {
-    content: content,
-    title: "资产包管理",
-    params,
-  };
-};
-
 let bankNameInputValue;
 let packageNumInputValue;
 // 创建react组件
 const View = (props) => {
-  console.info(props);
+  // console.info("+++++++++++++++++++");
+  // console.info(props);
   const { show } = props.modal;
   const { search } = props.actions;
   const error = props.error || {};
@@ -28,6 +20,18 @@ const View = (props) => {
   };
   const getTableList = (params) => {
     search(Object.assign(paramsDefault, params));
+  };
+
+  const packageManagement = (options) => {
+    const { content, params } = options;
+    // console.log("getTableList");
+    // console.log(getTableList);
+    return {
+      content: content,
+      title: "资产包管理",
+      params,
+      getTableList,
+    };
   };
 
   const columns = [

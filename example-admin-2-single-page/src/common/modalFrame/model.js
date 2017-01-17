@@ -6,18 +6,17 @@ import { map, filter, comp } from "transducers-js";
 import * as most from "most";
 
 
-const fetch = ({ visible, title, content, params, width, footer }) => Promise.resolve({
+const fetch = ({ visible, title, content, params, width, footer, getTableList }) => Promise.resolve({
   type: "dataUpdate",
-  value: JSON.stringify(
-    {
-      visible,
-      title,
-      content,
-      params,
-      width,
-      footer
-    }
-  )
+  value: {
+    visible,
+    title,
+    content,
+    params,
+    width,
+    footer,
+    getTableList
+  }
 });
 
 // const fetch = ({ visible, content }) => {
@@ -55,7 +54,8 @@ const modalFrameModel = () => {
   // {results:[]}
   const generateStateFromResp = comp(
     filter(i => i.type === "dataUpdate"),
-    map(data => JSON.parse(data.value)),
+    map(data => data.value),
+    // map(data => JSON.parse(data.value)),
   // 把结果映射成state 到新的 state
     map(items => state => ({ results: items }))
   );
@@ -87,14 +87,15 @@ const modalFrameModel = () => {
       // 绑定操作到props.action里
       reRender: value => ({ type: "reRender", value }),
       show: value => {
-        const { content, title, params, width, footer } = value;
+        const { content, title, params, width, footer, getTableList } = value;
         value = {
           visible: true,
           title,
           content,
           width,
           params,
-          footer
+          footer,
+          getTableList
         };
         // console.log(value);
         return ({ type: "reRender", value });

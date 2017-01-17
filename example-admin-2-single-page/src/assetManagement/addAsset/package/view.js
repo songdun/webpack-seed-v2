@@ -5,22 +5,16 @@ import moment from "moment";
 
 import fetch from "srcDir/common/model/itemModel/fetch";
 
-
-// console.info(data);
-
-// const back = () => {
-//   console.log("back");
-// };
-
 const FormItem = Form.Item;
 const dateFormat = "YYYY-MM-DD";
 
 // 创建react组件
 const View = Form.create()((props) => {
-  console.info(props);
-  const { params, results, form, actions, modal } = props;
+  // console.info(props);
+  const { params, results, form, actions, modal, table } = props;
   const { getItem } = actions;
   const { hide } = modal;
+  const { getTableList } = table;
   const { validateFieldsAndScroll, getFieldDecorator, resetFields } = form;
 
   // 首次加载的时候设置results为空对象
@@ -45,7 +39,6 @@ const View = Form.create()((props) => {
    * 1. 隐藏modal
    * 2. 重置表单以清除验证
    * 3. 清除表单值
-   * 4. 刷新列表
    */
   const handleBack = () => {
     hide();
@@ -58,10 +51,10 @@ const View = Form.create()((props) => {
     validateFieldsAndScroll((err, values) => {
       // console.log(arguments);
       if (!err) {
-        console.log("表单结果");
         // 格式化时间
         values.transferDate = values.transferDate.format(dateFormat);
-        console.info(values);
+        // console.log("表单结果");
+        // console.info(values);
 
         let url;
         // 判断新增或编辑
@@ -80,6 +73,9 @@ const View = Form.create()((props) => {
               message: JSON.parse(res.entity).msg,
               description: JSON.parse(res.entity).msg,
             });
+            // 刷新列表
+            getTableList();
+            handleBack();
           }
         });
       } else {

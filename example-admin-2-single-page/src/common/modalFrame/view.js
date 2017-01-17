@@ -8,9 +8,12 @@ const View = (props) => {
   const { actions, results } = props;
   const { hide, show, reRender } = actions;
 
-  const { visible, title, width, footer } = results || {};
+  const { visible, title, width, footer, getTableList } = results || {};
   props.children.props.modal = {
     show, hide, reRender,
+  };
+  props.children.props.table = {
+    getTableList
   };
 
   const Close = () => {
@@ -32,6 +35,7 @@ const View = (props) => {
         <Content
           params={props.results.params}
           modal={props.children.props.modal}
+          table={props.children.props.table}
         />
       );
     }
