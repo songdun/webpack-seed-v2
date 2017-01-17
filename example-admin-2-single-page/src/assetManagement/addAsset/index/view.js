@@ -16,7 +16,6 @@ const View = (props) => {
   const paramsDefault = {
     Q_bankName_like_string: bankNameInputValue || "",
     Q_packageNum_like_string: packageNumInputValue || "",
-    _index: "1"
   };
   const getTableList = (params) => {
     search(Object.assign(paramsDefault, params));
