@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./style.less";
 import { Table, Icon, Tooltip, Input, Breadcrumb, Row, Col, Button, Modal, notification } from "antd";
 import fetch from "srcDir/common/model/itemModel/fetch";
+import debtor from "srcDir/assetManagement/addAsset/debtorList/route";
 
 const confirm = Modal.confirm;
 
@@ -127,12 +128,12 @@ const View = (props) => {
   return (
     <div>
 
-      <Breadcrumb separator=">" className={styles.Breadcrumb}>
+      <Breadcrumb separator=">" className={styles.marginBottom}>
         <Breadcrumb.Item href="/">首页</Breadcrumb.Item>
         <Breadcrumb.Item>资产管理</Breadcrumb.Item>
         <Breadcrumb.Item>新增资产</Breadcrumb.Item>
       </Breadcrumb>
-      <Row type="flex" justify="start" align="middle">
+      <Row type="flex" justify="start" align="middle" className={styles.marginBottom}>
         <Col span={2}>出包行:</Col>
         <Col span={3}>
           <Input
@@ -167,11 +168,11 @@ const View = (props) => {
           rowKey="id"
           dataSource={props.results.rows}
           columns={columns}
-          expandedRowRender={() => <Table
-            rowKey="id"
-            dataSource={props.results.rows}
-            columns={columns}
-          />
+          expandedRowRender={
+            (item) => {
+              const SubTable = debtor(item.id);
+              return <SubTable assetId={item.id} />;
+            }
           }
           pagination={{
             total: props.results.totalRows,

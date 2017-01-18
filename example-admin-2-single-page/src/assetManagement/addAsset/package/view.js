@@ -157,7 +157,10 @@ const View = Form.create()((props) => {
             {
               props.results && getFieldDecorator("packageNum", {
                 initialValue: props.results.packageNum,
-                rules: [{ required: true, message: "Please input your packageNum!" }],
+                rules: [
+                  { required: true, message: "Please input your packageNum!" },
+                  { len: 4, pattern: /^([\d]{4})$/, message: "资产包流水号为数字且最多4位!" }
+                ],
               })(<Input />)
             }
           </FormItem>
