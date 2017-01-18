@@ -1,6 +1,9 @@
 import React from "react";
 import styles from "./style.less";
-import { Table, Icon, Tooltip, Input, Breadcrumb, Row, Col, Button } from "antd";
+import { Table, Icon, Tooltip, Input, Breadcrumb, Row, Col, Button, Modal, notification } from "antd";
+import fetch from "srcDir/common/model/itemModel/fetch";
+
+const confirm = Modal.confirm;
 
 const PackagePath = "assetManagement/addAsset/package";
 
@@ -33,12 +36,37 @@ const View = (props) => {
     };
   };
 
+  const deletePackage = (item) => {
+    // console.log(item);
+    confirm({
+      title: `确定删除出包行-${item.bankName}？`,
+      // content: "When clicked the OK button, this dialog will be closed after 1 second",
+      onOk() {
+        fetch({
+          url: "/ap/assetInfo/del",
+          method: "POST",
+          params: {
+            id: item.id
+          },
+          success(res) {
+            notification.success({
+              message: JSON.parse(res.entity).msg,
+              description: JSON.parse(res.entity).msg,
+            });
+            // 刷新列表
+            getTableList();
+          }
+        });
+      }
+    });
+  };
+
   const columns = [
     {
       title: "操作",
       dataIndex: "id",
       key: "id",
-      render: (value) => (
+      render: (value, item) => (
         <span>
           <a href="#"><Tooltip placement="left" title={"新增借款人"}><Icon type="plus" /></Tooltip></a>
           <span className="ant-divider" />
@@ -51,11 +79,15 @@ const View = (props) => {
               )
             }
           >
-            <Tooltip placement="top" title={"管理"}><Icon type="edit" /></Tooltip>
+            <Tooltip placement="top" title={"管理资产"}><Icon type="edit" /></Tooltip>
           </a>
           <span className="ant-divider" />
-          <a href="#" className="ant-dropdown-link">
-            <Tooltip placement="right" title={"删除"}><Icon type="delete" /></Tooltip>
+          <a
+            href="#"
+            className="ant-dropdown-link"
+            onClick={() => deletePackage(item)}
+          >
+            <Tooltip placement="right" title={"删除资产"}><Icon type="delete" /></Tooltip>
           </a>
         </span>
       ),
