@@ -6,7 +6,7 @@ import { map, filter, comp } from "transducers-js";
 import * as most from "most";
 import fetch from "./fetch";
 
-const tableModel = ({ url, method, params }) => {
+const tableModel = ({ id, url, method, params }) => {
   // console.log(fetch({ url, method, params }));
   if (!url || url === "") {
     console.error("url参数不正确");
@@ -33,8 +33,8 @@ const tableModel = ({ url, method, params }) => {
   );
 
   const Data = function (intent$) {
-  // 构建数据流并让数据流中的类型为‘searchSub’的值debounce去抖500ms(500ms内只执行一次)
-    const updateSink$ = intent$.filter(i => i.type === "searchSub")
+  // 构建数据流并让数据流中的类型为‘`searchSub@${id}`’的值debounce去抖500ms(500ms内只执行一次)
+    const updateSink$ = intent$.filter(i => i.type === `searchSub@${id}`)
                              .debounce(300) //  延时500ms
 
   //  发送API请求
@@ -57,7 +57,7 @@ const tableModel = ({ url, method, params }) => {
 
     return {
       // 绑定操作到props.action里
-      searchSub: value => ({ type: "searchSub", value }),
+      [`searchSub@${id}`]: value => ({ type: `searchSub@${id}`, value }),
       //  generateStateFromResp返回的新state数组{results:[]}
       updateSink$,
       data$,

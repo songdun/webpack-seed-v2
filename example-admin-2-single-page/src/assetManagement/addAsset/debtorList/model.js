@@ -9,6 +9,7 @@ import tableModel from "srcDir/common/model/tableModel/subTable";
 //   }
 // });
 const data = (id) => tableModel({
+  id,
   url: "/ad/debtorInfo/list",
   method: "GET",
   params: {

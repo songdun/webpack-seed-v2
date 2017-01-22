@@ -1,6 +1,6 @@
 import React from "react";
-// import styles from "./style.less";
-import { Table, Icon, Tooltip, Modal, notification } from "antd";
+import styles from "./style.less";
+import { Table, Icon, Tooltip, Modal, notification, Breadcrumb } from "antd";
 import fetch from "srcDir/common/model/itemModel/fetch";
 
 const confirm = Modal.confirm;
@@ -13,19 +13,21 @@ let packageNumInputValue;
 const View = (props) => {
   // console.info("+++++++++++++++++++");
   // console.info(props);
-  // const { show } = props.modal;
-  const { assetId } = props;
-  const { searchSub } = props.actions;
+
+  const { assetId, actions } = props;
+
+  const searchSubName = Object.keys(actions).filter((v) => v.match(/searchSub/))[0];
+  const searchSub = actions[searchSubName];
+  // console.log(searchSubName);
   const error = props.error || {};
   const paramsDefault = {
     Q_bankName_like_string: bankNameInputValue || "",
     Q_packageNum_like_string: packageNumInputValue || "",
     "Q_t.apAssetInfo.id_eq_long": assetId || ""
   };
-  // if (props.id) {
-  //   searchSub(paramsDefault);
-  // }
+
   const getTableList = (params) => {
+    // console.log("getTableList");
     searchSub(Object.assign(paramsDefault, params));
   };
 
@@ -123,7 +125,12 @@ const View = (props) => {
 
   return (
     <div>
-
+      <Breadcrumb separator=">" className={styles.marginBottom}>
+        <Breadcrumb.Item href="/">首页</Breadcrumb.Item>
+        <Breadcrumb.Item>资产管理</Breadcrumb.Item>
+        <Breadcrumb.Item>新增资产</Breadcrumb.Item>
+        <Breadcrumb.Item>借款人列表</Breadcrumb.Item>
+      </Breadcrumb>
       <span className={"red " + error.className}>{error.message}</span>
 
       {

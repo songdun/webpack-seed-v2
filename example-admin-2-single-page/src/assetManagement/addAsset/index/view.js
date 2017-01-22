@@ -1,12 +1,18 @@
 import React from "react";
+import { createBrowserHistory } from "history";
+
 import styles from "./style.less";
 import { Table, Icon, Tooltip, Input, Breadcrumb, Row, Col, Button, Modal, notification } from "antd";
 import fetch from "srcDir/common/model/itemModel/fetch";
-import debtor from "srcDir/assetManagement/addAsset/debtorList/route";
+// import debtor from "srcDir/assetManagement/addAsset/debtorList/route";
 
 const confirm = Modal.confirm;
 
 const PackagePath = "assetManagement/addAsset/package";
+
+const history = createBrowserHistory({
+  hashType: "noslash"
+});
 
 let bankNameInputValue;
 let packageNumInputValue;
@@ -14,6 +20,7 @@ let packageNumInputValue;
 const View = (props) => {
   // console.info("+++++++++++++++++++");
   // console.info(props);
+  const { addRouteMatch } = props.router;
   const { show } = props.modal;
   const { search } = props.actions;
   const error = props.error || {};
@@ -61,6 +68,12 @@ const View = (props) => {
       }
     });
   };
+  const test = (item) => {
+    // console.log("test");
+    addRouteMatch({ keyName: "资产管理", path: "/aaa", name: "测试", title: "aaa", component: "assetManagement/addAsset/debtorList", paramId: item.id });
+
+    history.push("/aaa");
+  };
 
   const columns = [
     {
@@ -89,6 +102,14 @@ const View = (props) => {
             onClick={() => deletePackage(item)}
           >
             <Tooltip placement="right" title={"删除资产"}><Icon type="delete" /></Tooltip>
+          </a>
+          <span className="ant-divider" />
+          <a
+            href={`#${value}`}
+            className="ant-dropdown-link"
+            onClick={() => test(item)}
+          >
+            <Tooltip placement="right" title={"查看借款人列表"}><Icon type="solution" /></Tooltip>
           </a>
         </span>
       ),
@@ -168,12 +189,14 @@ const View = (props) => {
           rowKey="id"
           dataSource={props.results.rows}
           columns={columns}
-          expandedRowRender={
-            (item) => {
-              const SubTable = debtor(item.id);
-              return <SubTable assetId={item.id} />;
-            }
-          }
+          bordered={1}
+          // 下面的SubGrid改为添加一个新的页面
+          // expandedRowRender={
+          //   (item) => {
+          //     const SubTable = debtor(item.id);
+          //     return <SubTable assetId={item.id} />;
+          //   }
+          // }
           pagination={{
             total: props.results.totalRows,
             current: props.results.page,
