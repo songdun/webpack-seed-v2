@@ -1,18 +1,14 @@
 import React from "react";
-import { createBrowserHistory } from "history";
+import history from "srcDir/common/router/history";
 
 import styles from "./style.less";
 import { Table, Icon, Tooltip, Input, Breadcrumb, Row, Col, Button, Modal, notification } from "antd";
 import fetch from "srcDir/common/model/itemModel/fetch";
-// import debtor from "srcDir/assetManagement/addAsset/debtorList/route";
 
 const confirm = Modal.confirm;
 
 const PackagePath = "assetManagement/addAsset/package";
 
-const history = createBrowserHistory({
-  hashType: "noslash"
-});
 
 let bankNameInputValue;
 let packageNumInputValue;
@@ -21,6 +17,8 @@ const View = (props) => {
   // console.info("+++++++++++++++++++");
   // console.info(props);
   const { addRouteMatch } = props.router;
+  window.addRouteMatch = addRouteMatch;
+  window.a = history;
   const { show } = props.modal;
   const { search } = props.actions;
   const error = props.error || {};
@@ -34,8 +32,7 @@ const View = (props) => {
 
   const packageManagement = (options) => {
     const { content, params } = options;
-    // console.log("getTableList");
-    // console.log(getTableList);
+
     return {
       content: content,
       title: "资产包管理",
@@ -68,11 +65,10 @@ const View = (props) => {
       }
     });
   };
-  const test = (item) => {
-    // console.log("test");
-    addRouteMatch({ keyName: "资产管理", path: "/aaa", name: "测试", title: "aaa", component: "assetManagement/addAsset/debtorList", paramId: item.id });
-
-    history.push("/aaa");
+  const showDebtorList = (item) => {
+    console.log("showDebtorList");
+    addRouteMatch({ keyName: "资产管理", path: "/AddAsset/DebtorList", name: "借款人列表", title: "debtorList", component: "assetManagement/addAsset/debtorList", paramId: item.id });
+    history.push("/AddAsset/DebtorList");
   };
 
   const columns = [
@@ -82,10 +78,16 @@ const View = (props) => {
       key: "id",
       render: (value, item) => (
         <span>
-          <a href="#"><Tooltip placement="left" title={"新增借款人"}><Icon type="plus" /></Tooltip></a>
+          <a
+            // href={`#${item.bankName}`}
+            className="ant-dropdown-link"
+            onClick={() => showDebtorList(item)}
+          >
+            <Tooltip placement="left" title={"查看借款人列表"}><Icon type="solution" /></Tooltip>
+          </a>
           <span className="ant-divider" />
           <a
-            href="#"
+            // href="#"
             className="ant-dropdown-link"
             onClick={
               () => show(
@@ -97,20 +99,18 @@ const View = (props) => {
           </a>
           <span className="ant-divider" />
           <a
-            href="#"
+            // href="#"
             className="ant-dropdown-link"
             onClick={() => deletePackage(item)}
           >
             <Tooltip placement="right" title={"删除资产"}><Icon type="delete" /></Tooltip>
           </a>
-          <span className="ant-divider" />
-          <a
-            href={`#${value}`}
-            className="ant-dropdown-link"
-            onClick={() => test(item)}
-          >
-            <Tooltip placement="right" title={"查看借款人列表"}><Icon type="solution" /></Tooltip>
-          </a>
+          {
+            /*
+            <span className="ant-divider" />
+            <a href="#"><Tooltip placement="left" title={"新增借款人"}><Icon type="plus" /></Tooltip></a>
+            */
+          }
         </span>
       ),
     }, {
@@ -149,12 +149,12 @@ const View = (props) => {
   return (
     <div>
 
-      <Breadcrumb separator=">" className={styles.marginBottom}>
+      <Breadcrumb separator=">" className={styles.mb}>
         <Breadcrumb.Item href="/">首页</Breadcrumb.Item>
         <Breadcrumb.Item>资产管理</Breadcrumb.Item>
         <Breadcrumb.Item>新增资产</Breadcrumb.Item>
       </Breadcrumb>
-      <Row type="flex" justify="start" align="middle" className={styles.marginBottom}>
+      <Row type="flex" justify="start" align="middle" className={styles.mb}>
         <Col span={2}>出包行:</Col>
         <Col span={3}>
           <Input
@@ -178,7 +178,7 @@ const View = (props) => {
           />
         </Col>
 
-        <Col span={2} offset={3}>
+        <Col span={2} offset={9} className={styles.tr}>
           <Button type="primary" icon="plus" onClick={() => show(packageManagement({ content: PackagePath }))}>添加</Button>
         </Col>
       </Row>

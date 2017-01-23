@@ -11,6 +11,11 @@ const View = (props) => <Menu
   // theme={"dark"}
   className={props.className ? `${styles.menu} ${props.className}` : styles.menu}
 >
+  <SubMenu key={"erwrwer23"} title={<span><Icon /><span>借款人列表</span></span>}>
+    <Menu.Item key={"2323232323-32323232323"}>
+      <Link to={"/AddAsset/DebtorList"}>{"借款人列表"}</Link>
+    </Menu.Item>
+  </SubMenu>
   {
     props.results && Object.keys(props.results.MenuList).map(
       (value, index) =>

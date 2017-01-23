@@ -1,11 +1,16 @@
 import React from "react";
 import styles from "./style.less";
-import { Table, Icon, Tooltip, Modal, notification, Breadcrumb } from "antd";
+import { Table, Icon, Tooltip, Modal, notification, Breadcrumb, Row, Col, Input, Button } from "antd";
 import fetch from "srcDir/common/model/itemModel/fetch";
+import history from "srcDir/common/router/history";
 
 const confirm = Modal.confirm;
 
 // const PackagePath = "assetManagement/addAsset/package";
+
+const back = () => {
+  history.go(-2);
+};
 
 let bankNameInputValue;
 let packageNumInputValue;
@@ -15,6 +20,7 @@ const View = (props) => {
   // console.info(props);
 
   const { assetId, actions } = props;
+  // const { show } = modal;
 
   const searchSubName = Object.keys(actions).filter((v) => v.match(/searchSub/))[0];
   const searchSub = actions[searchSubName];
@@ -125,12 +131,43 @@ const View = (props) => {
 
   return (
     <div>
-      <Breadcrumb separator=">" className={styles.marginBottom}>
+      <Breadcrumb separator=">" className={styles.mb}>
         <Breadcrumb.Item href="/">首页</Breadcrumb.Item>
         <Breadcrumb.Item>资产管理</Breadcrumb.Item>
         <Breadcrumb.Item>新增资产</Breadcrumb.Item>
-        <Breadcrumb.Item>借款人列表</Breadcrumb.Item>
+        <Breadcrumb.Item>{`${window.location.hash.substring(1)}-借款人列表`}</Breadcrumb.Item>
       </Breadcrumb>
+      <Row type="flex" justify="start" align="middle" className={styles.mb}>
+        <Col span={2}>出包行:</Col>
+        <Col span={3}>
+          <Input
+            onChange={
+              e => {
+                bankNameInputValue = e.target.value;
+                getTableList({ Q_bankName_like_string: bankNameInputValue });
+              }
+            }
+          />
+        </Col>
+        <Col span={2} offset={3}>资产包流水号:</Col>
+        <Col span={3}>
+          <Input
+            onChange={
+              e => {
+                packageNumInputValue = e.target.value;
+                getTableList({ Q_packageNum_like_string: packageNumInputValue });
+              }
+            }
+          />
+        </Col>
+
+        <Col span={2} offset={7} className={styles.tr}>
+          <Button type="primary" icon="plus" >添加</Button>
+        </Col>
+        <Col span={2} offset={0} className={styles.tr}>
+          <Button icon="rollback" onClick={back}>返回</Button>
+        </Col>
+      </Row>
       <span className={"red " + error.className}>{error.message}</span>
 
       {

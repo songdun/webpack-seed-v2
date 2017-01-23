@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import Most from "react-most";
 // import styles from "./style.less";
-import { BrowserRouter, Match } from "react-router";
+import { MemoryRouter, Match } from "react-router";
 import Menu from "srcDir/common/menu/route";
 import ModalFrame from "srcDir/common/modalFrame/route";
 
@@ -36,7 +36,7 @@ import ModalFrame from "srcDir/common/modalFrame/route";
 //     );
 //   };
 //   return (
-//     <BrowserRouter>
+//     <MemoryRouter>
 //       <div>
 //         <Menu router={addRouteMatch} />
 //         {
@@ -57,7 +57,7 @@ import ModalFrame from "srcDir/common/modalFrame/route";
 
 
 //       </div>
-//     </BrowserRouter>
+//     </MemoryRouter>
 //   );
 // };
 
@@ -119,7 +119,7 @@ class View extends React.Component {
       );
     };
     return (
-      <BrowserRouter>
+      <MemoryRouter>
         <div>
           <Menu />
           {
@@ -154,7 +154,7 @@ class View extends React.Component {
 
 
         </div>
-      </BrowserRouter>
+      </MemoryRouter>
     );
   }
 }

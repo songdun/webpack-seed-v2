@@ -43,6 +43,7 @@ router.route("/mag/permission/menu")
       MenuList: {
         资产管理: [
           { title: "AddAsset", path: "/AddAsset", component: "assetManagement/addAsset/index", name: "新增资产" },
+          { title: "/AddAsset/DebtorList", path: "/AddAsset/DebtorList", component: "assetManagement/addAsset/index", name: "借款人列表" },
 
         ],
 
