@@ -4,7 +4,6 @@ import Most from "react-most";
 // import styles from "./style.less";
 import { MemoryRouter, Match } from "react-router";
 import Menu from "srcDir/common/menu/route";
-import ModalFrame from "srcDir/common/modalFrame/route";
 
 
 // 创建react组件
@@ -85,13 +84,12 @@ class View extends React.Component {
     const { props, state } = this;
     const renderContentPage = (componentPath) => {
       // console.log(componentPath);
+      if (!componentPath) return false;
       const ContentPage = require(`srcDir/${componentPath}/route`).default;
       if (ContentPage) {
         ReactDOM.render(
           <Most>
-            <ModalFrame>
-              <ContentPage router={{ addRouteMatch: this.addRouteMatch }} />
-            </ModalFrame>
+            <ContentPage router={{ addRouteMatch: this.addRouteMatch }} modal={props.modal} />
           </Most>, document.getElementById("contentContainer")
         );
       }
@@ -101,15 +99,13 @@ class View extends React.Component {
       );
     };
     const renderAddedContentPage = (componentPath, paramId) => {
-      // console.log("renderAddedContentPage");
+      console.log("renderAddedContentPage");
       const contentPage = require(`srcDir/${componentPath}/route`).default;
       if (contentPage) {
         const SubTable = contentPage(paramId);
         ReactDOM.render(
           <Most>
-            <ModalFrame>
-              <SubTable assetId={paramId} router={{ addRouteMatch: this.addRouteMatch }} />
-            </ModalFrame>
+            <SubTable assetId={paramId} router={{ addRouteMatch: this.addRouteMatch }} modal={props.modal} />
           </Most>, document.getElementById("contentContainer")
         );
       }

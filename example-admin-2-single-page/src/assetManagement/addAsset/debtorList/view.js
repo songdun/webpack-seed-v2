@@ -17,7 +17,7 @@ let packageNumInputValue;
 // 创建react组件
 const View = (props) => {
   // console.info("+++++++++++++++++++");
-  // console.info(props);
+  console.info(props);
 
   const { assetId, actions } = props;
   // const { show } = modal;

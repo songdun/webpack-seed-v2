@@ -15,10 +15,9 @@ let packageNumInputValue;
 // 创建react组件
 const View = (props) => {
   // console.info("+++++++++++++++++++");
-  // console.info(props);
+  console.info(props);
   const { addRouteMatch } = props.router;
-  window.addRouteMatch = addRouteMatch;
-  window.a = history;
+
   const { show } = props.modal;
   const { search } = props.actions;
   const error = props.error || {};
