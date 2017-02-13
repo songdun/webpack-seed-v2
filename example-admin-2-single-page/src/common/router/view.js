@@ -11,7 +11,7 @@ class View extends React.Component {
     super(props);
     this.state = {};
     this.addRouteMatch = this.addRouteMatch.bind(this);
-    console.log(props);
+    // console.log(props);
   }
   addRouteMatch({ keyName, component, name, path, title, paramId }) {
     console.log({ keyName, component, name, path, title });
@@ -29,7 +29,7 @@ class View extends React.Component {
     // console.log(this);
     const { props, state } = this;
     const renderContentPage = (componentPath) => {
-      console.log(componentPath);
+      // console.log(componentPath);
       if (!componentPath) return false;
       const ContentPage = require(`srcDir/${componentPath}/route`).default;
       if (ContentPage) {

@@ -11,27 +11,34 @@ const View = (props) => {
   const { visible, title, width, footer, getTableList } = results || {};
 
   const addModalFunction = (propsValue) => {
-    Object.keys(propsValue.children)
-      .map((v) => {
-        // console.log(propsValue);
+    // console.log(propsValue);
+    Object.keys(propsValue)
+      .map(() => {
+        // console.log(v);
         let value;
-        if (propsValue.children[v] && propsValue.children[v].props) {
-          propsValue.children[v].props.modal = {
+        if (propsValue.props && propsValue.props.children && propsValue.props.children.props) {
+          propsValue.props.modal = {
             show, hide, reRender,
           };
-          value = propsValue.children[v].props;
-        } else {
-          propsValue.children.props.modal = {
+          propsValue.props.children.props.modal = {
             show, hide, reRender,
           };
+          value = propsValue.props.children.props;
+        } else if (propsValue.children) {
+          propsValue.children.map((v1) => addModalFunction(v1));
           value = propsValue.children;
+        } else {
+          propsValue.props.modal = {
+            show, hide, reRender,
+          };
+          value = propsValue.props;
         }
         return value;
       })
       .filter(v => v.children)
       .map((v) => addModalFunction(v));
   };
-  addModalFunction(props.children.props);
+  addModalFunction(props.children);
   // console.info(props);
 
   const Close = () => {

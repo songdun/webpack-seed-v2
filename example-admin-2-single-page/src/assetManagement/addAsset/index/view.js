@@ -15,7 +15,7 @@ let packageNumInputValue;
 // 创建react组件
 const View = (props) => {
   // console.info("+++++++++++++++++++");
-  console.info(props);
+  // console.info(props);
   const { addRouteMatch } = props.router;
 
   const { show } = props.modal;
