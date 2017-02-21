@@ -14,6 +14,7 @@ class View extends React.Component {
     this.addRouteMatch = this.addRouteMatch.bind(this);
     // console.log(props);
   }
+  // 添加一个新的路由（私有）
   addRouteMatch({ keyName, component, name, path, title, paramId }) {
     console.log({ keyName, component, name, path, title });
     // console.log(this);
@@ -25,13 +26,29 @@ class View extends React.Component {
     // console.log(this);
     this.forceUpdate();
   }
+  // 添加一个新的路由并立即跳转，完成后删除该路由以确保GC
+  addRoute({ keyName, component, name, path, title, paramId }, _this = this) {
+    // console.log(_this);
+    _this.addRouteMatch({ keyName, component, name, path, title, paramId });
+    history.push(path);
+    setTimeout(() => {
+      this.state = {};
+      this.forceUpdate();
+    }, 1000);
+  }
   render() {
     // console.log("routerProps");
     // console.log(this);
     const { props, state } = this;
     const router = {
-      addRouteMatch: this.addRouteMatch,
-      history: history
+      // addRouteMatch: this.addRouteMatch,
+      history: history,
+      back: () => {
+        history.go(-1);
+      },
+      addRoute: ({ keyName, component, name, path, title, paramId }) => {
+        this.addRoute({ keyName, component, name, path, title, paramId }, this);
+      }
     };
     const renderContentPage = (componentPath) => {
       // console.log(componentPath);

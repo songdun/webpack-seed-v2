@@ -14,8 +14,9 @@ let packageNumInputValue;
 // 创建react组件
 const View = (props) => {
   // console.info("+++++++++++++++++++");
-  // console.info(props);
-  const { addRouteMatch, history } = props.router;
+  console.info(props);
+  // const { addRouteMatch, history } = props.router;
+  const { addRoute } = props.router;
 
   const { show } = props.modal;
   const { search } = props.actions;
@@ -65,8 +66,9 @@ const View = (props) => {
   };
   const showDebtorList = (item) => {
     // console.log("showDebtorList");
-    addRouteMatch({ keyName: "资产管理", path: "/AddAsset/DebtorList", name: "借款人列表", title: "debtorList", component: "assetManagement/addAsset/debtorList", paramId: item.id });
-    history.push("/AddAsset/DebtorList");
+    addRoute({ keyName: "资产管理", path: "/AddAsset/DebtorList", name: "借款人列表", title: "debtorList", component: "assetManagement/addAsset/debtorList", paramId: item.id });
+    // addRouteMatch({ keyName: "资产管理", path: "/AddAsset/DebtorList", name: "借款人列表", title: "debtorList", component: "assetManagement/addAsset/debtorList", paramId: item.id });
+    // history.push("/AddAsset/DebtorList");
   };
 
   const columns = [

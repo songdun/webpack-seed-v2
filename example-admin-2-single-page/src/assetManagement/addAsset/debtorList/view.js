@@ -15,11 +15,7 @@ const View = (props) => {
   // console.info("+++++++++++++++++++");
   console.info(props);
   const { assetId, actions, router } = props;
-  const { history } = router;
-  const back = () => {
-    history.go(-1);
-  };
-  // const { show } = modal;
+  const { back } = router;
 
   const searchSubName = Object.keys(actions).filter((v) => v.match(/searchSub/))[0];
   const searchSub = actions[searchSubName];
