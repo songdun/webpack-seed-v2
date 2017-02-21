@@ -2,15 +2,11 @@ import React from "react";
 import styles from "./style.less";
 import { Table, Icon, Tooltip, Modal, notification, Breadcrumb, Row, Col, Input, Button } from "antd";
 import fetch from "srcDir/common/model/itemModel/fetch";
-import history from "srcDir/common/router/history";
+
 
 const confirm = Modal.confirm;
 
 // const PackagePath = "assetManagement/addAsset/package";
-
-const back = () => {
-  history.go(-2);
-};
 
 let bankNameInputValue;
 let packageNumInputValue;
@@ -18,8 +14,11 @@ let packageNumInputValue;
 const View = (props) => {
   // console.info("+++++++++++++++++++");
   console.info(props);
-
-  const { assetId, actions } = props;
+  const { assetId, actions, router } = props;
+  const { history } = router;
+  const back = () => {
+    history.go(-1);
+  };
   // const { show } = modal;
 
   const searchSubName = Object.keys(actions).filter((v) => v.match(/searchSub/))[0];

@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./style.less";
 import { Menu, Icon } from "antd";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 
 const SubMenu = Menu.SubMenu;
 

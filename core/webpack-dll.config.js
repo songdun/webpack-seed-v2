@@ -26,6 +26,7 @@ module.exports = {
       'particles.js',
       'js-cookie',
       'react-router',
+      'react-router-dom',
       'moment',
     ],
   },
@@ -51,6 +52,7 @@ module.exports = {
       'particles': 'particles.js',
       'js-cookie': 'js-cookie',
       'react-router': 'react-router',
+      'react-router-dom': 'react-router-dom',
       'moment': 'moment',
     }),
     new ExtractTextPlugin('[name].css'), // 打包css/less的时候会用到ExtractTextPlugin

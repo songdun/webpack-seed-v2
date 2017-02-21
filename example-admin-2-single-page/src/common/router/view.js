@@ -2,7 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom";
 import Most from "react-most";
 // import styles from "./style.less";
-import { MemoryRouter, Match } from "react-router";
+import { Router, Route } from "react-router";
+import history from "srcDir/common/router/history";
 // import Menu from "srcDir/common/menu/route";
 
 // 创建react组件
@@ -28,6 +29,10 @@ class View extends React.Component {
     // console.log("routerProps");
     // console.log(this);
     const { props, state } = this;
+    const router = {
+      addRouteMatch: this.addRouteMatch,
+      history: history
+    };
     const renderContentPage = (componentPath) => {
       // console.log(componentPath);
       if (!componentPath) return false;
@@ -35,7 +40,7 @@ class View extends React.Component {
       if (ContentPage) {
         ReactDOM.render(
           <Most>
-            <ContentPage router={{ addRouteMatch: this.addRouteMatch }} modal={props.modal} />
+            <ContentPage router={router} modal={props.modal} />
           </Most>, document.getElementById("contentContainer")
         );
       }
@@ -51,7 +56,7 @@ class View extends React.Component {
         const SubTable = contentPage(paramId);
         ReactDOM.render(
           <Most>
-            <SubTable assetId={paramId} router={{ addRouteMatch: this.addRouteMatch }} modal={props.modal} />
+            <SubTable assetId={paramId} router={router} modal={props.modal} />
           </Most>, document.getElementById("contentContainer")
         );
       }
@@ -61,7 +66,7 @@ class View extends React.Component {
       );
     };
     return (
-      <MemoryRouter>
+      <Router history={history}>
         <div>
           {
             props.children
@@ -71,9 +76,9 @@ class View extends React.Component {
               (value) =>
                 props.results.MenuList[value].map(
                   (val) =>
-                    <Match
-                      exactly
-                      pattern={val.path}
+                    <Route
+                      exact
+                      path={val.path}
                       component={() => renderContentPage(val.component)}
                     />
 
@@ -85,9 +90,9 @@ class View extends React.Component {
             state && Object.keys(state).map(
               (value) =>
                 state[value].map(
-                  (val) => (<Match
-                    exactly
-                    pattern={val.path}
+                  (val) => (<Route
+                    exact
+                    path={val.path}
                     component={() => renderAddedContentPage(val.component, val.paramId)}
                   />)
 
@@ -98,7 +103,7 @@ class View extends React.Component {
 
 
         </div>
-      </MemoryRouter>
+      </Router>
     );
   }
 }

@@ -1,5 +1,4 @@
 import React from "react";
-import history from "srcDir/common/router/history";
 
 import styles from "./style.less";
 import { Table, Icon, Tooltip, Input, Breadcrumb, Row, Col, Button, Modal, notification } from "antd";
@@ -16,7 +15,7 @@ let packageNumInputValue;
 const View = (props) => {
   // console.info("+++++++++++++++++++");
   // console.info(props);
-  const { addRouteMatch } = props.router;
+  const { addRouteMatch, history } = props.router;
 
   const { show } = props.modal;
   const { search } = props.actions;
@@ -65,10 +64,9 @@ const View = (props) => {
     });
   };
   const showDebtorList = (item) => {
-    console.log("showDebtorList");
+    // console.log("showDebtorList");
     addRouteMatch({ keyName: "资产管理", path: "/AddAsset/DebtorList", name: "借款人列表", title: "debtorList", component: "assetManagement/addAsset/debtorList", paramId: item.id });
-    // history.push("/AddAsset/DebtorList");
-    window.his = history;
+    history.push("/AddAsset/DebtorList");
   };
 
   const columns = [
