@@ -2,6 +2,14 @@ import ajaxGlobal from "./global";
 import { message } from "antd";
 
 const fetch = function ({ url, method, params, success, error }) {
+  console.log(params);
+  if (params) {
+    Object.keys(params).filter((v) => params[v] === "").map((v) => {
+      delete params[v];
+      return params;
+    });
+  }
+  console.log(params);
   return ajaxGlobal({
     method: method || "GET",
     path: url,

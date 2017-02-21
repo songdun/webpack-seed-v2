@@ -67,8 +67,6 @@ const View = (props) => {
   const showDebtorList = (item) => {
     // console.log("showDebtorList");
     addRoute({ keyName: "资产管理", path: "/AddAsset/DebtorList", name: "借款人列表", title: "debtorList", component: "assetManagement/addAsset/debtorList", paramId: item.id });
-    // addRouteMatch({ keyName: "资产管理", path: "/AddAsset/DebtorList", name: "借款人列表", title: "debtorList", component: "assetManagement/addAsset/debtorList", paramId: item.id });
-    // history.push("/AddAsset/DebtorList");
   };
 
   const columns = [
