@@ -28,6 +28,7 @@ module.exports = {
       'react-router',
       'react-router-dom',
       'moment',
+      'store2',
     ],
   },
   plugins: [
@@ -54,6 +55,7 @@ module.exports = {
       'react-router': 'react-router',
       'react-router-dom': 'react-router-dom',
       'moment': 'moment',
+      'store2': 'store2',
     }),
     new ExtractTextPlugin('[name].css'), // 打包css/less的时候会用到ExtractTextPlugin
     new webpack.DefinePlugin({

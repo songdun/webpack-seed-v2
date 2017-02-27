@@ -192,7 +192,7 @@ const View = (props) => {
           // expandedRowRender={
           //   (item) => {
           //     const SubTable = debtor(item.id);
-          //     return <SubTable assetId={item.id} />;
+          //     return <SubTable pid={item.id} />;
           //   }
           // }
           pagination={{

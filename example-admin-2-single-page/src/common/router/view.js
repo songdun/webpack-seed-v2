@@ -26,15 +26,11 @@ class View extends React.Component {
     // console.log(this);
     this.forceUpdate();
   }
-  // 添加一个新的路由并立即跳转，完成后删除该路由以确保GC
+  // 添加一个新的路由并立即跳转
   addRoute({ keyName, component, name, path, title, paramId }, _this = this) {
     // console.log(_this);
     _this.addRouteMatch({ keyName, component, name, path, title, paramId });
     history.push(path);
-    setTimeout(() => {
-      this.state = {};
-      this.forceUpdate();
-    }, 1000);
   }
   render() {
     // console.log("routerProps");
@@ -43,8 +39,15 @@ class View extends React.Component {
     const router = {
       // addRouteMatch: this.addRouteMatch,
       history: history,
+      // 返回
       back: () => {
         history.go(-1);
+      },
+      // 返回并在完成后删除该路由以确保GC，
+      back2refresh: () => {
+        history.go(-1);
+        this.state = {};
+        this.forceUpdate();
       },
       addRoute: ({ keyName, component, name, path, title, paramId }) => {
         this.addRoute({ keyName, component, name, path, title, paramId }, this);
@@ -73,7 +76,7 @@ class View extends React.Component {
         const SubTable = contentPage(paramId);
         ReactDOM.render(
           <Most>
-            <SubTable assetId={paramId} router={router} modal={props.modal} />
+            <SubTable pid={paramId} router={router} modal={props.modal} />
           </Most>, document.getElementById("contentContainer")
         );
       }

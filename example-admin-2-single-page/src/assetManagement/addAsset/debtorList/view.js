@@ -14,9 +14,10 @@ let packageNumInputValue;
 const View = (props) => {
   // console.info("+++++++++++++++++++");
   console.info(props);
-  const { assetId, actions, router } = props;
-  const { back } = router;
+  const { pid, actions, router } = props;
+  const { back2refresh, addRoute } = router;
 
+  // 需在操作后附加数据ID
   const searchSubName = Object.keys(actions).filter((v) => v.match(/searchSub/))[0];
   const searchSub = actions[searchSubName];
   // console.log(searchSubName);
@@ -24,7 +25,7 @@ const View = (props) => {
   const paramsDefault = {
     Q_bankName_like_string: bankNameInputValue || "",
     Q_packageNum_like_string: packageNumInputValue || "",
-    "Q_t.apAssetInfo.id_eq_long": assetId || ""
+    "Q_t.apAssetInfo.id_eq_long": pid || ""
   };
 
   const getTableList = (params) => {
@@ -43,6 +44,11 @@ const View = (props) => {
   //     getTableList,
   //   };
   // };
+
+  const showTab = (item) => {
+    // console.log("showDebtorList");
+    addRoute({ keyName: "资产管理", path: "/AddAsset/DebtorManage", name: "借款人管理", title: "debtorManage", component: "assetManagement/addAsset/debtorManage", paramId: item.id });
+  };
 
   const deletePackage = (item) => {
     // console.log(item);
@@ -79,11 +85,9 @@ const View = (props) => {
           <a
             href="#"
             className="ant-dropdown-link"
-            // onClick={
-            //   () => show(
-            //     packageManagement({ content: PackagePath, params: { id: value } })
-            //   )
-            // }
+            onClick={
+              () => showTab(item)
+            }
           >
             <Tooltip placement="top" title={"管理借款人"}><Icon type="edit" /></Tooltip>
           </a>
@@ -160,7 +164,7 @@ const View = (props) => {
           <Button type="primary" icon="plus" >添加</Button>
         </Col>
         <Col span={2} offset={0} className={styles.tr}>
-          <Button icon="rollback" onClick={back}>返回</Button>
+          <Button icon="rollback" onClick={back2refresh}>返回</Button>
         </Col>
       </Row>
       <span className={"red " + error.className}>{error.message}</span>
@@ -170,6 +174,7 @@ const View = (props) => {
           rowKey="id"
           dataSource={props.results.rows}
           columns={columns}
+          bordered={1}
           pagination={{
             total: props.results.totalRows,
             current: props.results.page,
