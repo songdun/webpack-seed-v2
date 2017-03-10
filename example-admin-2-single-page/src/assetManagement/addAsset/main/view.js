@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./style.less";
 import { Breadcrumb, Row, Col, Button } from "antd";
-import Tab from "srcDir/common/tab/";
+
 // import fetch from "srcDir/common/model/itemModel/fetch";
 
 
@@ -9,26 +9,15 @@ import Tab from "srcDir/common/tab/";
 
 // const PackagePath = "assetManagement/addAsset/package";
 
-const TabConf = {
-  defaultKey: 1, // 初始化展示tab
-  tabs: [{
-    title: "主体信息",
-    key: "1",
-    path: "assetManagement/addAsset/main",
-  }, {
-    title: "计息管理",
-    key: "2",
-    path: "",
-  }]
-};
 
 // 创建react组件
 const View = (props) => {
   // console.info("+++++++++++++++++++");
-  // console.info(props);
+  console.info(props);
   const error = props.error || {};
-  const { router, pid, modal } = props;
+  const { router } = props;
   const { back } = router;
+
   return (
     <div>
       <Breadcrumb separator=">" className={styles.mb}>
@@ -51,8 +40,7 @@ const View = (props) => {
         </Col>
       </Row>
       <span className={"red " + error.className}>{error.message}</span>
-      12333212313221312
-      <Tab conf={TabConf} router={router} pid={pid} modal={modal} />
+      主题信息模块
       {
         /*
         props.results && <Table
