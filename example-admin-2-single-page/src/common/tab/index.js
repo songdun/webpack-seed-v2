@@ -1,25 +1,25 @@
 import React from "react";
 import { Tabs } from "antd";
 const TabPane = Tabs.TabPane;
-const onTabClick = (key) => {
-  console.log("onTabClick");
-  console.log(key);
-};
+// const onTabClick = (key) => {
+//   console.log("onTabClick");
+//   console.log(key);
+// };
 const Tab = (props) => {
-  // console.log(props);
+  console.log(props);
   const { conf } = props;
   return (
     <Tabs
-      defaultActiveKey="1"
-      onTabClick={onTabClick}
+      defaultActiveKey={conf.defaultKey}
       animated={false}
+      // onTabClick={onTabClick}
     >
       {
         conf.tabs && conf.tabs.map(
           (v) => {
             let ContentPage;
             if (v.path !== "") {
-              ContentPage = require(`srcDir/${v.path}/view`).default;
+              ContentPage = require(`srcDir/${v.path}/route`).default;
             }
             return (
               <TabPane tab={v.title} key={v.key}>

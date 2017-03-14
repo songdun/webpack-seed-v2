@@ -10,7 +10,7 @@ import Tab from "srcDir/common/tab/";
 // const PackagePath = "assetManagement/addAsset/package";
 
 const TabConf = {
-  defaultKey: 1, // 初始化展示tab
+  defaultKey: "2", // 初始化展示tab
   tabs: [{
     title: "主体信息",
     key: "1",
@@ -38,10 +38,10 @@ const View = (props) => {
         <Breadcrumb.Item>借款人管理</Breadcrumb.Item>
       </Breadcrumb>
       <Row type="flex" justify="start" align="middle" className={styles.mb}>
-        <Col span={2}>出包行:</Col>
+        <Col span={2} />
         <Col span={3} />
 
-        <Col span={2} offset={3}>资产包流水号:</Col>
+        <Col span={2} offset={3} />
         <Col span={3} />
 
         <Col span={2} offset={7} className={styles.tr} />
@@ -51,7 +51,6 @@ const View = (props) => {
         </Col>
       </Row>
       <span className={"red " + error.className}>{error.message}</span>
-      12333212313221312
       <Tab conf={TabConf} router={router} pid={pid} modal={modal} />
       {
         /*

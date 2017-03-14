@@ -6,16 +6,17 @@ import fetch from "srcDir/common/model/itemModel/fetch";
 
 const confirm = Modal.confirm;
 
-// const PackagePath = "assetManagement/addAsset/package";
+const ComponentPath = "assetManagement/addAsset/main";
 
-let bankNameInputValue;
+let nameInputValue;
 let packageNumInputValue;
 // 创建react组件
 const View = (props) => {
   // console.info("+++++++++++++++++++");
   console.info(props);
-  const { pid, actions, router } = props;
+  const { pid, actions, router, modal } = props;
   const { back2refresh, addRoute } = router;
+  const { show } = modal;
 
   // 需在操作后附加数据ID
   const searchSubName = Object.keys(actions).filter((v) => v.match(/searchSub/))[0];
@@ -23,7 +24,7 @@ const View = (props) => {
   // console.log(searchSubName);
   const error = props.error || {};
   const paramsDefault = {
-    Q_bankName_like_string: bankNameInputValue || "",
+    Q_name_like_string: nameInputValue || "",
     Q_packageNum_like_string: packageNumInputValue || "",
     "Q_t.apAssetInfo.id_eq_long": pid || ""
   };
@@ -33,17 +34,17 @@ const View = (props) => {
     searchSub(Object.assign(paramsDefault, params));
   };
 
-  // const packageManagement = (options) => {
-  //   const { content, params } = options;
-  //   // console.log("getTableList");
-  //   // console.log(getTableList);
-  //   return {
-  //     content: content,
-  //     title: "资产包管理",
-  //     params,
-  //     getTableList,
-  //   };
-  // };
+  const addAdebtor = (options) => {
+    const { content, params } = options;
+    // console.log("getTableList");
+    // console.log(getTableList);
+    return {
+      content: content,
+      title: "新增借款人",
+      params,
+      getTableList,
+    };
+  };
 
   const showTab = (item) => {
     // console.log("showDebtorList");
@@ -83,7 +84,7 @@ const View = (props) => {
       render: (value, item) => (
         <span>
           <a
-            href="#"
+            // href="#"
             className="ant-dropdown-link"
             onClick={
               () => showTab(item)
@@ -137,31 +138,37 @@ const View = (props) => {
         <Breadcrumb.Item>{`${window.location.hash.substring(1)}-借款人列表`}</Breadcrumb.Item>
       </Breadcrumb>
       <Row type="flex" justify="start" align="middle" className={styles.mb}>
-        <Col span={2}>出包行:</Col>
+        <Col span={2}>借款人:</Col>
         <Col span={3}>
           <Input
             onChange={
               e => {
-                bankNameInputValue = e.target.value;
-                getTableList({ Q_bankName_like_string: bankNameInputValue });
+                nameInputValue = e.target.value;
+                getTableList({ Q_name_like_string: nameInputValue });
               }
             }
           />
         </Col>
-        <Col span={2} offset={3}>资产包流水号:</Col>
+        <Col span={2} offset={3}>
+          {/*
+            资产包流水号:
+          */}
+        </Col>
         <Col span={3}>
-          <Input
-            onChange={
-              e => {
-                packageNumInputValue = e.target.value;
-                getTableList({ Q_packageNum_like_string: packageNumInputValue });
+          {/*
+            <Input
+              onChange={
+                e => {
+                  packageNumInputValue = e.target.value;
+                  getTableList({ Q_packageNum_like_string: packageNumInputValue });
+                }
               }
-            }
-          />
+            />
+          */}
         </Col>
 
         <Col span={2} offset={7} className={styles.tr}>
-          <Button type="primary" icon="plus" >添加</Button>
+          <Button type="primary" icon="plus" onClick={() => show(addAdebtor({ content: ComponentPath }))}>添加</Button>
         </Col>
         <Col span={2} offset={0} className={styles.tr}>
           <Button icon="rollback" onClick={back2refresh}>返回</Button>
