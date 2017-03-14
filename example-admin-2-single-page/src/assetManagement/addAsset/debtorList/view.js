@@ -168,7 +168,7 @@ const View = (props) => {
         </Col>
 
         <Col span={2} offset={7} className={styles.tr}>
-          <Button type="primary" icon="plus" onClick={() => show(addAdebtor({ content: ComponentPath }))}>添加</Button>
+          <Button type="primary" icon="plus" onClick={() => show(addAdebtor({ content: ComponentPath, params: { pid: pid } }))}>添加</Button>
         </Col>
         <Col span={2} offset={0} className={styles.tr}>
           <Button icon="rollback" onClick={back2refresh}>返回</Button>

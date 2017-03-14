@@ -1,7 +1,7 @@
 import itemModel from "srcDir/common/model/itemModel";
 
 const data = itemModel({
-  url: "/ap/assetInfo/show",
+  url: "/ad/debtorInfo/show",
   method: "GET",
   // 参数改由调用的时候传递
   // params: {

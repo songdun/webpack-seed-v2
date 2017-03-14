@@ -8,13 +8,15 @@ import fetch from "srcDir/common/model/itemModel/fetch";
 import city from "srcDir/common/model/cityModel/index";
 
 const FormItem = Form.Item;
-const dateFormat = "YYYY-MM-DD";
+const dateFormat2Year = "YYYY";
+// const dateFormat = "YYYY-MM-DD";
 
 
 // 创建react组件
 const View = Form.create()((props) => {
   // console.info(props);
-  const { params, results, form, actions, modal, table } = props;
+  const { params = {}, results, form, actions, modal, table } = props;
+  const { pid } = params;
   const { getItem } = actions;
   const { hide } = modal;
   const { getTableList } = table;
@@ -28,7 +30,7 @@ const View = Form.create()((props) => {
 
     // 判断是否为编辑
   } else if (params && (!results || results.id !== params.id)) {
-    getItem(params);
+    getItem(params.id);
   }
   // console.log(params);
   const error = props.error || {};
@@ -55,14 +57,26 @@ const View = Form.create()((props) => {
     e.preventDefault();
     validateFieldsAndScroll((err, values) => {
       // console.log(arguments);
+      // console.info(values);
       if (!err) {
         // 格式化时间
-        values.transferDate = values.transferDate.format(dateFormat);
+        values.closedownYear = values.closedownYear.format(dateFormat2Year);
+        // 格式化省市
+        values["province.id"] = values.area[0];
+        values["area.id"] = values.area[1];
+        delete values.area;
+        // 格式化select
+        values["operateTypeCode.code"] = values.operateTypeCode;
+        values["tradeTypeCode.code"] = values.tradeTypeCode;
+        delete values.operateTypeCode;
+        delete values.tradeTypeCode;
         // console.log("表单结果");
-        console.info(values);
+        // 添加父id
+        values["apAssetInfo.id"] = pid;
+        // console.info(values);
         let url;
         // 判断新增或编辑
-        if (params) {
+        if (params.id) {
           url = "/ad/debtorInfo/update";
           values.id = params.id;
         } else {
@@ -104,9 +118,9 @@ const View = Form.create()((props) => {
           >
 
             {
-              props.results && getFieldDecorator("bankName", {
-                initialValue: props.results.bankName,
-                rules: [{ required: true, message: "Please input your bankName!" }],
+              props.results && getFieldDecorator("name", {
+                initialValue: props.results.name,
+                rules: [{ required: true, message: "Please input your name!" }],
               })(<Input />)
             }
 
@@ -116,10 +130,10 @@ const View = Form.create()((props) => {
             label="注册资本"
           >
             {
-              props.results && getFieldDecorator("packageYear", {
-                initialValue: props.results.packageYear,
+              props.results && getFieldDecorator("regCapital", {
+                initialValue: props.results.regCapital,
                 rules: [
-                  { required: true, message: "Please input your packageYear!" },
+                  { required: true, message: "Please input your regCapital!" },
                   // { len: 4, pattern: /^([\d]{4})$/, message: "资产包年份!" }
                 ],
               })(<Input addonAfter="万元" />)
@@ -130,8 +144,8 @@ const View = Form.create()((props) => {
             label="经营现状"
           >
             {
-              props.results && getFieldDecorator("loanPrincipal", {
-                initialValue: props.results.loanPrincipal,
+              props.results && getFieldDecorator("operateTypeCode", {
+                initialValue: props.results.operateTypeCode,
                 rules: [{ required: true, message: "请选择经营现状!" }],
               })(<Select placeholder="请选择" >
                 {
@@ -147,16 +161,16 @@ const View = Form.create()((props) => {
             label="停业年份"
           >
             {
-              props.results && getFieldDecorator("transferDate", {
-                initialValue: moment(props.results.transferDate || new Date(), dateFormat),
+              props.results && getFieldDecorator("closedownYear", {
+                initialValue: moment(props.results.closedownYear || new Date(), dateFormat2Year),
                 getValueFromEvent() {
-                  return moment(arguments[1], dateFormat);
+                  return moment(arguments[1], dateFormat2Year);
                 },
-                rules: [{ required: true, message: "Please input your transferDate!" }],
+                rules: [{ required: true, message: "Please input your closedownYear!" }],
               })(
                 <DatePicker
                   allowClear={!1}
-                  defaultValue={moment(props.results.transferDate, dateFormat)}
+                  defaultValue={moment(props.results.closedownYear, dateFormat2Year)}
                 />
               )
             }
@@ -166,10 +180,10 @@ const View = Form.create()((props) => {
             label="行业类型"
           >
             {
-              props.results && getFieldDecorator("packageNum", {
-                initialValue: props.results.packageNum,
+              props.results && getFieldDecorator("tradeTypeCode", {
+                initialValue: props.results.tradeTypeCode,
                 rules: [
-                  { required: true, message: "Please input your packageNum!" },
+                  { required: true, message: "Please input your tradeTypeCode!" },
                   // { len: 4, pattern: /^([\d]{4})$/, message: "资产包流水号为数字且最多4位!" }
                 ],
               })(<Select placeholder="请选择" >
@@ -186,9 +200,9 @@ const View = Form.create()((props) => {
             label="所属区域"
           >
             {
-              props.results && getFieldDecorator("loanInterset", {
-                initialValue: props.results.loanInterset,
-                rules: [{ required: true, message: "Please input your loanInterset!" }],
+              props.results && getFieldDecorator("area", {
+                initialValue: props.results.area,
+                rules: [{ required: true, message: "Please input your area!" }],
               })(<Cascader
                 allowClear={false}
                 options={city}
@@ -204,7 +218,7 @@ const View = Form.create()((props) => {
           >
             {
               props.results && getFieldDecorator("regAddress", {
-                initialValue: props.results.loanInterset,
+                initialValue: props.results.regAddress,
                 rules: [{ required: true, message: "Please input your regAddress!" }],
               })(<Input />)
             }
