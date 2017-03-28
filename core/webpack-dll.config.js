@@ -29,6 +29,7 @@ module.exports = {
       'react-router-dom',
       'moment',
       'store2',
+      'interceptXHR/interceptXHR.min',
     ],
   },
   plugins: [

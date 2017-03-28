@@ -24,8 +24,8 @@ const TabConf = {
 
 // 创建react组件
 const View = (props) => {
-  // console.info("+++++++++++++++++++");
-  // console.info(props);
+  console.info("debtorManage");
+  console.info(props);
   const error = props.error || {};
   const { router, pid, modal } = props;
   const { back } = router;

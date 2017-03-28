@@ -14,8 +14,9 @@ const dateFormat2Year = "YYYY";
 
 // 创建react组件
 const View = Form.create()((props) => {
-  // console.info(props);
-  const { params = {}, results, form, actions, modal, table } = props;
+  console.info("main");
+  console.info(props);
+  const { params = {}, results, form, actions, modal, table = {} } = props;
   const { pid } = params;
   const { getItem } = actions;
   const { hide } = modal;
@@ -92,7 +93,9 @@ const View = Form.create()((props) => {
               description: JSON.parse(res.entity).msg,
             });
             // 刷新列表
-            getTableList();
+            if (getTableList) {
+              getTableList();
+            }
             handleBack();
           }
         });

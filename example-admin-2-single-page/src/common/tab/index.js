@@ -6,6 +6,7 @@ const TabPane = Tabs.TabPane;
 //   console.log(key);
 // };
 const Tab = (props) => {
+  console.log("tab");
   console.log(props);
   const { conf } = props;
   return (

@@ -57,6 +57,7 @@
     "rimraf": "^2.5.4",
     "store2": "^2.5.0",
     "style-loader": "^0.13.1",
+    "stylelint-config-standard": "^16.0.0",
     "transducers-js": "^0.4.174",
     "url-loader": "^0.5.7",
     "webpack": "^1.13.2",
