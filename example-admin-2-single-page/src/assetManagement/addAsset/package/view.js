@@ -1,15 +1,17 @@
 import React from "react";
 import styles from "./style.less";
-import { Input, Button, Card, DatePicker, Form, Row, Col, notification } from "antd";
+import { InputItem, Button, Card, DatePicker, List, Flex, Toast } from "antd-mobile";
 import moment from "moment";
+import { createForm } from "rc-form";
 
 import fetch from "srcDir/common/model/itemModel/fetch";
 
-const FormItem = Form.Item;
+const Col = Flex.Item;
+const FormItem = List.Item;
 const dateFormat = "YYYY-MM-DD";
 
 // 创建react组件
-const View = Form.create()((props) => {
+const View = createForm()((props) => {
   // console.info(props);
   const { params, results, form, actions, modal, table } = props;
   const { getItem } = actions;
@@ -69,7 +71,7 @@ const View = Form.create()((props) => {
           method: "POST",
           params: values,
           success(res) {
-            notification.success({
+            Toast.success({
               message: JSON.parse(res.entity).msg,
               description: JSON.parse(res.entity).msg,
             });
@@ -79,7 +81,7 @@ const View = Form.create()((props) => {
           }
         });
       } else {
-        notification.warning({
+        Toast.warning({
           message: "表单验证没有通过哦",
           description: "表单里有内容没有通过验证，请修改！",
         });
@@ -92,7 +94,7 @@ const View = Form.create()((props) => {
       <span className={"red " + error.className}>{error.message}</span>
 
       <Card>
-        <Form>
+        <List>
           <FormItem
             {...formItemLayout}
             label="出包行"
@@ -102,7 +104,7 @@ const View = Form.create()((props) => {
               props.results && getFieldDecorator("bankName", {
                 initialValue: props.results.bankName,
                 rules: [{ required: true, message: "Please input your bankName!" }],
-              })(<Input />)
+              })(<InputItem />)
             }
 
           </FormItem>
@@ -117,7 +119,7 @@ const View = Form.create()((props) => {
                   { required: true, message: "Please input your packageYear!" },
                   { len: 4, pattern: /^([\d]{4})$/, message: "资产包年份!" }
                 ],
-              })(<Input addonAfter="年" />)
+              })(<InputItem addonAfter="年" />)
             }
           </FormItem>
           <FormItem
@@ -128,7 +130,7 @@ const View = Form.create()((props) => {
               props.results && getFieldDecorator("loanPrincipal", {
                 initialValue: props.results.loanPrincipal,
                 rules: [{ required: true, message: "Please input your loanPrincipal!" }],
-              })(<Input addonAfter="元" />)
+              })(<InputItem addonAfter="元" />)
             }
           </FormItem>
           <FormItem
@@ -161,7 +163,7 @@ const View = Form.create()((props) => {
                   { required: true, message: "Please input your packageNum!" },
                   { len: 4, pattern: /^([\d]{4})$/, message: "资产包流水号为数字且最多4位!" }
                 ],
-              })(<Input />)
+              })(<InputItem />)
             }
           </FormItem>
           <FormItem
@@ -172,21 +174,21 @@ const View = Form.create()((props) => {
               props.results && getFieldDecorator("loanInterset", {
                 initialValue: props.results.loanInterset,
                 rules: [{ required: true, message: "Please input your loanInterset!" }],
-              })(<Input addonAfter="元" />)
+              })(<InputItem addonAfter="元" />)
             }
           </FormItem>
 
           <FormItem>
-            <Row type="flex" justify="space-around" align="middle">
+            <Flex type="flex" justify="space-around" align="middle">
               <Col span={12}>
                 <Button className={styles.submitButton} type="primary" htmlType="submite" icon="save" size="large" onClick={handleSubmit}>保存</Button>
               </Col>
               <Col span={12}>
                 <Button className={styles.submitBack} icon="rollback" size="large" onClick={handleBack}>返回</Button>
               </Col>
-            </Row>
+            </Flex>
           </FormItem>
-        </Form>
+        </List>
       </Card>
 
     </div>

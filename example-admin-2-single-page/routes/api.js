@@ -42,8 +42,11 @@ router.route("/mag/permission/menu")
       AppBarTitle: " ",
       MenuList: {
         资产管理: [
-          { title: "AddAsset", path: "/AddAsset", component: "assetManagement/addAsset/index", name: "新增资产" },
-          { title: "/AddAsset/DebtorList", path: "/AddAsset/DebtorList", component: "assetManagement/addAsset/index", name: "借款人列表" },
+          { title: "/home/index/index", path: "/home/index/index", component: "home/index/index", name: "首页" },
+          { title: "/service/index/index", path: "/service/index/index", component: "service/index/index", name: "客服" },
+          { title: "/order/index/index", path: "/order/index/index", component: "order/index/index", name: "订单" },
+          { title: "/my/index/index", path: "/my/index/index", component: "my/index/index", name: "我的" },
+
 
         ],
 

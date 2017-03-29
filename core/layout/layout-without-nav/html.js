@@ -1,12 +1,12 @@
-const config = require('configModule');
-const noJquery = require('withoutJqueryModule');
-const layout = require('./html.ejs');
-const header = require('../../components/header/html.ejs');
-const footer = require('../../components/footer/html.ejs');
+const config = require("configModule");
+const noJquery = require("withoutJqueryModule");
+const layout = require("./html.ejs");
+const header = require("../../components/header/html.ejs");
+const footer = require("../../components/footer/html.ejs");
 const dirsConfig = config.DIRS;
 
 const pf = {
-  pageTitle: '',
+  pageTitle: "",
   constructInsideUrl: noJquery.constructInsideUrl,
 };
 

@@ -1,6 +1,10 @@
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const dirVars = require('../base/dir-vars.config.js');
 const includeDirs = [dirVars.srcRootDir];
+const svgDirs = [
+  require.resolve('antd-mobile').replace(/warn\.js$/, ''),  // 1. 属于 antd-mobile 内置 svg 文件
+  // path.resolve(__dirname, 'src/my-project-svg-foler'),  // 2. 自己私人的 svg 存放目录
+];
 
 module.exports = [
   {
@@ -21,14 +25,14 @@ module.exports = [
     test: /\.jsx?$/,
     include: includeDirs,
     exclude: /(node_modules|bower_components)/,
-    extensions: ['.jsx', '.js'],
+    extensions: ['', '.web.js', '.json', '.jsx', '.js'],
     loader: 'babel-loader',
     query: {
       presets: ['es2015-loose', 'es2015', 'react'],
       cacheDirectory: true,
       plugins: ['transform-runtime', 'transform-object-assign', [
         "import", {
-          libraryName: 'antd',
+          libraryName: 'antd-mobile',
         }
       ]],
     },
@@ -49,5 +53,10 @@ module.exports = [
     test: /\.(png|jpg|gif)$/,
     include: includeDirs,
     loader: 'url?limit=8192&name=./static/img/[hash].[ext]',
+  },
+  {
+    test: /\.(svg)$/i,
+    loader: 'svg-sprite',
+    include: svgDirs,  // 把 svgDirs 路径下的所有 svg 文件交给 svg-sprite-loader 插件处理
   },
 ];

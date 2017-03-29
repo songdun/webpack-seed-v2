@@ -1,6 +1,6 @@
-import { createMemoryHistory } from "history";
+import { createBrowserHistory } from "history";
 
-const history = createMemoryHistory({
+const history = createBrowserHistory({
   hashType: "noslash"
 });
 

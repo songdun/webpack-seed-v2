@@ -1,5 +1,5 @@
 import ajaxGlobal from "./global";
-import { message } from "antd";
+import { Toast } from "antd-mobile";
 import Cookies from "js-cookie";
 
 const fetch = function ({ url, method, params, success, error }) {
@@ -24,16 +24,16 @@ const fetch = function ({ url, method, params, success, error }) {
     const code = resp.status.code;
     switch (code) {
     case 401:
-      message.error("登录超时，请重新登录！");
+      Toast.fail("登录超时，请重新登录！");
       window.location.href = "/login/login/page.html";
       break;
 
     case 404:
-      message.error("请求接口不存在！");
+      Toast.fail("请求接口不存在！");
       break;
 
     case 500:
-      message.error("服务器内部错误！");
+      Toast.fail("服务器内部错误！");
       break;
 
     default:
@@ -46,7 +46,7 @@ const fetch = function ({ url, method, params, success, error }) {
       };
     }
   }, resp => {
-    message.error(resp.error + "-code:[" + resp.status.code + "]");
+    Toast.fail(resp.error + "-code:[" + resp.status.code + "]");
     if (error) {
       error(resp);
     }

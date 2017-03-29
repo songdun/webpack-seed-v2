@@ -1,7 +1,8 @@
 import React from "react";
 import styles from "./style.less";
-import { Breadcrumb, Row, Col, Button } from "antd";
+import { Flex, Button } from "antd-mobile";
 import Tab from "srcDir/common/tab/";
+const Col = Flex.Item;
 // import fetch from "srcDir/common/model/itemModel/fetch";
 
 
@@ -31,13 +32,7 @@ const View = (props) => {
   const { back } = router;
   return (
     <div>
-      <Breadcrumb separator=">" className={styles.mb}>
-        <Breadcrumb.Item href="/">首页</Breadcrumb.Item>
-        <Breadcrumb.Item>资产管理</Breadcrumb.Item>
-        <Breadcrumb.Item>新增资产</Breadcrumb.Item>
-        <Breadcrumb.Item>借款人管理</Breadcrumb.Item>
-      </Breadcrumb>
-      <Row type="flex" justify="start" align="middle" className={styles.mb}>
+      <Flex type="flex" justify="start" align="middle" className={styles.mb}>
         <Col span={2} />
         <Col span={3} />
 
@@ -49,7 +44,7 @@ const View = (props) => {
         <Col span={2} offset={0} className={styles.tr}>
           <Button icon="rollback" onClick={back}>返回</Button>
         </Col>
-      </Row>
+      </Flex>
       <span className={"red " + error.className}>{error.message}</span>
       <Tab conf={TabConf} router={router} pid={pid} modal={modal} />
       {

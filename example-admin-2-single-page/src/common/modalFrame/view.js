@@ -1,7 +1,7 @@
 import React from "react";
 // import ReactDOM from "react-dom";
 // import styles from "./style.less";
-import { Modal } from "antd";
+import { Modal } from "antd-mobile";
 
 const View = (props) => {
   // console.info(props);

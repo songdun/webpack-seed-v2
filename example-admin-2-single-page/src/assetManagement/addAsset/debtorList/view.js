@@ -1,9 +1,9 @@
 import React from "react";
 import styles from "./style.less";
-import { Table, Icon, Tooltip, Modal, notification, Breadcrumb, Row, Col, Input, Button } from "antd";
+import { Table, Icon, Modal, Toast, Flex, InputItem, Button } from "antd-mobile";
 import fetch from "srcDir/common/model/itemModel/fetch";
 
-
+const Col = Flex.Item;
 const confirm = Modal.confirm;
 
 const ComponentPath = "assetManagement/addAsset/main";
@@ -64,7 +64,7 @@ const View = (props) => {
             id: item.id
           },
           success(res) {
-            notification.success({
+            Toast.success({
               message: JSON.parse(res.entity).msg,
               description: JSON.parse(res.entity).msg,
             });
@@ -90,7 +90,7 @@ const View = (props) => {
               () => showTab(item)
             }
           >
-            <Tooltip placement="top" title={"管理借款人"}><Icon type="edit" /></Tooltip>
+            <Icon type="edit" />
           </a>
           <span className="ant-divider" />
           <a
@@ -98,7 +98,7 @@ const View = (props) => {
             className="ant-dropdown-link"
             onClick={() => deletePackage(item)}
           >
-            <Tooltip placement="right" title={"删除借款人"}><Icon type="delete" /></Tooltip>
+            <Icon type="delete" />
           </a>
         </span>
       ),
@@ -131,16 +131,10 @@ const View = (props) => {
 
   return (
     <div>
-      <Breadcrumb separator=">" className={styles.mb}>
-        <Breadcrumb.Item href="/">首页</Breadcrumb.Item>
-        <Breadcrumb.Item>资产管理</Breadcrumb.Item>
-        <Breadcrumb.Item>新增资产</Breadcrumb.Item>
-        <Breadcrumb.Item>{`${window.location.hash.substring(1)}-借款人列表`}</Breadcrumb.Item>
-      </Breadcrumb>
-      <Row type="flex" justify="start" align="middle" className={styles.mb}>
+      <Flex type="flex" justify="start" align="middle" className={styles.mb}>
         <Col span={2}>借款人:</Col>
         <Col span={3}>
-          <Input
+          <InputItem
             onChange={
               e => {
                 nameInputValue = e.target.value;
@@ -156,7 +150,7 @@ const View = (props) => {
         </Col>
         <Col span={3}>
           {/*
-            <Input
+            <InputItem
               onChange={
                 e => {
                   packageNumInputValue = e.target.value;
@@ -173,7 +167,7 @@ const View = (props) => {
         <Col span={2} offset={0} className={styles.tr}>
           <Button icon="rollback" onClick={back2refresh}>返回</Button>
         </Col>
-      </Row>
+      </Flex>
       <span className={"red " + error.className}>{error.message}</span>
 
       {

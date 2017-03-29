@@ -1,5 +1,5 @@
 import React from "react";
-import { Tabs } from "antd";
+import { Tabs } from "antd-mobile";
 const TabPane = Tabs.TabPane;
 // const onTabClick = (key) => {
 //   console.log("onTabClick");

@@ -1,19 +1,21 @@
 import React from "react";
 import styles from "./style.less";
-import { Input, Button, Card, DatePicker, Form, Row, Col, notification, Cascader, Select } from "antd";
+import { InputItem, Button, Card, List, DatePicker, Flex, Toast, Picker } from "antd-mobile";
+import { createForm } from "rc-form";
 import moment from "moment";
 import store from "store2";
 
 import fetch from "srcDir/common/model/itemModel/fetch";
 import city from "srcDir/common/model/cityModel/index";
 
-const FormItem = Form.Item;
+const Col = Flex.Item;
+const FormItem = List.Item;
 const dateFormat2Year = "YYYY";
 // const dateFormat = "YYYY-MM-DD";
 
 
 // 创建react组件
-const View = Form.create()((props) => {
+const View = createForm()((props) => {
   console.info("main");
   console.info(props);
   const { params = {}, results, form, actions, modal, table = {} } = props;
@@ -88,7 +90,7 @@ const View = Form.create()((props) => {
           method: "POST",
           params: values,
           success(res) {
-            notification.success({
+            Toast.success({
               message: JSON.parse(res.entity).msg,
               description: JSON.parse(res.entity).msg,
             });
@@ -100,7 +102,7 @@ const View = Form.create()((props) => {
           }
         });
       } else {
-        notification.warning({
+        Toast.warning({
           message: "表单验证没有通过哦",
           description: "表单里有内容没有通过验证，请修改！",
         });
@@ -114,7 +116,7 @@ const View = Form.create()((props) => {
 
       <Card>
         这是新增借款人
-        <Form>
+        <List>
           <FormItem
             {...formItemLayout}
             label="借款人名称"
@@ -124,7 +126,7 @@ const View = Form.create()((props) => {
               props.results && getFieldDecorator("name", {
                 initialValue: props.results.name,
                 rules: [{ required: true, message: "Please input your name!" }],
-              })(<Input />)
+              })(<InputItem />)
             }
 
           </FormItem>
@@ -139,7 +141,7 @@ const View = Form.create()((props) => {
                   { required: true, message: "Please input your regCapital!" },
                   // { len: 4, pattern: /^([\d]{4})$/, message: "资产包年份!" }
                 ],
-              })(<Input addonAfter="万元" />)
+              })(<InputItem addonAfter="万元" />)
             }
           </FormItem>
           <FormItem
@@ -150,13 +152,13 @@ const View = Form.create()((props) => {
               props.results && getFieldDecorator("operateTypeCode", {
                 initialValue: props.results.operateTypeCode,
                 rules: [{ required: true, message: "请选择经营现状!" }],
-              })(<Select placeholder="请选择" >
+              })(<Picker placeholder="请选择" >
                 {
                   codeMap.filter((x) => /A_004\w+/.test(x.code)).map(
                     (v) => <Option value={v.code}>{v.name}</Option>
                   )
                 }
-              </Select>)
+              </Picker>)
             }
           </FormItem>
           <FormItem
@@ -189,13 +191,13 @@ const View = Form.create()((props) => {
                   { required: true, message: "Please input your tradeTypeCode!" },
                   // { len: 4, pattern: /^([\d]{4})$/, message: "资产包流水号为数字且最多4位!" }
                 ],
-              })(<Select placeholder="请选择" >
+              })(<Picker placeholder="请选择" >
                 {
                   codeMap.filter((x) => /A_002\w+/.test(x.code)).map(
                     (v) => <Option value={v.code}>{v.name}</Option>
                   )
                 }
-              </Select>)
+              </Picker>)
             }
           </FormItem>
           <FormItem
@@ -206,7 +208,7 @@ const View = Form.create()((props) => {
               props.results && getFieldDecorator("area", {
                 initialValue: props.results.area,
                 rules: [{ required: true, message: "Please input your area!" }],
-              })(<Cascader
+              })(<Picker
                 allowClear={false}
                 options={city}
                 defaultValue=""
@@ -223,21 +225,21 @@ const View = Form.create()((props) => {
               props.results && getFieldDecorator("regAddress", {
                 initialValue: props.results.regAddress,
                 rules: [{ required: true, message: "Please input your regAddress!" }],
-              })(<Input />)
+              })(<InputItem />)
             }
           </FormItem>
 
           <FormItem>
-            <Row type="flex" justify="space-around" align="middle">
+            <Flex type="flex" justify="space-around" align="middle">
               <Col span={12}>
                 <Button className={styles.submitButton} type="primary" htmlType="submite" icon="save" size="large" onClick={handleSubmit}>保存</Button>
               </Col>
               <Col span={12}>
                 <Button className={styles.submitBack} icon="rollback" size="large" onClick={handleBack}>返回</Button>
               </Col>
-            </Row>
+            </Flex>
           </FormItem>
-        </Form>
+        </List>
       </Card>
 
     </div>

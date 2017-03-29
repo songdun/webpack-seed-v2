@@ -1,5 +1,5 @@
 import React from "react";
-import { Spin } from "antd";
+import { ActivityIndicator } from "antd-mobile";
 import styles from "./style.less";
 
 class View extends React.Component {
@@ -23,7 +23,7 @@ class View extends React.Component {
   render() {
     return (
       <div className={`${styles.loading} js-loading`}>
-        <Spin
+        <ActivityIndicator
           className={styles.spin}
           spinning={1}
           size="large"

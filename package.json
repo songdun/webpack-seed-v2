@@ -10,6 +10,7 @@
   "license": "MIT",
   "devDependencies": {
     "antd": "^2.6.0",
+    "antd-mobile": "^1.0.7",
     "autoprefixer": "^6.4.0",
     "babel-core": "^6.7.7",
     "babel-eslint": "^7.1.1",
@@ -58,6 +59,7 @@
     "store2": "^2.5.0",
     "style-loader": "^0.13.1",
     "stylelint-config-standard": "^16.0.0",
+    "svg-sprite-loader": "^0.3.0",
     "transducers-js": "^0.4.174",
     "url-loader": "^0.5.7",
     "webpack": "^1.13.2",

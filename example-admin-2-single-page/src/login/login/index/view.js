@@ -1,15 +1,16 @@
 import React from "react";
 import styles from "./style.less";
-import { Form, Icon, Input, Button, Checkbox } from "antd";
+import { List, Icon, InputItem, Button, Checkbox } from "antd-mobile";
+import { createForm } from "rc-form";
 require("particles.js");
 require("./background");
 import Cookies from "js-cookie";
 import store from "store2";
 
-const FormItem = Form.Item;
+const Item = List.Item;
 
 // 创建react组件
-const View = Form.create()((props) => {
+const View = createForm()((props) => {
   const origin = window.location.origin;
   if (props.results) {
     Cookies.set("token", props.results.token);
@@ -20,6 +21,7 @@ const View = Form.create()((props) => {
   const { getFieldDecorator, validateFields } = props.form;
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log("submit");
     validateFields((err, values) => {
       if (!err) {
         // console.log("Received values of form: ", values);
@@ -29,22 +31,22 @@ const View = Form.create()((props) => {
   };
   return (
     <div>
-      <Form onSubmit={e => handleSubmit(e)} className={styles["login-form"]}>
-        <FormItem>
+      <List onSubmit={e => handleSubmit(e)} className={styles["login-form"]}>
+        <Item>
           {getFieldDecorator("username", {
             rules: [{ required: true, message: "请输入账号！" }],
           })(
-            <Input addonBefore={<Icon type="user" />} placeholder="账号" />
+            <InputItem addonBefore={<Icon type="user" />} placeholder="账号" />
           )}
-        </FormItem>
-        <FormItem>
+        </Item>
+        <Item>
           {getFieldDecorator("password", {
             rules: [{ required: true, message: "请输入密码！" }],
           })(
-            <Input addonBefore={<Icon type="lock" />} type="password" placeholder="密码" />
+            <InputItem addonBefore={<Icon type="lock" />} type="password" placeholder="密码" />
           )}
-        </FormItem>
-        <FormItem>
+        </Item>
+        <Item>
           {getFieldDecorator("remember", {
             valuePropName: "checked",
             initialValue: true,
@@ -52,12 +54,12 @@ const View = Form.create()((props) => {
             <Checkbox>保存账号</Checkbox>
           )}
           <a className={styles["login-form-forgot"]}>忘记密码</a>
-          <Button type="primary" htmlType="submit" className={styles["login-form-button"]}>
+          <Button type="primary" htmlType="submit" className={styles["login-form-button"]} onClick={e => handleSubmit(e)}>
             登录
           </Button>
           <a>注册</a>
-        </FormItem>
-      </Form>
+        </Item>
+      </List>
     </div>
   );
 });
