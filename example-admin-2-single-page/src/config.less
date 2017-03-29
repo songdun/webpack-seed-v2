@@ -2,65 +2,135 @@
  * the less config of this project
  */
 // font-size
-@fz-20 : 20px;
-@fz-18 : 18px;
-@fz-16 : 16px;
-@fz-14 : 14px;
-@fz-12 : 12px;
+@fz-20 : 20px ;
+
+@fz-18 : 18px ;
+
+@fz-16 : 16px ;
+
+@fz-14 : 14px ;
+
+@fz-12 : 12px ;
 
 // color
 // background
-@c-fff: #fff;
+@c-fff: #fff ;
 // fontColor
-@c-666: #666;
-@c-999: #999;
+@c-666: #666 ;
 
-@c-gray: #dde6e9;
-@c-blue: #438eb9;
-@c-green: #00c853;
-@c-red: #f83d46;
-@c-black: #666;
-@c-yellow: #ffea00;
-@c-orange: #fb8c00;
+@c-999: #999 ;
+
+@c-gray: #dde6e9 ;
+
+@c-blue: #438eb9 ;
+
+@c-green: #00c853 ;
+
+@c-red: #f83d46 ;
+
+@c-black: #666 ;
+
+@c-yellow: #ffea00 ;
+
+@c-orange: #fb8c00 ;
 
 /**
  * 默认值
  *
  */
-@default-font-size : @fz-12; //默认字号
-@default-font-color : @c-666; //默认字颜色
-@default-border-color : @c-gray; //默认边框颜色
-@default-border-radius : 4px; //默认圆角
-@default-margin: 20px; //默认边距
+@default-font-size : @fz-12 ; //默认字号
+@default-font-color : @c-666 ; //默认字颜色
+@default-border-color : @c-gray ; //默认边框颜色
+@default-border-radius : 4px ; //默认圆角
+@default-margin: 20px ; //默认边距
 // header
-@default-headerHeight: 48px; //默认header高度
-@default-headerBackgroundColor: #438eb9; //默认header背景
-@default-headerBackgroundImage: linear-gradient(to right, @default-headerBackgroundColor 0%, #51c6ea 100%);
+@default-headerHeight: 48px ; //默认header高度
+@default-headerBackgroundColor: rgba(0, 0, 0, 0.5) ; //默认header背景
+@default-headerBackgroundImage: linear-gradient(to right, @default-headerBackgroundColor 0%, #51c6ea 100%) ;
 // 菜单menu
-@default-menuWidth: 240px; //默认菜单宽度
-@default-menuBackground: @c-gray; //默认菜单背景色
-@default-menuColor: @c-999; //默认菜单字体颜色
+@default-menuWidth: 240px ; //默认菜单宽度
+@default-menuBackground: @c-gray ; //默认菜单背景色
+@default-menuColor: @c-999 ; //默认菜单字体颜色
 
 
-.c-blue{color: @c-blue !important;}
-.c-green{color: @c-green !important;}
-.c-red{color: @c-red !important;}
-.c-gray{color: @c-gray !important;}
-.c-black{color: @c-black !important;}
-.c-yellow{color: @c-yellow !important;}
-.c-orange{color: @c-orange !important;}
+.c-blue {
+  color: @c-blue !important;
+}
 
-.fz-20{font-size: @fz-20 !important;}
-.fz-18{font-size: @fz-18 !important;}
-.fz-16{font-size: @fz-16 !important;}
-.fz-14{font-size: @fz-14 !important;}
-.fz-12{font-size: @fz-12 !important;}
+.c-green {
+  color: @c-green !important;
+}
 
-.mt{margin-top: @default-margin;}
-.mb{margin-bottom: @default-margin;}
-.ml{margin-left: @default-margin;}
-.mr{margin-right: @default-margin;}
+.c-red {
+  color: @c-red !important;
+}
+
+.c-gray {
+  color: @c-gray !important;
+}
+
+.c-black {
+  color: @c-black !important;
+}
+
+.c-yellow {
+  color: @c-yellow !important;
+}
+
+.c-orange {
+  color: @c-orange !important;
+}
+
+.fz-20 {
+  font-size: @fz-20 !important;
+}
+
+.fz-18 {
+  font-size: @fz-18 !important;
+}
+
+.fz-16 {
+  font-size: @fz-16 !important;
+}
+
+.fz-14 {
+  font-size: @fz-14 !important;
+}
+
+.fz-12 {
+  font-size: @fz-12 !important;
+}
+
+.mt {
+  margin-top: @default-margin;
+}
+
+.mb {
+  margin-bottom: @default-margin;
+}
+
+.ml {
+  margin-left: @default-margin;
+}
+
+.mr {
+  margin-right: @default-margin;
+}
 
 .tr {
-	text-align: right;
+  text-align: right;
+}
+
+.text-overflow {
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+.text-overflow-mui (@lines) {
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  display: -webkit-box !important;
+  -webkit-line-clamp: @lines !important;
+  -webkit-box-orient: vertical !important;
 }

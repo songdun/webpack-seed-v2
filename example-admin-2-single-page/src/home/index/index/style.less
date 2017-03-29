@@ -1,5 +1,69 @@
 @import url('../../../config.less');
 
-.marginBottom {
-	.mb;
+.swiperimg {
+  width: 100%;
+  height: 350px;
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  height: @default-headerHeight;
+  background-color: @default-headerBackgroundColor;
+  color: rgba(255, 255, 255, 0.9);
+
+  div:first-child {
+    text-align: left;
+    padding-left: @default-margin;
+  }
+
+  div:last-child {
+    text-align: right;
+    padding-right: @default-margin;
+  }
+}
+
+@circle-botton-radius: 90px ;
+
+.buttons {
+  position: relative;
+  z-index: 1;
+  padding: 0 @default-margin / 2;
+  margin-top: -(@circle-botton-radius + @default-margin / 2);
+}
+
+.button {
+  width: @circle-botton-radius;
+  height: @circle-botton-radius;
+  border-radius: 50%;
+  border: 0;
+  background: url(https://zos.alipayobjects.com/rmsportal/wIjMDnsrDoPPcIV.png) no-repeat center;
+  background-size: contain;
+}
+
+// 列表
+.title {
+		margin-bottom: @default-margin / 4;
+    font-size: @fz-16 !important;
+    .text-overflow;
+  &::before {
+    content: "";
+    display: inline-block;
+    width: 4px;
+    height: 16px;
+    margin-right: @default-margin / 2;
+    margin-bottom: 2px;
+    background-color: @c-blue;
+    vertical-align: middle;
+  }
+}
+
+.text {
+	margin-bottom: @default-margin / 4;
+  font-size: @fz-12 !important;
+  .text-overflow-mui(2);
+
 }

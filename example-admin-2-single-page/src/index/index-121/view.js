@@ -3,6 +3,7 @@ import styles from "./style.less";
 
 import Router from "srcDir/common/router/route";
 // import ModalFrame from "srcDir/common/modalFrame/route";
+import Home from "srcDir/home/index/index/route";
 import Menu from "srcDir/common/menu/route";
 import store from "store2";
 // 发送请求时添加Spin
@@ -24,7 +25,7 @@ getCodeMap({
   }
 });
 
-const image = require("./images/home-background.jpg");
+// const image = require("./images/home-background.jpg");
 
 // 创建react组件
 const View = () => (
@@ -35,7 +36,12 @@ const View = () => (
         <Menu />
       </nav>
       <article id="contentContainer" className={styles.content} >
-        <img className={styles.img} alt="homeBackground" src={image} />
+        {
+          /*
+          <img className={styles.img} alt="homeBackground" src={image} />
+          */
+        }
+        <Home />
       </article>
     </div>
   </Router>

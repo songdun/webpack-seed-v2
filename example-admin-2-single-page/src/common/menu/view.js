@@ -34,7 +34,7 @@ class View extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedTab: "Tab2",
+      selectedTab: "Tab1",
     };
   }
   render() {
