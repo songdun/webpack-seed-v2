@@ -1,5 +1,6 @@
 var express = require("express");
 var mock = require("mockjs");
+var request = require("request");
 
 var router = express.Router();
 
@@ -35,6 +36,27 @@ router.route("/api/login")
     });
     res.send(data);
   });
+
+/**
+ * 微信接口
+ */
+router.route("/wechat/gettoken")
+.get(function (req, res) {
+  request("https://api.weixin.qq.com/cgi-bin/tokengrant_type=client_credential&appid=wx860a8c662dcd03a5&secret=c65e2a821505439a695a3b910af1166e",function(error,response,body){
+      var data=JSON.parse(body);
+      res.send(data);
+  });
+
+});
+router.route("/wechat/gettoken")
+.get(function (req, res) {
+  request("https://api.weixin.qq.com/cgi-bin/tokengrant_type=client_credential&appid=wx860a8c662dcd03a5&secret=c65e2a821505439a695a3b910af1166e",function(error,response,body){
+      var data=JSON.parse(body);
+      res.send(data);
+  });
+
+});
+
 
 router.route("/mag/permission/menu")
   .get(function (req, res) {

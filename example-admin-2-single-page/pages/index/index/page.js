@@ -9,3 +9,4 @@ $(() => {
     console.log(config.API_ROOT);
   }
 });
+

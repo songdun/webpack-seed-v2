@@ -28,7 +28,7 @@ module.exports = [
     extensions: ['', '.web.js', '.json', '.jsx', '.js'],
     loader: 'babel-loader',
     query: {
-      presets: ['es2015-loose', 'es2015', 'react'],
+      presets: ["stage-3", 'es2015-loose', 'es2015', 'react'],
       cacheDirectory: true,
       plugins: ['transform-runtime', 'transform-object-assign', [
         "import", {

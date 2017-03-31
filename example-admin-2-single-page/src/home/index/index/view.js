@@ -3,7 +3,11 @@ import React from "react";
 import styles from "./style.less";
 import { Carousel, Flex, Button, List } from "antd-mobile";
 // import fetch from "srcDir/common/model/itemModel/fetch";
+import openMap from "srcDir/common/weichat/openMap";
+import getLocation from "srcDir/common/weichat/getLocation";
+alert(getLocation());
 
+const banner = require("srcDir/images/banner.png");
 // 创建react组件
 const View = (props) => {
   // console.info("+++++++++++++++++++");
@@ -13,7 +17,7 @@ const View = (props) => {
   return (
     <div>
       <Flex className={styles.header}>
-        <Flex.Item>
+        <Flex.Item onClick={openMap}>
         北京
         </Flex.Item>
         <Flex.Item>
@@ -21,7 +25,7 @@ const View = (props) => {
         </Flex.Item>
       </Flex>
       <Carousel
-        className="my-carousel" autoplay={1} infinite selectedIndex={1} dots={false}
+        className="my-carousel" autoplay={0} infinite selectedIndex={0} dots={false}
         // beforeChange={(from, to) => console.log(`slide from ${from} to ${to}`)}
         // afterChange={index => console.log("slide to", index)}
       >
@@ -29,7 +33,7 @@ const View = (props) => {
           <img
             className={styles.swiperimg}
             alt="pic"
-            src={"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1490607524467&di=bbba4bc944e86b9a5e67b394c1ac7893&imgtype=0&src=http%3A%2F%2Fimg02.tooopen.com%2Fimages%2F20150713%2Ftooopen_sy_133776634622.jpg"}
+            src={banner}
           />
         </a>
         <a key={"TekJlZRVCjLFexlOCuWn"} >

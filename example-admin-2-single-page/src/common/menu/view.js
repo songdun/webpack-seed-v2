@@ -1,7 +1,6 @@
 import React from "react";
-// import styles from "./style.less";
-// import { Menu, Icon } from "antd-mobile";
-import { TabBar, Icon } from "antd-mobile";
+import styles from "./style.less";
+import { TabBar, Modal } from "antd-mobile";
 import history from "srcDir/common/router/history";
 // import { Link } from "react-router-dom";
 
@@ -30,42 +29,45 @@ import history from "srcDir/common/router/history";
 //     )
 //   }
 // </Menu>;
+
 class View extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       selectedTab: "Tab1",
+      modal: true
     };
+    this.onClose = this.onClose.bind(this);
+  }
+  onClose() {
+    this.setState({
+      selectedTab: "",
+      modal: false,
+    });
   }
   render() {
     return (
       <TabBar
         unselectedTintColor="#949494"
         tintColor="#33A3F4"
-        barTintColor="white"
+        barTintColor="rgba(255,255,255,.85)"
       >
         <TabBar.Item
           title="首页"
           key="首页"
           icon={<div
-            style={{
-              width: "0.44rem",
-              height: "0.44rem",
-              background: "url(https://zos.alipayobjects.com/rmsportal/sifuoDUQdAFKAVcFGROC.svg) center center /  0.42rem 0.42rem no-repeat" }}
+            className={styles.navHome}
           />
           }
           selectedIcon={<div
-            style={{
-              width: "0.44rem",
-              height: "0.44rem",
-              background: "url(https://zos.alipayobjects.com/rmsportal/iSrlOTqrKddqbOmlvUfq.svg) center center /  0.42rem 0.42rem no-repeat" }}
+            className={styles.navHomeActive}
           />
           }
           selected={this.state.selectedTab === "Tab1"}
           badge={1}
           data-seed="logId"
           onPress={() => {
-            history.push("/home/index/index");
+            history.push("/home");
             this.setState({
               selectedTab: "Tab1",
             });
@@ -74,37 +76,45 @@ class View extends React.Component {
         </TabBar.Item>
 
         <TabBar.Item
-          icon={<Icon type="koubei-o" size="md" />}
-          selectedIcon={<Icon type="koubei" size="md" />}
+          icon={<div
+            className={styles.navService}
+          />}
+          selectedIcon={<div
+            className={styles.navServiceActive}
+          />}
           selected={this.state.selectedTab === "Tab2"}
           title="客服"
           key="客服"
           badge={"new"}
           data-seed="logId1"
           onPress={() => {
-            history.push("/service/index/index");
             this.setState({
               selectedTab: "Tab2",
+              modal: true
             });
           }}
         >
+          <Modal
+            title="拨打客服电话"
+            transparent
+            maskClosable={false}
+            visible={this.state.modal}
+            closable={1}
+            onClose={this.onClose}
+          >
+            <a href="tel:18510341233"><div className={styles.serviceCallPic} /></a>
+          </Modal>
         </TabBar.Item>
 
         <TabBar.Item
           icon={
             <div
-              style={{
-                width: "0.44rem",
-                height: "0.44rem",
-                background: "url(https://zos.alipayobjects.com/rmsportal/psUFoAMjkCcjqtUCNPxB.svg) center center /  0.42rem 0.42rem no-repeat" }}
+              className={styles.navOrder}
             />
           }
           selectedIcon={
             <div
-              style={{
-                width: "0.44rem",
-                height: "0.44rem",
-                background: "url(https://zos.alipayobjects.com/rmsportal/IIRLrXXrFAhXVdhMWgUI.svg) center center /  0.42rem 0.42rem no-repeat" }}
+              className={styles.navOrderActive}
             />
           }
           selected={this.state.selectedTab === "Tab3"}
@@ -112,7 +122,7 @@ class View extends React.Component {
           key="订单"
           dot
           onPress={() => {
-            history.push("/order/index/index");
+            history.push("/order");
             this.setState({
               selectedTab: "Tab3",
             });
@@ -121,13 +131,19 @@ class View extends React.Component {
         </TabBar.Item>
 
         <TabBar.Item
-          icon={{ uri: "https://zos.alipayobjects.com/rmsportal/asJMfBrNqpMMlVpeInPQ.svg" }}
-          selectedIcon={{ uri: "https://zos.alipayobjects.com/rmsportal/gjpzzcrPMkhfEqgbYvmN.svg" }}
+          icon={
+            <div
+              className={styles.navMy}
+            />}
+          selectedIcon={
+            <div
+              className={styles.navMyActive}
+            />}
           selected={this.state.selectedTab === "Tab4"}
           title="个人中心"
           key="个人中心"
           onPress={() => {
-            history.push("/my/index/index");
+            history.push("/my");
             this.setState({
               selectedTab: "Tab4",
             });

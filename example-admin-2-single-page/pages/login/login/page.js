@@ -1,5 +1,0 @@
-require("srcDir/login");
-
-$(() => {
-
-});
