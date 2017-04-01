@@ -102,7 +102,7 @@ const View = (props) => {
         <Button className={styles.button} inline />
       </Flex>
       <List>
-        <List.Item wrap>
+        <List.Item wrap platform="android" onClick={() => {}}>
           <div className={styles.title}>
             单行模式，文字超长则隐藏；文本内容文本内容文本内容文本内容
           </div>
@@ -110,7 +110,7 @@ const View = (props) => {
             多行模式，文字超长则换行；文本内容文本内容文本内容文本内容文本内容文本内容多行模式，文字超长则换行；文本内容文本内容文本内容文本内容文本内容文本内容多行模式，文字超长则换行；文本内容文本内容文本内容文本内容文本内容文本内容
           </div>
         </List.Item>
-        <List.Item wrap>
+        <List.Item wrap platform="android" onClick={() => {}}>
           <div className={styles.title}>
             单行模式，文字超长则隐藏；文本内容文本内容文本内容文本内容
           </div>
@@ -118,7 +118,7 @@ const View = (props) => {
             多行模式，文字超长则换行；文本内容文本内容文本内容文本内容文本内容文本内容多行模式，文字超长则换行；文本内容文本内容文本内容文本内容文本内容文本内容多行模式，文字超长则换行；文本内容文本内容文本内容文本内容文本内容文本内容
           </div>
         </List.Item>
-        <List.Item wrap>
+        <List.Item wrap platform="android" onClick={() => {}}>
           <div className={styles.title}>
             单行模式，文字超长则隐藏；文本内容文本内容文本内容文本内容
           </div>
@@ -126,7 +126,7 @@ const View = (props) => {
             多行模式，文字超长则换行；文本内容文本内容文本内容文本内容文本内容文本内容多行模式，文字超长则换行；文本内容文本内容文本内容文本内容文本内容文本内容多行模式，文字超长则换行；文本内容文本内容文本内容文本内容文本内容文本内容
           </div>
         </List.Item>
-        <List.Item wrap>
+        <List.Item wrap platform="android" onClick={() => {}}>
           <div className={styles.title}>
             单行模式，文字超长则隐藏；文本内容文本内容文本内容文本内容
           </div>
@@ -134,7 +134,7 @@ const View = (props) => {
             多行模式，文字超长则换行；文本内容文本内容文本内容文本内容文本内容文本内容多行模式，文字超长则换行；文本内容文本内容文本内容文本内容文本内容文本内容多行模式，文字超长则换行；文本内容文本内容文本内容文本内容文本内容文本内容
           </div>
         </List.Item>
-        <List.Item wrap>
+        <List.Item wrap platform="android" onClick={() => {}}>
           <div className={styles.title}>
             单行模式，文字超长则隐藏；文本内容文本内容文本内容文本内容
           </div>
@@ -142,7 +142,7 @@ const View = (props) => {
             多行模式，文字超长则换行；文本内容文本内容文本内容文本内容文本内容文本内容多行模式，文字超长则换行；文本内容文本内容文本内容文本内容文本内容文本内容多行模式，文字超长则换行；文本内容文本内容文本内容文本内容文本内容文本内容
           </div>
         </List.Item>
-        <List.Item wrap>
+        <List.Item wrap platform="android" onClick={() => {}}>
           <div className={styles.title}>
             单行模式，文字超长则隐藏；文本内容文本内容文本内容文本内容
           </div>
@@ -150,7 +150,7 @@ const View = (props) => {
             多行模式，文字超长则换行；文本内容文本内容文本内容文本内容文本内容文本内容多行模式，文字超长则换行；文本内容文本内容文本内容文本内容文本内容文本内容多行模式，文字超长则换行；文本内容文本内容文本内容文本内容文本内容文本内容
           </div>
         </List.Item>
-        <List.Item wrap>
+        <List.Item wrap platform="android" onClick={() => {}}>
           <div className={styles.title}>
             单行模式，文字超长则隐藏；文本内容文本内容文本内容文本内容
           </div>

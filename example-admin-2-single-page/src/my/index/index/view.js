@@ -35,6 +35,7 @@ const View = (props) => {
           arrow="horizontal"
           thumb={myUser}
           multipleLine
+          platform="android"
           onClick={() => {}}
         >
           用户注册
@@ -43,6 +44,7 @@ const View = (props) => {
           arrow="horizontal"
           thumb={myTruck}
           multipleLine
+          platform="android"
           onClick={() => {}}
         >
           卡车档案
@@ -52,6 +54,7 @@ const View = (props) => {
             arrow="horizontal"
             thumb={myOrder}
             multipleLine
+            platform="android"
             onClick={() => {}}
           >
             未完成订单
@@ -60,6 +63,7 @@ const View = (props) => {
             arrow="horizontal"
             thumb={myCheck}
             multipleLine
+            platform="android"
             onClick={() => {}}
           >
             待评价订单
@@ -69,6 +73,7 @@ const View = (props) => {
           arrow="horizontal"
           thumb={mySys}
           multipleLine
+          platform="android"
           onClick={() => {}}
         >
           系统设置
@@ -77,6 +82,7 @@ const View = (props) => {
           arrow="horizontal"
           thumb={myAbout}
           multipleLine
+          platform="android"
           onClick={() => {}}
         >
           关于
