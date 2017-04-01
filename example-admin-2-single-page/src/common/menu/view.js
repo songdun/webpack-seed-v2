@@ -38,6 +38,7 @@ class View extends React.Component {
       modal: true
     };
     this.onClose = this.onClose.bind(this);
+    history.push("/home");
   }
   onClose() {
     this.setState({

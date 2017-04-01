@@ -15,6 +15,7 @@ const fetch = () => Promise.resolve({
         // { title: "/service", path: "/service", component: "service/index/index", name: "客服" },
         { title: "/order", path: "/order", component: "order/index/index", name: "订单" },
         { title: "/my", path: "/my", component: "my/index/index", name: "我的" },
+        { title: "/applyRescue", path: "/applyRescue", component: "home/rescue/application", name: "发起救援" },
 
 
       ],

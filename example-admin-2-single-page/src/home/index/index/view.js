@@ -5,6 +5,7 @@ import { Carousel, Flex, Button, List } from "antd-mobile";
 // import fetch from "srcDir/common/model/itemModel/fetch";
 import openMap from "srcDir/common/weichat/openMap";
 import Cookies from "js-cookie";
+import history from "srcDir/common/router/history";
 
 const banner = require("srcDir/images/banner.png");
 
@@ -49,11 +50,16 @@ const getLocationName = (location = locationDefault) => {
   });
   return locationName;
 };
+
+
 // 创建react组件
 const View = (props) => {
-  // console.info("+++++++++++++++++++");
+  console.info("home/index/index");
   console.info(props);
-
+  const applyRescue = () => {
+    console.log("applyRescue");
+    history.push("/applyRescue");
+  };
 
   return (
     <div>
@@ -97,7 +103,7 @@ const View = (props) => {
         </a>
       </Carousel>
       <Flex justify="around" className={styles.buttons}>
-        <Button className={styles.button} inline />
+        <Button className={styles.button} inline onClick={applyRescue} />
         <Button className={styles.button} inline />
         <Button className={styles.button} inline />
       </Flex>

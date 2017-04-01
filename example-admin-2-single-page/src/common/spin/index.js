@@ -12,7 +12,6 @@ class View extends React.Component {
   componentDidMount() {
     // const _this = this;
     // const { state } = _this;
-    window.a = this;
     window.addEventListener("ajaxLoadStart", function () {
       $(".js-loading").css({ display: "block" });
     });
