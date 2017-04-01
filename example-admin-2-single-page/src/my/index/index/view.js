@@ -7,8 +7,8 @@ import { List } from "antd-mobile";
 const defaultImg = require("srcDir/images/my-default-img.png");
 const myUser = require("srcDir/images/my-user.png");
 const myTruck = require("srcDir/images/my-truck.png");
-const myOrder = require("srcDir/images/my-order.png");
-const myCheck = require("srcDir/images/my-check.png");
+// const myOrder = require("srcDir/images/my-order.png");
+// const myCheck = require("srcDir/images/my-check.png");
 const mySys = require("srcDir/images/my-sys.png");
 const myAbout = require("srcDir/images/my-about.png");
 
@@ -47,22 +47,24 @@ const View = (props) => {
         >
           卡车档案
         </List.Item>
-        <List.Item
-          arrow="horizontal"
-          thumb={myOrder}
-          multipleLine
-          onClick={() => {}}
-        >
-          未完成订单
-        </List.Item>
-        <List.Item
-          arrow="horizontal"
-          thumb={myCheck}
-          multipleLine
-          onClick={() => {}}
-        >
-          待评价订单
-        </List.Item>
+        {/*
+          <List.Item
+            arrow="horizontal"
+            thumb={myOrder}
+            multipleLine
+            onClick={() => {}}
+          >
+            未完成订单
+          </List.Item>
+          <List.Item
+            arrow="horizontal"
+            thumb={myCheck}
+            multipleLine
+            onClick={() => {}}
+          >
+            待评价订单
+          </List.Item>
+        */}
         <List.Item
           arrow="horizontal"
           thumb={mySys}

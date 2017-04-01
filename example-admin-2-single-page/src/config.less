@@ -16,6 +16,8 @@
 // background
 @c-fff: #fff ;
 // fontColor
+@c-333: #333 ;
+
 @c-666: #666 ;
 
 @c-999: #999 ;
@@ -133,4 +135,14 @@
   display: -webkit-box !important;
   -webkit-line-clamp: @lines !important;
   -webkit-box-orient: vertical !important;
+}
+
+// 评价星星
+:global .ant-rate-star-content:before,
+:global .ant-rate-star:before {
+  @font-face {
+    font-family: 'anticon';
+    src: url('./fonts/font_r5u29ls31bgldi.woff') format('woff'), ; /* chrome、firefox */
+  }
+  font-family: anticon;
 }

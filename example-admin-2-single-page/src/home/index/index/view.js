@@ -4,10 +4,51 @@ import styles from "./style.less";
 import { Carousel, Flex, Button, List } from "antd-mobile";
 // import fetch from "srcDir/common/model/itemModel/fetch";
 import openMap from "srcDir/common/weichat/openMap";
-import getLocation from "srcDir/common/weichat/getLocation";
-alert(getLocation());
+import Cookies from "js-cookie";
 
 const banner = require("srcDir/images/banner.png");
+
+const locationDefault = JSON.stringify({
+  latitude: "35.9",
+  longitude: "116.4"
+});
+const getLocationName = (location = locationDefault) => {
+  let locationName = "中国";
+  if (location === null || location === "") {
+    location = locationDefault;
+  }
+  const { latitude = "", longitude = "" } = JSON.parse(location);
+  const locationStr = `${latitude},${longitude}`;
+  // console.info(locationStr);
+  const data = {
+    location: locationStr,
+    /* 换成自己申请的key */
+    key: "4ODBZ-3TYR4-XJ6UA-XREVY-M5UPO-R6FF3",
+    get_poi: 0
+  };
+  const url = "http://apis.map.qq.com/ws/geocoder/v1/?";
+  data.output = "jsonp";
+  $.ajax({
+    async: false,
+    type: "get",
+    dataType: "jsonp",
+    data: data,
+    jsonp: "callback",
+    jsonpCallback: "QQmap",
+    url: url,
+    success: function (json) {
+      // console.log(json.result.address_component.city);
+      locationName = json.result.address_component.city;
+      $("#locationName").find(".am-flexbox-item").eq(0)
+      .text(locationName);
+    },
+    // error: function () {
+    //   alert("服务端错误，请刷新浏览器后重试");
+    // }
+
+  });
+  return locationName;
+};
 // 创建react组件
 const View = (props) => {
   // console.info("+++++++++++++++++++");
@@ -16,14 +57,18 @@ const View = (props) => {
 
   return (
     <div>
-      <Flex className={styles.header}>
-        <Flex.Item onClick={openMap}>
-        北京
-        </Flex.Item>
-        <Flex.Item>
-        关于我们
-        </Flex.Item>
-      </Flex>
+      <div id="locationName">
+        <Flex className={styles.header}>
+          <Flex.Item onClick={openMap}>
+            {
+              getLocationName(Cookies.get("location"))
+            }
+          </Flex.Item>
+          <Flex.Item>
+          关于我们
+          </Flex.Item>
+        </Flex>
+      </div>
       <Carousel
         className="my-carousel" autoplay={0} infinite selectedIndex={0} dots={false}
         // beforeChange={(from, to) => console.log(`slide from ${from} to ${to}`)}
