@@ -47,6 +47,9 @@ const mapApi = () => {
   // 解析定位错误信息
   const onError = () => {
     document.getElementById("tip").innerHTML = "定位失败";
+    setTimeout(function () {
+      history.push("/applyRescue");
+    }, 1000);
   };
   // 加载地图，调用浏览器定位服务
   const map = new AMap.Map("container", {

@@ -6,12 +6,17 @@ import styles from "./style.less";
 import { List, Flex, TextareaItem } from "antd-mobile";
 import { createForm } from "rc-form";
 import Map from "srcDir/home/rescue/checkLocation/check.js";
+import history from "srcDir/common/router/history";
 
 
 const checkLocation = () => {
   ReactDOM.render(
     <Map />, document.getElementById("contentContainer")
   );
+};
+
+const submit = () => {
+  history.push("/rescueStatus");
 };
 
 // 创建react组件
@@ -58,7 +63,7 @@ const View = createForm()((props) => {
           <Flex.Item onClick={back2refresh}>
             <div style={{ textAlign: "center" }}>取消</div>
           </Flex.Item>
-          <Flex.Item>
+          <Flex.Item onClick={submit}>
             <div style={{ textAlign: "center", color: "#fff" }}>救援</div>
           </Flex.Item>
         </Flex>
