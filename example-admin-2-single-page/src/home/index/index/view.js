@@ -38,10 +38,12 @@ const getLocationName = (location = locationDefault) => {
     jsonpCallback: "QQmap",
     url: url,
     success: function (json) {
-      // console.log(json.result.address_component.city);
+      // console.log(json.result.address);
       locationName = json.result.address_component.city;
+      const locationAddress = json.result.address;
       $("#locationName").find(".am-flexbox-item").eq(0)
       .text(locationName);
+      Cookies.set("locationAddress", locationAddress);
     },
     // error: function () {
     //   alert("服务端错误，请刷新浏览器后重试");

@@ -1,10 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import Cookies from "js-cookie";
 
 import styles from "./style.less";
 import { List, Flex, TextareaItem } from "antd-mobile";
 import { createForm } from "rc-form";
-import Map from "srcDir/home/rescue/checkLocation/view.js";
+import Map from "srcDir/home/rescue/checkLocation/check.js";
+
 
 const checkLocation = () => {
   ReactDOM.render(
@@ -46,7 +48,7 @@ const View = createForm()((props) => {
         <div className={styles.getLocation}></div>
         <div className={styles.locationAddress}>
           <span className={styles.locationIcon}></span>
-          <span className={styles.address}>吉林省长春市亚泰大街001号</span>
+          <span className={styles.address}>{Cookies.get("locationAddress")}</span>
         </div>
       </List.Item>
       <List.Item wrap className={styles.blank}>
