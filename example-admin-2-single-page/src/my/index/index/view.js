@@ -5,12 +5,12 @@ import { List } from "antd-mobile";
 import history from "srcDir/common/router/history";
 // import fetch from "srcDir/common/model/itemModel/fetch";
 
-const defaultImg = require("srcDir/images/my-default-img.png");
+// const defaultImg = require("srcDir/images/my-default-img.png");
 const myUser = require("srcDir/images/my-user.png");
 const myTruck = require("srcDir/images/my-truck.png");
 // const myOrder = require("srcDir/images/my-order.png");
 // const myCheck = require("srcDir/images/my-check.png");
-const mySys = require("srcDir/images/my-sys.png");
+// const mySys = require("srcDir/images/my-sys.png");
 const myAbout = require("srcDir/images/my-about.png");
 
 const editUserInfo = () => {
@@ -42,7 +42,7 @@ const View = (props) => {
         <List.Item
           className={styles.userInfo}
           arrow="horizontal"
-          thumb={defaultImg}
+          // thumb={defaultImg}
           multipleLine
           onClick={() => editUserInfo()}
         >
@@ -86,6 +86,7 @@ const View = (props) => {
             待评价订单
           </List.Item>
         */}
+        {/*
         <List.Item
           arrow="horizontal"
           thumb={mySys}
@@ -95,6 +96,7 @@ const View = (props) => {
         >
           系统设置
         </List.Item>
+        */}
         <List.Item
           arrow="horizontal"
           thumb={myAbout}

@@ -2,7 +2,7 @@ import React from "react";
 
 import styles from "./style.less";
 import { List } from "antd-mobile";
-import Rate from "antd/lib/rate";
+// import Rate from "antd/lib/rate";
 import "antd/lib/rate/style/index.css";
 
 // 创建react组件
@@ -26,9 +26,11 @@ const View = () => {
         <div className={styles.item}>
           维修店名称：某某维修店
         </div>
+        {/*
         <div className={styles.item}>
           评价：<Rate disabled defaultValue={2} />
         </div>
+        */}
       </List.Item>
       <List.Item wrap platform="android" onClick={() => {}}>
         <div className={styles.item}>
@@ -43,9 +45,11 @@ const View = () => {
         <div className={styles.item}>
           维修店名称：某某维修店
         </div>
+        {/*
         <div className={styles.item}>
           评价：<Rate disabled defaultValue={3} />
         </div>
+        */}
       </List.Item>
     </List>
   );

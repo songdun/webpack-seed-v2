@@ -29,7 +29,7 @@ const View = createForm()((props) => {
   };
 
   return (
-    <div>
+    <div className={styles.register}>
       <List>
         <List.Item
           multipleLine

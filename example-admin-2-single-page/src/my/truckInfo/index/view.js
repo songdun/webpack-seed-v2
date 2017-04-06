@@ -8,7 +8,7 @@ import "moment/locale/zh-cn";
 // import history from "srcDir/common/router/history";
 // import fetch from "srcDir/common/model/itemModel/fetch";
 
-const myUser = <img className={styles.userImg} src={require("srcDir/images/my-default-img.png")} alt="头像" />;
+// const myUser = <img className={styles.userImg} src={require("srcDir/images/my-default-img.png")} alt="头像" />;
 
 
 // const editUserInfo = () => {
@@ -97,8 +97,11 @@ const View = (props) => {
           platform="android"
           onClick={getPhoto}
         >
+          {/*
           <img className={styles.licenseImg} alt="驾照" src="https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1491464600&di=6074ed808b75fe7fcde6001d17778bcb&src=http://www.lawcert.com/static/Upload/material/loan-44/CLXSZ/1-89364.jpg" />
+          */}
         </List.Item>
+        {/*
         <List.Item
           extra={myUser}
           arrow="horizontal"
@@ -108,6 +111,7 @@ const View = (props) => {
         >
           车辆照片
         </List.Item>
+        */}
         <List.Item
           extra={"京Q1234"}
           arrow="horizontal"

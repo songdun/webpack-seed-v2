@@ -8,7 +8,7 @@ import "moment/locale/zh-cn";
 // import history from "srcDir/common/router/history";
 // import fetch from "srcDir/common/model/itemModel/fetch";
 
-const myUser = <img className={styles.userImg} src={require("srcDir/images/my-default-img.png")} alt="头像" />;
+// const myUser = <img className={styles.userImg} src={require("srcDir/images/my-default-img.png")} alt="头像" />;
 
 
 // const editUserInfo = () => {
@@ -97,17 +97,21 @@ const View = (props) => {
           platform="android"
           onClick={getPhoto}
         >
+          {/*
           <img className={styles.licenseImg} alt="驾照" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1491458346933&di=ce824818c97dca65d1d734f22d902ed8&imgtype=0&src=http%3A%2F%2Fimg.amberedu.com%2FUserWriter%2F2014%2F04%2F27%2Fl_c89cfe54-ae10-4d7a-ad0d-095bfe13b8ed.jpg" />
+          */}
         </List.Item>
-        <List.Item
-          extra={myUser}
-          arrow="horizontal"
-          multipleLine
-          platform="android"
-          onClick={getPhoto}
-        >
-          头像
-        </List.Item>
+        {/*
+          <List.Item
+            extra={myUser}
+            arrow="horizontal"
+            multipleLine
+            platform="android"
+            onClick={getPhoto}
+          >
+            头像
+          </List.Item>
+        */}
         <List.Item
           extra={"李木"}
           arrow="horizontal"

@@ -3,7 +3,7 @@ import React from "react";
 import history from "srcDir/common/router/history";
 
 import styles from "./style.less";
-import { List, Flex, TextareaItem } from "antd-mobile";
+import { List, TextareaItem } from "antd-mobile";
 
 import { createForm } from "rc-form";
 
@@ -30,6 +30,8 @@ const View = createForm()((props) => {
 
   return (
     <List>
+      {
+      /*
       <List.Item wrap>
         <Flex justify="between">
           <Flex.Item className={styles.imageOut}>
@@ -44,6 +46,8 @@ const View = createForm()((props) => {
           </Flex.Item>
         </Flex>
       </List.Item>
+    */
+    }
       <List.Item wrap platform="android">
         <TextareaItem
           {...getFieldProps("count", {
@@ -61,7 +65,7 @@ const View = createForm()((props) => {
         <div className={styles.lastEvaluate}><span className={styles.evaluateText}>专业程度</span> <Rate /></div>
       </List.Item>
       <List.Item wrap className={styles.body}>
-        <div className={styles.evaluate} onClick={submit}>发布</div>
+        <div className={styles.evaluate} onClick={submit}>评价</div>
       </List.Item>
     </List>
   );

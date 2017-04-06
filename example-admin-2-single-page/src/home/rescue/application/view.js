@@ -37,7 +37,7 @@ const View = createForm()((props) => {
           联系电话：18801480027
         </div>
         <div className={styles.item}>
-          问题描述：2017032615880101
+          问题描述：
         </div>
         <div className={styles.item}>
           <TextareaItem
