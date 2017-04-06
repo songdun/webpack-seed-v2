@@ -18,6 +18,10 @@ const editUserInfo = () => {
   history.push("/userInfo");
 };
 
+const editTruckInfo = () => {
+  history.push("/truckInfo");
+};
+
 // 创建react组件
 const View = (props) => {
   // console.info("+++++++++++++++++++");
@@ -50,7 +54,7 @@ const View = (props) => {
           thumb={myTruck}
           multipleLine
           platform="android"
-          onClick={() => {}}
+          onClick={() => editTruckInfo()}
         >
           卡车档案
         </List.Item>
