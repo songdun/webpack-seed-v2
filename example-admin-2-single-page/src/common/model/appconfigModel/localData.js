@@ -21,6 +21,7 @@ const fetch = () => Promise.resolve({
         { title: "/userInfo", path: "/userInfo", component: "my/userInfo/index", name: "个人资料" },
         { title: "/truckInfo", path: "/truckInfo", component: "my/truckInfo/index", name: "汽车档案" },
         { title: "/about", path: "/about", component: "my/about/index", name: "关于我们" },
+        { title: "/register", path: "/register", component: "my/register/index", name: "用户注册" },
 
 
       ],

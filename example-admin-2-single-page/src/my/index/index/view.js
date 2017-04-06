@@ -18,6 +18,10 @@ const editUserInfo = () => {
   history.push("/userInfo");
 };
 
+const register = () => {
+  history.push("/register");
+};
+
 const editTruckInfo = () => {
   history.push("/truckInfo");
 };
@@ -49,7 +53,7 @@ const View = (props) => {
           thumb={myUser}
           multipleLine
           platform="android"
-          onClick={() => {}}
+          onClick={() => register()}
         >
           用户注册
         </List.Item>
