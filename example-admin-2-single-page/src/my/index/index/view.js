@@ -2,6 +2,7 @@ import React from "react";
 
 import styles from "./style.less";
 import { List } from "antd-mobile";
+import history from "srcDir/common/router/history";
 // import fetch from "srcDir/common/model/itemModel/fetch";
 
 const defaultImg = require("srcDir/images/my-default-img.png");
@@ -12,6 +13,10 @@ const myTruck = require("srcDir/images/my-truck.png");
 const mySys = require("srcDir/images/my-sys.png");
 const myAbout = require("srcDir/images/my-about.png");
 
+const editUserInfo = () => {
+  console.log("/userInfo");
+  history.push("/userInfo");
+};
 
 // 创建react组件
 const View = (props) => {
@@ -27,7 +32,7 @@ const View = (props) => {
           arrow="horizontal"
           thumb={defaultImg}
           multipleLine
-          onClick={() => {}}
+          onClick={() => editUserInfo()}
         >
           18109913069
         </List.Item>

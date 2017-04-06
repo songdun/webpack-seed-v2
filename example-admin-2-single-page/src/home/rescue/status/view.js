@@ -1,5 +1,6 @@
 import React from "react";
 // import ReactDOM from "react-dom";
+import history from "srcDir/common/router/history";
 
 import styles from "./style.less";
 import { List, Flex, Steps } from "antd-mobile";
@@ -12,6 +13,12 @@ const Step = Steps.Step;
 //     <Map />, document.getElementById("contentContainer")
 //   );
 // };
+const cancel = () => {
+  history.push("/home");
+};
+const evaluate = () => {
+  history.push("/evaluate");
+};
 
 // 创建react组件
 const View = (props) => {
@@ -26,7 +33,7 @@ const View = (props) => {
       <List.Item wrap className={styles.header}>
         <Flex justify="between">
           <Flex.Item className={styles.listNumber}>救援单号: 2017032615880101</Flex.Item>
-          <Flex.Item className={styles.cancel}>取消救援</Flex.Item>
+          <Flex.Item className={styles.cancel} onClick={cancel}>取消救援</Flex.Item>
         </Flex>
       </List.Item>
       <List.Item wrap platform="android" className={styles.nav}>
@@ -44,7 +51,7 @@ const View = (props) => {
           <Step title="已派单，某某汽修厂  联系电话：18801518987" description="2017/03/09 11:24" />
           <Step title="救援评价" description="" />
         </Steps>
-        <div className={styles.evaluate}>去评价</div>
+        <div className={styles.evaluate} onClick={evaluate}>去评价</div>
       </List.Item>
     </List>
   );

@@ -42,10 +42,11 @@ const View = createForm()((props) => {
         <div className={styles.item}>
           <TextareaItem
             {...getFieldProps("count", {
-              initialValue: "请输入...",
+              initialValue: "",
             })}
             rows={5}
             count={100}
+            placeholder="请输入..."
           />
         </div>
       </List.Item>

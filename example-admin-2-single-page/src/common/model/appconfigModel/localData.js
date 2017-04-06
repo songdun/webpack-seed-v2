@@ -17,6 +17,8 @@ const fetch = () => Promise.resolve({
         { title: "/my", path: "/my", component: "my/index/index", name: "我的" },
         { title: "/applyRescue", path: "/applyRescue", component: "home/rescue/application", name: "发起救援" },
         { title: "/rescueStatus", path: "/rescueStatus", component: "home/rescue/status", name: "救援状态" },
+        { title: "/evaluate", path: "/evaluate", component: "order/order/evaluate", name: "发表评价" },
+        { title: "/userInfo", path: "/userInfo", component: "my/userInfo/index", name: "个人资料" },
 
 
       ],

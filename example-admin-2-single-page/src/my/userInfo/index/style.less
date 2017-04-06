@@ -1,0 +1,30 @@
+@import url('../../../config.less');
+
+.license {
+  &:first-child {
+    & > div {
+      align-items: flex-end !important;
+
+      > div:last-child {
+        width: 50px;
+        height: 50px;
+        background-size: 100%;
+        margin-right: @default-margin / 2;
+        background-image: url(srcDir/images/camera.png);
+      }
+    }
+  }
+}
+
+.licenseImg {
+  width: 295px !important;
+  height: 174px !important;
+  margin: auto;
+}
+
+.userImg {
+  width: 30px !important;
+  height: 30px !important;
+  border-radius: 50%;
+  background-color: @c-gray;
+}
