@@ -22,6 +22,10 @@ const editTruckInfo = () => {
   history.push("/truckInfo");
 };
 
+const about = () => {
+  history.push("/about");
+};
+
 // 创建react组件
 const View = (props) => {
   // console.info("+++++++++++++++++++");
@@ -92,7 +96,7 @@ const View = (props) => {
           thumb={myAbout}
           multipleLine
           platform="android"
-          onClick={() => {}}
+          onClick={() => about()}
         >
           关于
         </List.Item>
