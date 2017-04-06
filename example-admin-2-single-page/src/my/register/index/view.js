@@ -1,6 +1,6 @@
 import React from "react";
 
-// import styles from "./style.less";
+import styles from "./style.less";
 import { List, Checkbox, InputItem, Button } from "antd-mobile";
 import { createForm } from "rc-form";
 const AgreeItem = Checkbox.AgreeItem;
@@ -77,7 +77,7 @@ const View = createForm()((props) => {
           </InputItem>
         </List.Item>
         <List.Item>
-          <Button type="primary" onClick={onSubmit} inline>注册</Button>
+          <Button className={styles.submit} type="primary" onClick={onSubmit}>注册</Button>
         </List.Item>
       </List>
     </div>

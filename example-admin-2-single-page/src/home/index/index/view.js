@@ -9,6 +9,10 @@ import history from "srcDir/common/router/history";
 
 const banner = require("srcDir/images/banner.png");
 
+const about = () => {
+  history.push("/about");
+};
+
 const locationDefault = JSON.stringify({
   latitude: "35.9",
   longitude: "116.4"
@@ -72,7 +76,7 @@ const View = (props) => {
               getLocationName(Cookies.get("location"))
             }
           </Flex.Item>
-          <Flex.Item>
+          <Flex.Item onClick={about}>
           关于我们
           </Flex.Item>
         </Flex>
