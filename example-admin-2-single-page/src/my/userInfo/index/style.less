@@ -1,25 +1,30 @@
 @import url('../../../config.less');
 
 .license {
+  background-color: #f8f8f8;
+
   &:first-child {
     & > div {
       align-items: flex-end !important;
 
       > div:last-child {
-        width: 50px;
-        height: 50px;
+        width: 32px;
+        height: 32px;
+        border-radius: @default-border-radius;
+        margin-bottom: -5px;
         background-size: 100%;
         margin-right: @default-margin / 2;
-        background-image: url(srcDir/images/camera.png);
+        background: url(srcDir/images/camera-gray.png) no-repeat center;
+
       }
     }
   }
 }
 
 .licenseImg {
-  width: 295px !important;
-  height: 174px !important;
-  margin: auto;
+  width: 295px-32px !important;
+  height: 174px * ((295 - 32) / 295) !important;
+  margin: auto auto auto 50px;
 }
 
 .userImg {
