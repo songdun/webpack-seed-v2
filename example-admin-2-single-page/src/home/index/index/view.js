@@ -12,6 +12,12 @@ const banner = require("srcDir/images/banner.png");
 const about = () => {
   history.push("/about");
 };
+const applyRescue = () => {
+  history.push("/applyRescue");
+};
+const maintenance = () => {
+  history.push("/maintenance");
+};
 
 const locationDefault = JSON.stringify({
   latitude: "35.9",
@@ -62,10 +68,6 @@ const getLocationName = (location = locationDefault) => {
 const View = (props) => {
   console.info("home/index/index");
   console.info(props);
-  const applyRescue = () => {
-    console.log("applyRescue");
-    history.push("/applyRescue");
-  };
 
   return (
     <div>
@@ -110,7 +112,7 @@ const View = (props) => {
       </Carousel>
       <Flex justify="around" className={styles.buttons}>
         <Button className={styles.button} inline onClick={applyRescue} />
-        <Button className={styles.button} inline />
+        <Button className={styles.button} inline onClick={maintenance} />
         <Button className={styles.button} inline />
       </Flex>
       <List>

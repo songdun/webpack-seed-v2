@@ -22,6 +22,8 @@ const fetch = () => Promise.resolve({
         { title: "/truckInfo", path: "/truckInfo", component: "my/truckInfo/index", name: "汽车档案" },
         { title: "/about", path: "/about", component: "my/about/index", name: "关于我们" },
         { title: "/register", path: "/register", component: "my/register/index", name: "用户注册" },
+        { title: "/maintenance", path: "/maintenance", component: "home/maintenance/list", name: "预约保养列表" },
+        { title: "/maintenance/detail/:id", path: "/maintenance/detail/:id", component: "home/maintenance/detail", name: "预约保养详情" },
 
 
       ],
