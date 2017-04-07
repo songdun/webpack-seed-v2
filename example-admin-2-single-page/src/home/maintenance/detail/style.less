@@ -77,3 +77,22 @@
 .info {
   padding-top: @default-margin;
 }
+.tag {
+  height: 36px;
+  padding: @default-margin/4 @default-margin/2;
+  margin: @default-margin/4;
+}
+.flex {
+  padding-left: @default-margin;
+  &:last-child {
+    margin-bottom: @default-margin;
+  }
+}
+.poplist {
+  & > div:last-child {
+    border: 0 !important;
+    &::after{
+      border: 0!important;
+    }
+  }
+}
