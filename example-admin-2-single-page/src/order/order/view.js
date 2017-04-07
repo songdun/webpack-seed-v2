@@ -2,8 +2,14 @@ import React from "react";
 
 import styles from "./style.less";
 import { List } from "antd-mobile";
+import history from "srcDir/common/router/history";
 // import Rate from "antd/lib/rate";
-import "antd/lib/rate/style/index.css";
+// import "antd/lib/rate/style/index.css";
+
+const detail = () => {
+  history.push("/order/detail/2");
+};
+
 
 // 创建react组件
 const View = () => {
@@ -13,7 +19,7 @@ const View = () => {
 
   return (
     <List>
-      <List.Item wrap platform="android" onClick={() => {}}>
+      <List.Item wrap platform="android" onClick={() => detail()}>
         <div className={styles.item}>
           救援时间：2017/03/15<span className={styles.status} >已完成</span>
         </div>
@@ -32,7 +38,7 @@ const View = () => {
         </div>
         */}
       </List.Item>
-      <List.Item wrap platform="android" onClick={() => {}}>
+      <List.Item wrap platform="android" onClick={() => detail()}>
         <div className={styles.item}>
           救援时间：2017/03/15<span className={styles.status} >已完成</span>
         </div>

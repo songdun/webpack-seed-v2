@@ -24,6 +24,7 @@ const fetch = () => Promise.resolve({
         { title: "/register", path: "/register", component: "my/register/index", name: "用户注册" },
         { title: "/maintenance", path: "/maintenance", component: "home/maintenance/list", name: "预约保养列表" },
         { title: "/maintenance/detail/:id", path: "/maintenance/detail/:id", component: "home/maintenance/detail", name: "预约保养详情" },
+        { title: "/order/detail/:id", path: "/order/detail/:id", component: "order/order/detail", name: "订单详情" },
 
 
       ],
