@@ -77,11 +77,7 @@
 .info {
   padding-top: @default-margin;
 }
-.tag {
-  height: 36px;
-  padding: @default-margin/4 @default-margin/2;
-  margin: @default-margin/4;
-}
+
 .flex {
   padding-left: @default-margin;
   &:last-child {
@@ -93,6 +89,42 @@
     border: 0 !important;
     &::after{
       border: 0!important;
+    }
+  }
+}
+.radio {
+  display: inline-block;
+  vertical-align: middle;
+  & > input{
+    display: none;
+  }
+  & > label{
+    height: 36px;
+    padding: @default-margin/4 @default-margin/2;
+    border: 1px solid @c-gray;
+    border-radius: @default-border-radius;
+    margin: @default-margin/4;
+    color: @c-999;
+    background-color: @c-fff;
+    font-size: @fz-14;
+    font-weight: normal;
+    vertical-align: middle;
+    line-height: 25px;
+  }
+  & > input:checked + label {
+    border-color: @c-blue;
+    color: @c-blue;
+  }
+}
+.chooseDate {
+  & > div{
+    & > div {
+      font-size: @fz-14 !important;
+      font-weight: normal;
+      color: @c-999 !important;
+    }
+    &::after {
+      border: 0 !important;
     }
   }
 }

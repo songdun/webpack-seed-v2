@@ -38,6 +38,8 @@ class View extends React.Component {
       modal: true
     };
     this.onClose = this.onClose.bind(this);
+    console.log("menu/view.js");
+    console.log(location.href);
     history.push("/home");
   }
   onClose() {

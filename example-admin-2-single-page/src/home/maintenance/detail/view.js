@@ -1,7 +1,7 @@
 import React from "react";
 
 import styles from "./style.less";
-import { List, Button, Tabs, Popup, Icon, Tag } from "antd-mobile";
+import { List, Button, Tabs, Popup, Icon, DatePicker } from "antd-mobile";
 import moment from "moment";
 import "moment/locale/zh-cn";
 // import history from "srcDir/common/router/history";
@@ -12,6 +12,11 @@ const defaultImg = require("srcDir/images/repare-1.png");
 // const detail = () => {
 //   history.push("/maintenance/detail");
 // };
+
+const zhNow = moment().locale("zh-cn").utcOffset(8);
+const minDate = zhNow;
+const maxDate = moment().add(14, "days").locale("zh-cn")
+.utcOffset(8);
 
 const isIPhone = new RegExp("\\biPhone\\b|\\biPod\\b", "i").test(window.navigator.userAgent);
 let maskProps;
@@ -26,15 +31,10 @@ const onClose = () => {
   Popup.hide();
 };
 
-const renderTag = (arr) => arr.map((i) => (
-  <Tag className={styles.tag}>
-    {
-      moment().add(i, "days").locale("zh-cn")
-      .utcOffset(8)
-      .format("dddd")
-    }
-  </Tag>
-));
+const onDateChange = (val) => {
+  console.log("onDateChange");
+  console.log(val.format("YYYY-MM-DD"));
+};
 
 const onClick = () => {
   Popup.show(<div>
@@ -54,9 +54,18 @@ const onClick = () => {
         </div>)}
     >
       <div className={styles.flex}>
-        <Tag className={styles.tag}>预约保养</Tag>
-        <Tag className={styles.tag}>预约维修</Tag>
-        <Tag className={styles.tag}>钣金喷漆</Tag>
+        <div className={styles.radio}>
+          <input id="type1" type="radio" name="type" />
+          <label htmlFor="type1">预约保养</label>
+        </div>
+        <div className={styles.radio}>
+          <input id="type2" type="radio" name="type" />
+          <label htmlFor="type2">预约维修</label>
+        </div>
+        <div className={styles.radio}>
+          <input id="type3" type="radio" name="type" />
+          <label htmlFor="type3">钣金喷漆</label>
+        </div>
       </div>
     </List>
     <List
@@ -67,32 +76,49 @@ const onClick = () => {
         </div>)}
     >
       <div className={styles.flex}>
-        <Tag className={styles.tag}>今天(
-        {
-          moment().locale("zh-cn").utcOffset(8)
-          .format("dddd")
-        }
-        )</Tag>
-        <Tag className={styles.tag}>明天(
-        {
-          moment().add(1, "days").locale("zh-cn")
-          .utcOffset(8)
-          .format("dddd")
-        }
-        )</Tag>
+        <DatePicker
+          mode="date"
+          title="选择日期"
+          minDate={minDate}
+          maxDate={maxDate}
+          onChange={onDateChange}
+        >
+          <List.Item
+            className={styles.chooseDate}
+            arrow="horizontal"
+            multipleLine
+            platform="android"
+            onClick={() => {}}
+          >
+            请选择日期
+          </List.Item>
+        </DatePicker>
       </div>
       <div className={styles.flex}>
-        {
-          renderTag([2, 3, 4, 5, 6])
-        }
-      </div>
-      <div className={styles.flex}>
-        <Tag className={styles.tag}>08:00-10:00</Tag>
-        <Tag className={styles.tag}>10:00-12:00</Tag>
-        <Tag className={styles.tag}>12:00-14:00</Tag>
-        <Tag className={styles.tag}>14:00-16:00</Tag>
-        <Tag className={styles.tag}>16:00-18:00</Tag>
-        <Tag className={styles.tag}>18:00-20:00</Tag>
+        <div className={styles.radio}>
+          <input id="time1" type="radio" name="time" />
+          <label htmlFor="time1">08:00-10:00</label>
+        </div>
+        <div className={styles.radio}>
+          <input id="time2" type="radio" name="time" />
+          <label htmlFor="time2">10:00-12:00</label>
+        </div>
+        <div className={styles.radio}>
+          <input id="time3" type="radio" name="time" />
+          <label htmlFor="time3">12:00-14:00</label>
+        </div>
+        <div className={styles.radio}>
+          <input id="time4" type="radio" name="time" />
+          <label htmlFor="time4">14:00-16:00</label>
+        </div>
+        <div className={styles.radio}>
+          <input id="time5" type="radio" name="time" />
+          <label htmlFor="time5">16:00-18:00</label>
+        </div>
+        <div className={styles.radio}>
+          <input id="time6" type="radio" name="time" />
+          <label htmlFor="time6">18:00-20:00</label>
+        </div>
       </div>
     </List>
     <Button type="primary" onClick={() => onClose()} style={{ borderRadius: "0" }}>确认预约</Button>
