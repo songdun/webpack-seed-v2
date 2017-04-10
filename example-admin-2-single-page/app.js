@@ -13,22 +13,44 @@ app.get('/', function (req, res) {
 
 app.use('/', routes);
 
-// // catch 404 and forward to error handler
-// app.use(function(req, res, next) {
-//   var err = new Error('Not Found');
-//   err.status = 404;
-//   next(err);
+// // // catch 404 and forward to error handler
+// // app.use(function(req, res, next) {
+// //   var err = new Error('Not Found');
+// //   err.status = 404;
+// //   next(err);
+// // });
+// app.all('/', function(req, res) {
+//   res.sendFile(path.resolve(__dirname, './','index.html'));
 // });
-app.all('/', function(req, res) {
-  res.sendFile(path.resolve(__dirname, './','index.html'));
-});
 
+// app.all('/:page', function(req, res) {
+//   res.sendFile(path.resolve(__dirname, './','index.html'));
+// });
+
+// app.all('/core|react-component/:page', function(req, res) {
+//   res.sendFile(path.resolve(__dirname, './','index.html'));
+// });
+
+// app.all('/core|react-component/core|react-component/:page', function(req, res) {
+//   res.sendFile(path.resolve(__dirname, './','index.html'));
+// });
+
+app.all('/', function(req, res) {
+	res.redirect("/index/index/page.html");
+});
+app.all('/MP_verify_zm7joyhezj78uapj.txt', function(req, res) {
+	res.sendFile(path.resolve(__dirname, './','MP_verify_zm7joyhezj78uapj.txt'));
+});
 app.all('/:page', function(req, res) {
-  res.sendFile(path.resolve(__dirname, './','index.html'));
+  res.redirect("/index/index/page.html");
 });
 
 app.all('/core|react-component/:page', function(req, res) {
-  res.sendFile(path.resolve(__dirname, './','index.html'));
+  res.redirect("/index/index/page.html");
+});
+
+app.all('/core|react-component/core|react-component/:page', function(req, res) {
+  res.redirect("/index/index/page.html");
 });
 
 app.listen(url.mockServer.port, function () {

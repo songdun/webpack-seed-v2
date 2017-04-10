@@ -1,38 +1,41 @@
 @import url('../../config.less');
 
-:global #wrapper,:global #root{
-	height: 100%;
+:global #wrapper,
+:global #root {
+  height: 100%;
 }
 
 .container {
-	height: 100%;
+  height: 100%;
 }
-.header,.nav {
-	position: fixed;
-	left: 0;
-	z-index: 1;
-}
-.header {
-	top: 0;
-	right: 0;
-	height: @default-headerHeight;
-	background: @default-headerBackgroundColor;
-	background-image: @default-headerBackgroundImage;
-}
-.nav {
-	top: @default-headerHeight;
-	bottom: 0;
-	width: @default-menuWidth;
-	background-color: @default-menuBackground;
-	color: @default-menuColor;
-}
+// .header,.nav {
+//  position: fixed;
+//  left: 0;
+//  z-index: 1;
+// }
+// .header {
+//  top: 0;
+//  right: 0;
+//  height: @default-headerHeight;
+//  background: @default-headerBackgroundColor;
+//  background-image: @default-headerBackgroundImage;
+// }
+// .nav {
+//  top: @default-headerHeight;
+//  bottom: 0;
+//  width: @default-menuWidth;
+//  background-color: @default-menuBackground;
+//  color: @default-menuColor;
+// }
 .content {
-	padding: @default-margin;
-	padding-top: @default-headerHeight+@default-margin;
-	margin-left: @default-menuWidth;
-	background-color: @c-fff;
-	.img {
-		width: 100%;
-	}
-	// border: 1px solid @c-red;
+  // padding: @default-margin;
+  // padding-top: @default-headerHeight+@default-margin;
+  // margin-left: @default-menuWidth;
+  margin-bottom: 1rem;
+  background-color: @c-fff;
+
+  .img {
+    width: 100%;
+  }
+  // border: 1px solid @c-red;
 }

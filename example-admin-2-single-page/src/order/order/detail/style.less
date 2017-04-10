@@ -1,0 +1,68 @@
+@import url('../../../config.less');
+
+.list:first-child > div {
+  border-top: 0;
+}
+.list > div > div {
+  padding-top: @default-margin /2;
+}
+
+.userInfo {
+  height: 100px;
+
+  > div:first-child > img {
+    width: 75px;
+    height: 75px;
+    border-radius: @default-border-radius;
+  }
+
+  > div:last-child {
+    > div {
+      margin-right: 100px;
+    }
+    &::after {
+      border-bottom: 0 !important;
+    }
+
+  }
+}
+
+.title {
+  margin: @default-margin auto @default-margin / 2*1.5;
+  .text-overflow;
+  &~p {
+  	.text-overflow;
+  }
+}
+
+.skill {
+  &:not(:first-child) {
+    margin-left: @default-margin / 2;
+  }
+}
+.itemName {
+  display: inline-block;
+  width: 90px;
+  vertical-align: middle;
+  text-align: right;
+}
+.bespeak {
+  position: absolute;
+  right: 15px;
+  bottom: 10px;
+  z-index: 1;
+  width: 100px;
+  color: @c-blue !important;
+  border: 1px solid @c-blue;
+  background-color: @c-fff;
+  text-decoration: none !important;
+}
+.right {
+  text-align: right;
+}
+.redText {
+  color: @c-red;
+}
+.flex {
+  flex: .5 !important;
+}

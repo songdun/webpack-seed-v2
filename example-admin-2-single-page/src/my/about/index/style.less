@@ -1,0 +1,18 @@
+@import url('../../../config.less');
+
+.city {
+  &::before {
+    content: "";
+    display: inline-block;
+    width: 5px;
+    height: 16px;
+    margin-right: @default-margin / 2;
+    margin-bottom: 2px;
+    background-color: @c-blue;
+    vertical-align: middle;
+  }
+
+  > div:after {
+    border-bottom-style: dashed !important;
+  }
+}

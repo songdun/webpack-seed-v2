@@ -13,6 +13,7 @@ module.exports = {
     /* vendor */
     /* bootstrap 相关 */
     metisMenu: path.resolve(dirVars.vendorDir, 'metisMenu/'),
+    interceptXHR: path.resolve(dirVars.vendorDir, 'interceptXHR/'),
 
     /* libs */
     withoutJqueryModule: path.resolve(dirVars.libsDir, 'without-jquery.module'),
@@ -30,5 +31,5 @@ module.exports = {
   },
 
   // 当require的模块找不到时，尝试添加这些后缀后进行寻找
-  extentions: ['', 'js'],
+  extentions: ['', 'js', '.web.js', '.js', '.json'],
 };

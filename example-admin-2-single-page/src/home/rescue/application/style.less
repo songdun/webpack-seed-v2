@@ -1,0 +1,86 @@
+@import url('../../../config.less');
+
+.item {
+  &:not(:last-child) {
+    padding-bottom: @default-margin / 2;
+  }
+}
+
+.button {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 50px;
+  z-index: 101;
+  border-top: 1px solid #ddd;
+
+  &::before {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 50%;
+    height: 100%;
+    z-index: 0;
+    background-color: @c-blue;
+  }
+
+  &::after {
+    content: "";
+    padding-top: 60px;
+  }
+}
+
+.getLocation {
+  position: relative;
+  width: 65px;
+  height: 65px;
+  padding: @default-margin;
+  margin: @default-margin auto auto;
+  background: url(srcDir/images/location-big.png) no-repeat center;
+  background-size: contain;
+
+  &::after {
+    content: "重新定位";
+    position: absolute;
+    left: 0;
+    top: 70px;
+    display: block;
+    width: 100px;
+  }
+}
+
+.locationIcon {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background: url(srcDir/images/location-gray.png) no-repeat center;
+  background-size: contain;
+  vertical-align: middle;
+}
+
+.address {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.locationAddress {
+  margin: @default-margin*3 0;
+  text-align: center;
+}
+
+.blank {
+  padding: @default-margin*5;
+
+  & > div::after {
+    border: 0 !important;
+  }
+}
+
+.wrapper {
+  > div {
+    overflow: hidden;
+    height: ~"calc(100vh - 50px)";
+  }
+}

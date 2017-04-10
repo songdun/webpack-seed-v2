@@ -1,0 +1,52 @@
+@import url('../../../config.less');
+
+.imageOut {
+  flex: 1;
+}
+
+.image {
+  width: 48px !important;
+  height: 48px !important;
+  margin: @default-margin / 2 auto;
+}
+
+.text {
+  font-size: @fz-16;
+
+  &:last-child {
+    @media only screen and (max-device-width: 374px) {
+      display: none;
+    }
+  }
+}
+
+.description {
+  flex: 4 !important;
+}
+
+.body {
+  padding: @default-margin;
+}
+
+.evaluateTitle {
+  margin-bottom: @default-margin / 2;
+}
+
+.evaluateText {
+  margin-right: @default-margin;
+}
+
+.lastEvaluate {
+  margin-bottom: @default-margin;
+}
+
+.evaluate {
+  width: 60%;
+  padding: 6px;
+  border: 1px solid @c-blue;
+  border-radius: @default-border-radius;
+  margin: @default-margin auto @default-margin+20;
+  // margin-bottom: 81px;
+  color: @c-blue;
+  text-align: center;
+}
