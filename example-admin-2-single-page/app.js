@@ -31,6 +31,10 @@ app.all('/core|react-component/:page', function(req, res) {
   res.sendFile(path.resolve(__dirname, './','index.html'));
 });
 
+app.all('/core|react-component/core|react-component/:page', function(req, res) {
+  res.sendFile(path.resolve(__dirname, './','index.html'));
+});
+
 app.listen(url.mockServer.port, function () {
   console.log('The app listening on port 3000 was started!');
 });

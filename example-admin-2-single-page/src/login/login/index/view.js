@@ -4,6 +4,7 @@ import { Form, Icon, Input, Button, Checkbox } from "antd";
 require("particles.js");
 require("./background");
 import Cookies from "js-cookie";
+import store from "store2";
 
 const FormItem = Form.Item;
 
@@ -12,6 +13,7 @@ const View = Form.create()((props) => {
   const origin = window.location.origin;
   if (props.results) {
     Cookies.set("token", props.results.token);
+    store.session.set("logined", true);
     window.location.href = origin + "/index/index/page.html";
   }
   const { login } = props.actions;

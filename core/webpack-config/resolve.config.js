@@ -13,6 +13,7 @@ module.exports = {
     /* vendor */
     /* bootstrap 相关 */
     metisMenu: path.resolve(dirVars.vendorDir, 'metisMenu/'),
+    interceptXHR: path.resolve(dirVars.vendorDir, 'interceptXHR/'),
 
     /* libs */
     withoutJqueryModule: path.resolve(dirVars.libsDir, 'without-jquery.module'),

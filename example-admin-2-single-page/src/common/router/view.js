@@ -2,64 +2,9 @@ import React from "react";
 import ReactDOM from "react-dom";
 import Most from "react-most";
 // import styles from "./style.less";
-import { BrowserRouter, Match } from "react-router";
-import Menu from "srcDir/common/menu/route";
-import ModalFrame from "srcDir/common/modalFrame/route";
-
-
-// 创建react组件
-// const View = (props) => {
-//   console.log("routerProps");
-//   console.log(props);
-//   const addRouteMatch = ({ keyName, component, name, path, title }) => {
-//     if (!props.results.MenuList[keyName]) {
-//       props.results.MenuList[keyName] = [];
-//     }
-//     props.results.MenuList[keyName].push({ component, name, path, title });
-//     console.log(props.results.MenuList);
-//   };
-//   const renderContentPage = (componentPath) => {
-//     // console.log(componentPath);
-//     const ContentPage = require(`srcDir/${componentPath}/route`).default;
-//     if (ContentPage) {
-//       ReactDOM.render(
-//         <Most>
-//           <ModalFrame>
-//             <ContentPage router={{ addRouteMatch }} />
-//           </ModalFrame>
-//         </Most>, document.getElementById("contentContainer")
-//       );
-//     }
-
-//     return (
-//       <div />
-//     );
-//   };
-//   return (
-//     <BrowserRouter>
-//       <div>
-//         <Menu router={addRouteMatch} />
-//         {
-//           props.results && Object.keys(props.results.MenuList).map(
-//             (value) =>
-//               props.results.MenuList[value].map(
-//                 (val) =>
-//                   <Match
-//                     exactly
-//                     pattern={val.path}
-//                     component={() => renderContentPage(val.component)}
-//                   />
-
-//               )
-//           )
-
-//         }
-
-
-//       </div>
-//     </BrowserRouter>
-//   );
-// };
+import { Router, Route } from "react-router";
+import history from "srcDir/common/router/history";
+// import Menu from "srcDir/common/menu/route";
 
 // 创建react组件
 class View extends React.Component {
@@ -67,9 +12,11 @@ class View extends React.Component {
     super(props);
     this.state = {};
     this.addRouteMatch = this.addRouteMatch.bind(this);
+    // console.log(props);
   }
+  // 添加一个新的路由（私有）
   addRouteMatch({ keyName, component, name, path, title, paramId }) {
-    // console.log({ keyName, component, name, path, title });
+    console.log({ keyName, component, name, path, title });
     // console.log(this);
     const { state } = this;
     if (!state[keyName]) {
@@ -79,19 +26,41 @@ class View extends React.Component {
     // console.log(this);
     this.forceUpdate();
   }
+  // 添加一个新的路由并立即跳转
+  addRoute({ keyName, component, name, path, title, paramId }, _this = this) {
+    // console.log(_this);
+    _this.addRouteMatch({ keyName, component, name, path, title, paramId });
+    history.push(path);
+  }
   render() {
     // console.log("routerProps");
     // console.log(this);
     const { props, state } = this;
+    const router = {
+      // addRouteMatch: this.addRouteMatch,
+      history: history,
+      // 返回
+      back: () => {
+        history.go(-1);
+      },
+      // 返回并在完成后删除该路由以确保GC，
+      back2refresh: () => {
+        history.go(-1);
+        this.state = {};
+        this.forceUpdate();
+      },
+      addRoute: ({ keyName, component, name, path, title, paramId }) => {
+        this.addRoute({ keyName, component, name, path, title, paramId }, this);
+      }
+    };
     const renderContentPage = (componentPath) => {
       // console.log(componentPath);
+      if (!componentPath) return false;
       const ContentPage = require(`srcDir/${componentPath}/route`).default;
       if (ContentPage) {
         ReactDOM.render(
           <Most>
-            <ModalFrame>
-              <ContentPage router={{ addRouteMatch: this.addRouteMatch }} />
-            </ModalFrame>
+            <ContentPage router={router} modal={props.modal} />
           </Most>, document.getElementById("contentContainer")
         );
       }
@@ -101,15 +70,13 @@ class View extends React.Component {
       );
     };
     const renderAddedContentPage = (componentPath, paramId) => {
-      // console.log("renderAddedContentPage");
+      console.log("renderAddedContentPage");
       const contentPage = require(`srcDir/${componentPath}/route`).default;
       if (contentPage) {
         const SubTable = contentPage(paramId);
         ReactDOM.render(
           <Most>
-            <ModalFrame>
-              <SubTable assetId={paramId} router={{ addRouteMatch: this.addRouteMatch }} />
-            </ModalFrame>
+            <SubTable pid={paramId} router={router} modal={props.modal} />
           </Most>, document.getElementById("contentContainer")
         );
       }
@@ -119,17 +86,19 @@ class View extends React.Component {
       );
     };
     return (
-      <BrowserRouter>
+      <Router history={history}>
         <div>
-          <Menu />
+          {
+            props.children
+          }
           {
             props.results && Object.keys(props.results.MenuList).map(
               (value) =>
                 props.results.MenuList[value].map(
                   (val) =>
-                    <Match
-                      exactly
-                      pattern={val.path}
+                    <Route
+                      exact
+                      path={val.path}
                       component={() => renderContentPage(val.component)}
                     />
 
@@ -141,9 +110,9 @@ class View extends React.Component {
             state && Object.keys(state).map(
               (value) =>
                 state[value].map(
-                  (val) => (<Match
-                    exactly
-                    pattern={val.path}
+                  (val) => (<Route
+                    exact
+                    path={val.path}
                     component={() => renderAddedContentPage(val.component, val.paramId)}
                   />)
 
@@ -154,7 +123,7 @@ class View extends React.Component {
 
 
         </div>
-      </BrowserRouter>
+      </Router>
     );
   }
 }
