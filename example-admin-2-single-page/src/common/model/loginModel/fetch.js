@@ -1,5 +1,5 @@
 import ajax from "srcDir/common/ajax/index";
-import { Toast } from "antd-mobile";
+import { message } from "antd";
 
 const fetch = function ({ url, method, q }) {
   return ajax({
@@ -9,9 +9,9 @@ const fetch = function ({ url, method, q }) {
     success(resp) {
       const entity = JSON.parse(resp.entity);
       if (entity.success) {
-        Toast.info(entity.msg);
+        message.info(entity.msg);
       } else {
-        Toast.fail(entity.msg);
+        message.error(entity.msg);
       }
     }
   });

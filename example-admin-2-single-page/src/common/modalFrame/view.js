@@ -1,45 +1,20 @@
 import React from "react";
 // import ReactDOM from "react-dom";
 // import styles from "./style.less";
-import { Modal } from "antd-mobile";
+import { Modal } from "antd";
 
 const View = (props) => {
-  // console.info(props);
+  // console.log(props);
   const { actions, results } = props;
   const { hide, show, reRender } = actions;
 
   const { visible, title, width, footer, getTableList } = results || {};
-
-  const addModalFunction = (propsValue) => {
-    // console.log(propsValue);
-    Object.keys(propsValue)
-      .map(() => {
-        // console.log(v);
-        let value;
-        if (propsValue.props && propsValue.props.children && propsValue.props.children.props) {
-          propsValue.props.modal = {
-            show, hide, reRender,
-          };
-          propsValue.props.children.props.modal = {
-            show, hide, reRender,
-          };
-          value = propsValue.props.children.props;
-        } else if (propsValue.children) {
-          propsValue.children.map((v1) => addModalFunction(v1));
-          value = propsValue.children;
-        } else {
-          propsValue.props.modal = {
-            show, hide, reRender,
-          };
-          value = propsValue.props;
-        }
-        return value;
-      })
-      .filter(v => v.children)
-      .map((v) => addModalFunction(v));
+  props.children.props.modal = {
+    show, hide, reRender,
   };
-  addModalFunction(props.children);
-  // console.info(props);
+  props.children.props.table = {
+    getTableList
+  };
 
   const Close = () => {
     hide({
@@ -52,16 +27,15 @@ const View = (props) => {
   };
 
   const renderContent = () => {
-    // console.log("renderContent");
     if (props.results.content) {
       const Content = require(`srcDir/${props.results.content}/route`).default;
-      // const modal = props.children.props.modal;
-      // modal.hide = Close;
+      const modal = props.children.props.modal;
+      modal.hide = Close;
       return (
         <Content
           params={props.results.params}
-          modal={{ hide: Close, show, reRender }}
-          table={{ getTableList, }}
+          modal={props.children.props.modal}
+          table={props.children.props.table}
         />
       );
     }
