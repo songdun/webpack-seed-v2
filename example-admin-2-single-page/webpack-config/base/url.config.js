@@ -12,7 +12,7 @@ var url = {
   },
   // 远程api服务器地址，若不写则连至本地开发mockServer
   remoteServer: {
-    url: "http://192.168.0.58:8080/amsserver"
+    // url: "http://192.168.0.58:8080/amsserver"
     // url: "http://192.168.1.70:8881/ams-server"
   }
 };

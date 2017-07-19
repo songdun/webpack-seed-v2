@@ -53,6 +53,20 @@ router.route("/mag/permission/menu")
     };
     res.send(data);
   });
+// 登录
+router.route("/account/login")
+  .post(function (req, res) {
+    var data = {
+  "msg": "登录成功",
+  "obj": {
+    "token": "eyJhbGciOiJIUzI1NiJ9.eyJwdWIiOnsidXNlcm5hbWUiOiJhZG1pbiJ9LCJwcmkiOiIvSHM3RjdlMmlha29Xb0N2RVZHL0YyZGxZdkxkcTZESGQvTk1ybU1NTHNvPSIsImV4cCI6MTQ5ODU2MDE1NX0.7VrLWNQ6df8LG0e-kRVKbKhktSPz2i-8oQWO38tvsVc"
+  },
+  "success": true,
+  "type": 0,
+  "fieldErrors": {}
+};
+    res.send(data);
+  });
 // 新增资产列表
 router.route("/ap/assetInfo/listInvite")
   .get(function (req, res) {

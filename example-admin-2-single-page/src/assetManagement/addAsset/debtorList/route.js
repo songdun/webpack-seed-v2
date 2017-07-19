@@ -1,17 +1,20 @@
-import { connect } from "react-most";
+import route from "srcDir/common/route/withId";
 
-import debtorIndexModel from "./model";
-import debtorIndexView from "./view";
+import model from "./model";
+import view from "./view";
+
 
 // connect 连接行为与react组件，返回一个react类
 // 第一个参数 数据流
 // 第二个参数 react组件
-// const debtorIndex = connect(function (value) {
-//   return debtorIndexModel(value);
-// })(debtorIndexView);
+// const debtorManage = connect(function (value) {
+//   return debtorManageModel(value);
+// })(debtorManageView);
 
-const debtorIndex = (id) => connect(function (value) {
-  return debtorIndexModel(id)(value);
-})(debtorIndexView);
+// const debtorManage = (id) => connect(function (value) {
+//   return debtorManageModel(id)(value);
+// })(debtorManageView);
 
-export { debtorIndex as default };
+// export { debtorManage as default };
+export default route({ model, view });
+
